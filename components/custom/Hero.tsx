@@ -1,15 +1,7 @@
-'use client'
-
-import { useParams, usePathname, useRouter } from 'next/navigation'
-import React from 'react'
 import { Button } from '@/components/ui/button'
 import Stats from './Stats'
-import { Path, ROUTING_PATHS } from '@/lib/constants'
 
 const Hero = () => {
-  const pathname = usePathname()
-  const isLandingPage =
-    pathname === ROUTING_PATHS.map((item: Path) => item.path)[0]
   return (
     <section className='min-h-screen flex flex-col items-center justify-center px-6 md:px-12 text-center gap-y-20'>
       <div className='max-w-6xl'>
