@@ -27,9 +27,9 @@ const Navbar = () => {
       <div className='max-w-7xl mx-auto px-6 flex justify-between items-center h-16'>
         <Link
           href={'/'}
-          className='text-3xl font-extrabold cursor-pointer tracking-wide text-gray-800 dark:text-white'
+          className='text-2xl font-normal cursor-pointer tracking-wide text-gray-800 dark:text-white'
         >
-          ReadReality
+          Read-Reality
         </Link>
 
         <ul className='hidden md:flex space-x-6'>
