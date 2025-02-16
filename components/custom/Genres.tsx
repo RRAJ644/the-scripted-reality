@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Book,
@@ -27,6 +29,7 @@ import {
   Eye,
   WandSparkles,
 } from 'lucide-react'
+import PointerTooltip from './PointerTooltip'
 
 const genres = [
   {
@@ -167,6 +170,8 @@ const genres = [
 ]
 
 const Genres = () => {
+  const [tooltipText, setTooltipText] = useState<string | null>(null)
+
   return (
     <section className='py-16 px-6 md:px-12'>
       <div className='max-w-6xl mx-auto text-center mb-12'>
@@ -185,6 +190,12 @@ const Genres = () => {
           <Card
             key={index}
             className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 backdrop-blur-lg bg-gradient-to-br from-white/60 to-gray-100/60 dark:from-zinc-900/60 dark:to-zinc-800/60 rounded-3xl hover:scale-105 hover:-rotate-1 transition-transform duration-500 hover:shadow-xl'
+            onMouseEnter={() =>
+              setTooltipText(
+                `http://localhost:3000/read/${genre.title.toLowerCase()}`
+              )
+            }
+            onMouseLeave={() => setTooltipText(null)}
           >
             <CardHeader className='flex items-center justify-center pb-2'>
               {genre.icon}
@@ -200,6 +211,7 @@ const Genres = () => {
           </Card>
         ))}
       </div>
+      <PointerTooltip text={tooltipText} />
     </section>
   )
 }

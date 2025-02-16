@@ -14,12 +14,9 @@ const Hero = () => {
           aspiring screenwriters worldwide.
         </p>
         <div className='mt-6 space-x-4'>
-          {/* <Button className='px-6 py-5 text-lg bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-white shadow-md transition-all'>
-            Explore
-          </Button> */}
           <Button
             variant='outline'
-            className='px-6 py-5 text-lg border-2 border-gray-600 text-gray-700 dark:text-gray-300 shadow-md hover:bg-zinc-800 hover:text-white transition-all'
+            className='px-6 py-5 text-lg border-2 border-gray-600 text-gray-700 dark:text-gray-300 shadow-sm hover:bg-zinc-800 hover:text-white transition-all rounded-3xl'
           >
             Join the Community
           </Button>
