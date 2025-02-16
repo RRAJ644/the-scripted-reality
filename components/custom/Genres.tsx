@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Book,
@@ -24,7 +24,6 @@ import {
   Sword,
   Users,
   Feather,
-  // HatWizard,
   BrainCircuit,
   Eye,
   WandSparkles,
@@ -32,167 +31,166 @@ import {
 import PointerTooltip from './PointerTooltip'
 import Link from 'next/link'
 
-const genres = [
-  {
-    icon: <Book className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Crime',
-    description:
-      'Focuses on criminal activities, investigations, and the pursuit of justice.',
-  },
-  {
-    icon: <Brain className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Psychological',
-    description:
-      'Delves into the complexities of the human mind with psychological twists.',
-  },
-  {
-    icon: <Heart className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Romance',
-    description: 'Centers around love stories and emotional relationships.',
-  },
-  {
-    icon: <Laugh className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'RomCom',
-    description: 'A light-hearted genre combining romance with humor.',
-  },
-  {
-    icon: <Tv className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'SitCom',
-    description:
-      'Humor derived from everyday situations with recurring characters.',
-  },
-  {
-    icon: <Zap className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Thriller',
-    description: 'Suspenseful stories with unexpected twists and high stakes.',
-  },
-  {
-    icon: <Search className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Mystery',
-    description: 'Revolves around solving a puzzle or crime.',
-  },
-  {
-    icon: <Wand className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Fantasy',
-    description:
-      'Features magical elements, mythical creatures, and imaginary worlds.',
-  },
-  {
-    icon: <Rocket className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Sci-Fi',
-    description:
-      'Explores futuristic technology and advanced scientific possibilities.',
-  },
-  {
-    icon: <Ghost className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Horror',
-    description: 'Evokes fear through supernatural or psychological terror.',
-  },
-  {
-    icon: <Shield className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Action',
-    description:
-      'Physical feats, chases, and combat with heroes overcoming obstacles.',
-  },
-  {
-    icon: <Compass className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Adventure',
-    description: 'Epic journeys, quests, and exploration.',
-  },
-  {
-    icon: <History className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Historical',
-    description: 'Stories based on real historical events or time periods.',
-  },
-  {
-    icon: <Film className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Drama',
-    description: 'Emotional narratives with realistic life situations.',
-  },
-  {
-    icon: <Music className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Musical',
-    description: 'Stories integrated with songs and dance.',
-  },
-  {
-    icon: <Camera className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Documentary',
-    description: 'Factual information about real-life subjects.',
-  },
-  {
-    icon: <Home className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Slice of Life',
-    description: 'Everyday experiences and relatable moments.',
-  },
-  {
-    icon: <Sword className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Action-Comedy',
-    description: 'Action sequences balanced with humor.',
-  },
-  {
-    icon: (
-      <WandSparkles className='w-10 h-10 text-gray-700 dark:text-gray-100' />
-    ),
-    title: 'Superhero',
-    description: 'Heroes with extraordinary abilities fighting villains.',
-  },
-  {
-    icon: <Users className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Family',
-    description: 'Wholesome content for audiences of all ages.',
-  },
-  {
-    icon: <User className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Coming-of-Age',
-    description: 'Character growth from youth to adulthood.',
-  },
-  {
-    icon: <Eye className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Noir',
-    description: 'Dark and cynical crime stories.',
-  },
-  {
-    icon: <Feather className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Western',
-    description: 'Stories set in the American frontier.',
-  },
-  {
-    icon: (
-      <BrainCircuit className='w-10 h-10 text-gray-700 dark:text-gray-100' />
-    ),
-    title: 'Psychological Thriller',
-    description: 'Suspense with psychological elements.',
-  },
-  {
-    icon: <Eye className='w-10 h-10 text-gray-700 dark:text-gray-100' />,
-    title: 'Satire',
-    description: 'Humor and irony to critique societal norms.',
-  },
-]
-
 const Genres = () => {
   const [tooltipText, setTooltipText] = useState<string | null>(null)
 
+  const iconClass = 'w-10 h-10 text-gray-700 dark:text-gray-100'
+
+  const genres = useMemo(
+    () => [
+      {
+        icon: <Book className={iconClass} />,
+        title: 'Crime',
+        description: 'Criminal activities, investigations, and justice.',
+      },
+      {
+        icon: <Brain className={iconClass} />,
+        title: 'Psychological',
+        description: 'Psychological twists and mind games.',
+      },
+      {
+        icon: <Heart className={iconClass} />,
+        title: 'Romance',
+        description: 'Love stories and emotional journeys.',
+      },
+      {
+        icon: <Laugh className={iconClass} />,
+        title: 'RomCom',
+        description: 'Romantic comedies with humor.',
+      },
+      {
+        icon: <Tv className={iconClass} />,
+        title: 'SitCom',
+        description: 'Humorous everyday situations.',
+      },
+      {
+        icon: <Zap className={iconClass} />,
+        title: 'Thriller',
+        description: 'Suspenseful twists and turns.',
+      },
+      {
+        icon: <Search className={iconClass} />,
+        title: 'Mystery',
+        description: 'Puzzles and crime-solving.',
+      },
+      {
+        icon: <Wand className={iconClass} />,
+        title: 'Fantasy',
+        description: 'Magical worlds and creatures.',
+      },
+      {
+        icon: <Rocket className={iconClass} />,
+        title: 'Sci-Fi',
+        description: 'Futuristic and scientific stories.',
+      },
+      {
+        icon: <Ghost className={iconClass} />,
+        title: 'Horror',
+        description: 'Supernatural and psychological fear.',
+      },
+      {
+        icon: <Shield className={iconClass} />,
+        title: 'Action',
+        description: 'High-octane action sequences.',
+      },
+      {
+        icon: <Compass className={iconClass} />,
+        title: 'Adventure',
+        description: 'Epic journeys and quests.',
+      },
+      {
+        icon: <History className={iconClass} />,
+        title: 'Historical',
+        description: 'Stories based on real events.',
+      },
+      {
+        icon: <Film className={iconClass} />,
+        title: 'Drama',
+        description: 'Emotional and realistic narratives.',
+      },
+      {
+        icon: <Music className={iconClass} />,
+        title: 'Musical',
+        description: 'Stories with music and dance.',
+      },
+      {
+        icon: <Camera className={iconClass} />,
+        title: 'Documentary',
+        description: 'Real-life factual content.',
+      },
+      {
+        icon: <Home className={iconClass} />,
+        title: 'Slice of Life',
+        description: 'Everyday relatable moments.',
+      },
+      {
+        icon: <Sword className={iconClass} />,
+        title: 'Action-Comedy',
+        description: 'Action with humor.',
+      },
+      {
+        icon: <WandSparkles className={iconClass} />,
+        title: 'Superhero',
+        description: 'Heroes saving the day.',
+      },
+      {
+        icon: <Users className={iconClass} />,
+        title: 'Family',
+        description: 'Content for all ages.',
+      },
+      {
+        icon: <User className={iconClass} />,
+        title: 'Coming-of-Age',
+        description: 'Growth and life transitions.',
+      },
+      {
+        icon: <Eye className={iconClass} />,
+        title: 'Noir',
+        description: 'Dark, cynical crime stories.',
+      },
+      {
+        icon: <Feather className={iconClass} />,
+        title: 'Western',
+        description: 'Frontier adventures.',
+      },
+      {
+        icon: <BrainCircuit className={iconClass} />,
+        title: 'Psychological Thriller',
+        description: 'Suspense and mind games.',
+      },
+      {
+        icon: <Eye className={iconClass} />,
+        title: 'Satire',
+        description: 'Humorous social critiques.',
+      },
+    ],
+    []
+  )
+
   return (
-    <section className='py-16 px-6 md:px-12'>
-      <div className='max-w-6xl mx-auto text-center mb-12'>
-        <h2 className='text-4xl md:text-5xl font-bold bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text mb-4'>
+    <section className='w-full flex flex-col items-center justify-center gap-y-6'>
+      <div className='max-w-6xl mx-auto text-center px-4'>
+        <h2 className='max-sm:text-3xl text-4xl lg:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
           Discover Popular Entertainment Genres
         </h2>
         <p className='text-lg text-gray-700 dark:text-gray-300'>
-          Explore a wide range of entertainment genres, from action-packed
-          thrillers to heartwarming romances. Find your next favorite show,
-          movie, or book here!
+          Explore diverse entertainment genres, from action thrillers to
+          heartwarming romances.
         </p>
       </div>
 
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4'>
         {genres.map((genre, index) => {
-          const url = `http://localhost:3000/read/${genre?.title?.toLowerCase()}`
+          const url = `/read/${genre.title.toLowerCase()}`
           return (
-            <Link href={url} target='_blank' key={index}>
+            <Link
+              href={url}
+              target='_blank'
+              key={index}
+              aria-label={`View ${genre.title} genre`}
+            >
               <Card
-                className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 backdrop-blur-lg bg-gradient-to-br from-white/60 to-gray-100/60 dark:from-zinc-900/60 dark:to-zinc-800/60 rounded-3xl hover:scale-105 hover:-rotate-1 transition-transform duration-500 hover:shadow-xl'
+                className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 backdrop-blur-lg bg-gradient-to-br from-white/70 to-gray-100/70 dark:from-zinc-900/70 dark:to-zinc-800/70 rounded-3xl hover:scale-105 hover:-rotate-2 transition-transform duration-500 hover:shadow-2xl'
                 onMouseEnter={() => setTooltipText(url)}
                 onMouseLeave={() => setTooltipText(null)}
               >
@@ -200,10 +198,10 @@ const Genres = () => {
                   {genre.icon}
                 </CardHeader>
                 <CardContent className='text-center'>
-                  <CardTitle className='mb-3 text-xl font-semibold text-gray-800 dark:text-gray-100'>
+                  <CardTitle className='mb-2 text-xl font-bold text-gray-800 dark:text-gray-100'>
                     {genre.title}
                   </CardTitle>
-                  <p className='text-gray-600 dark:text-gray-400'>
+                  <p className='text-gray-600 dark:text-gray-400 text-sm'>
                     {genre.description}
                   </p>
                 </CardContent>
@@ -212,6 +210,7 @@ const Genres = () => {
           )
         })}
       </div>
+
       <PointerTooltip text={tooltipText} />
     </section>
   )

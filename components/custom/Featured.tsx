@@ -28,8 +28,8 @@ const features = [
 const Featured = () => {
   return (
     <section className='py-16 px-6 w-full flex flex-col gap-y-10'>
-      <div className='max-w-6xl mx-auto text-center space-y-4'>
-        <h2 className='text-4xl md:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
+      <div className='max-w-5xl mx-auto text-center space-y-4'>
+        <h2 className='max-sm:text-3xl text-4xl md:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
           We Love Our Readers
         </h2>
         <p className='text-lg text-gray-700 dark:text-gray-300'>
