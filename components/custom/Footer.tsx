@@ -26,102 +26,92 @@ const footerConfig = {
 
 const Footer = () => {
   return (
-    <footer className='relative overflow-hidden mt-10 py-10 bg-neutral-50'>
-      <div className='mx-auto max-w-7xl px-6'>
-        <div className='grid gap-12 md:grid-cols-2 lg:grid-cols-4 py-6'>
-          {/* Company Info */}
-          <div className='space-y-4'>
-            <h3 className='text-xl font-semibold text-neutral-900'>
-              {footerConfig.companyName}
-            </h3>
-            <p className='text-sm text-neutral-700'>{footerConfig.tagline}</p>
-            <p className='text-sm text-neutral-700'>
-              Explore expert screenwriting services, creative content, and
-              insightful storytelling.
-            </p>
-          </div>
+    <footer className='relative overflow-hidden bg-neutral-50 flex flex-col items-center justify-center mt-10'>
+      <div className='grid grid-cols-1 lg:grid-cols-4 gap-6 w-full max-w-7xl max-lg:place-items-center py-8'>
 
-          {/* Company Links */}
-          <div className='space-y-4'>
-            <h4 className='text-sm font-bold uppercase text-neutral-900'>
-              Explore
-            </h4>
-            <ul className='space-y-3'>
-              {footerConfig.mainLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.url}
-                    className='group inline-flex items-center text-sm text-neutral-600 hover:text-neutral-900'
-                    aria-label={`Navigate to ${link.label}`}
-                  >
-                    <span>{link.label}</span>
-                    <ArrowRight className='ml-2 h-4 w-4 opacity-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:opacity-100' />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div className='space-y-4'>
-            <h4 className='text-sm font-bold uppercase text-neutral-900'>
-              Legal Information
-            </h4>
-            <ul className='space-y-3'>
-              {footerConfig.links.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.url}
-                    className='group inline-flex items-center text-sm text-neutral-600 hover:text-neutral-900'
-                    aria-label={`Read our ${link.label}`}
-                  >
-                    <span>{link.label}</span>
-                    <ArrowRight className='ml-2 h-4 w-4 opacity-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:opacity-100' />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social Links */}
-          <div className='space-y-4'>
-            <h4 className='text-sm font-bold uppercase text-neutral-900'>
-              Connect With Us
-            </h4>
-            <div className='flex space-x-4'>
-              {footerConfig.socialLinks.map((link) => {
-                const Icon = link.icon
-                return (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='group rounded-full border border-neutral-300 p-2 hover:border-neutral-900 hover:bg-neutral-900'
-                    aria-label={`Follow us on ${link.name}`}
-                    title={`Follow ${footerConfig.companyName} on ${link.name}`}
-                  >
-                    <Icon className='h-5 w-5 text-neutral-600 transition-colors duration-200 group-hover:text-white' />
-                  </a>
-                )
-              })}
-            </div>
-            <p className='text-sm text-neutral-600'>
-              Follow us for the latest insights into screenwriting and content
-              marketing.
-            </p>
-          </div>
+        <div className='flex flex-col items-start w-full max-lg:items-center gap-y-2'>
+          <h3 className='text-xl font-semibold text-neutral-900'>
+            {footerConfig.companyName}
+          </h3>
+          <p className='text-sm text-neutral-700'>{footerConfig.tagline}</p>
         </div>
 
-        <div className='flex flex-col items-center justify-between border-t border-neutral-200 md:flex-row md:space-y-0 py-6'>
+        <div className='flex flex-col items-start w-full max-lg:items-center gap-y-2'>
+          <h4 className='text-sm font-bold uppercase text-neutral-900'>
+            About Company
+          </h4>
+          <ul className='space-y-3 flex flex-col items-center justify-center'>
+            {footerConfig.mainLinks.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.url}
+                  className='group inline-flex items-center text-sm text-neutral-600 hover:text-neutral-900'
+                  aria-label={`Navigate to ${link.label}`}
+                >
+                  <span>{link.label}</span>
+                  <ArrowRight className='ml-2 h-4 w-4 opacity-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:opacity-100' />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className='flex flex-col items-start gap-y-2 w-full max-lg:items-center'>
+          <h4 className='text-sm font-bold uppercase text-neutral-900'>
+            Legal Information
+          </h4>
+          <ul className='space-y-3 flex flex-col items-center justify-center'>
+            {footerConfig.links.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.url}
+                  className='group inline-flex items-center text-sm text-neutral-600 hover:text-neutral-900'
+                  aria-label={`Read our ${link.label}`}
+                >
+                  <span>{link.label}</span>
+                  <ArrowRight className='ml-2 h-4 w-4 opacity-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:opacity-100' />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className='flex flex-col items-start gap-y-2 w-full max-lg:items-center'>
+          <h4 className='text-sm font-bold uppercase text-neutral-900'>
+            Connect With Us
+          </h4>
+          <div className='flex space-x-4'>
+            {footerConfig.socialLinks.map((link) => {
+              const Icon = link.icon
+              return (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='group rounded-full border border-neutral-300 p-2 hover:border-neutral-900 hover:bg-neutral-900'
+                  aria-label={`Follow us on ${link.name}`}
+                  title={`Follow ${footerConfig.companyName} on ${link.name}`}
+                >
+                  <Icon className='h-5 w-5 text-neutral-600 transition-colors duration-200 group-hover:text-white' />
+                </a>
+              )
+            })}
+          </div>
           <p className='text-sm text-neutral-600'>
-            &copy; {footerConfig.year} {footerConfig.companyName}. All rights
-            reserved.
-          </p>
-          <p className='text-sm text-neutral-500'>
-            Empowering Creativity Through Storytelling Excellence
+            Follow us for insights into screenwriting & marketing.
           </p>
         </div>
+      </div>
+
+      <div className='w-full max-w-6xl flex flex-col md:flex-row items-center justify-between border-t border-neutral-200 py-6 px-4'>
+        <p className='text-sm text-neutral-600'>
+          &copy; {footerConfig.year} {footerConfig.companyName}. All rights
+          reserved.
+        </p>
+        <p className='text-sm text-neutral-500 text-center md:text-right'>
+          Empowering Creativity Through Storytelling Excellence
+        </p>
       </div>
     </footer>
   )
