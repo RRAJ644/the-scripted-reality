@@ -42,11 +42,13 @@ const trendingStories = [
 const TrendingStories = () => {
   return (
     <section className='py-16 px-6 md:px-12'>
+      
       <div className='max-w-6xl mx-auto text-center'>
         <h2 className='text-4xl md:text-5xl font-normal bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 text-transparent bg-clip-text py-6'>
           Trending Stories
         </h2>
       </div>
+
       <div className='max-w-7xl mx-auto'>
         <div className='space-y-6'>
           {trendingStories.map((story, index) => (

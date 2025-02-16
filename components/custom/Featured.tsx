@@ -27,22 +27,21 @@ const features = [
 
 const Featured = () => {
   return (
-    <section className='py-16 px-6 w-full flex flex-col gap-y-10'>
-      <div className='max-w-5xl mx-auto text-center space-y-4'>
+    <section className='w-full flex flex-col items-center justify-center gap-y-6'>
+      <div className='max-w-6xl mx-auto text-center space-y-4'>
         <h2 className='max-sm:text-3xl text-4xl md:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
           We Love Our Readers
         </h2>
         <p className='text-lg text-gray-700 dark:text-gray-300'>
           Dive into compelling stories, unlock new perspectives, and fuel your
-          imagination with every read. Experience the joy of learning, the
-          thrill of discovery, and the magic of storytelling, all in one place.
+          imagination with every read.
         </p>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 w-full max-w-5xl'>
         {features.map((feature, index) => (
           <Card
             key={index}
-            className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 bg-gradient-to-br from-white/60 to-gray-100/60 dark:from-zinc-900/60 dark:to-zinc-800/60 shadow-sm rounded-3xl hover:scale-110 transition-transform duration-500'
+            className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 bg-gradient-to-br from-white/60 to-gray-100/60 dark:from-zinc-900/60 dark:to-zinc-800/60 shadow-sm rounded-3xl hover:scale-105 transition-transform duration-500 flex flex-col items-center text-center'
           >
             <CardHeader className='flex items-center justify-center pb-2'>
               {feature.icon}
