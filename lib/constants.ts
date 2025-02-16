@@ -100,7 +100,7 @@ export const SCREEN_PLAYS: Screenplay[] = [
     imageUrl:
       'https://images.unsplash.com/photo-1476842634003-7dcca8f832de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60',
     hoverGif: 'https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif',
-    genre: 'Action',
+    genre: 'Crime',
   },
   {
     id: '10',
@@ -109,7 +109,7 @@ export const SCREEN_PLAYS: Screenplay[] = [
     imageUrl:
       'https://images.unsplash.com/photo-1476842634003-7dcca8f832de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60',
     hoverGif: 'https://media.giphy.com/media/1BXa2alBjrCXC/giphy.gif',
-    genre: 'Drama',
+    genre: 'Crime',
   },
 ]
 
