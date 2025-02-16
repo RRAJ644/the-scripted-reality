@@ -15,9 +15,9 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
 
   const navLinks = [
-    { name: 'Our Work', href: '/work' },
+    // { name: 'Our Work', href: '/work' },
     { name: 'Read', href: '/read' },
-    { name: 'Services', href: '/services' },
+    // { name: 'Services', href: '/services' },
     { name: 'About', href: '/about' },
     { name: 'Blogs', href: '/blogs' },
   ]
@@ -37,7 +37,7 @@ const Navbar = () => {
             <li key={link.name}>
               <Link
                 href={link.href}
-                className='hover:text-blue-600 transition-colors'
+                className='hover:text-neutral-900 transition-colors'
               >
                 {link.name}
               </Link>
