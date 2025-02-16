@@ -30,6 +30,7 @@ import {
   WandSparkles,
 } from 'lucide-react'
 import PointerTooltip from './PointerTooltip'
+import Link from 'next/link'
 
 const genres = [
   {
@@ -186,30 +187,30 @@ const Genres = () => {
       </div>
 
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto'>
-        {genres.map((genre, index) => (
-          <Card
-            key={index}
-            className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 backdrop-blur-lg bg-gradient-to-br from-white/60 to-gray-100/60 dark:from-zinc-900/60 dark:to-zinc-800/60 rounded-3xl hover:scale-105 hover:-rotate-1 transition-transform duration-500 hover:shadow-xl'
-            onMouseEnter={() =>
-              setTooltipText(
-                `http://localhost:3000/read/${genre.title.toLowerCase()}`
-              )
-            }
-            onMouseLeave={() => setTooltipText(null)}
-          >
-            <CardHeader className='flex items-center justify-center pb-2'>
-              {genre.icon}
-            </CardHeader>
-            <CardContent className='text-center'>
-              <CardTitle className='mb-3 text-xl font-semibold text-gray-800 dark:text-gray-100'>
-                {genre.title}
-              </CardTitle>
-              <p className='text-gray-600 dark:text-gray-400'>
-                {genre.description}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
+        {genres.map((genre, index) => {
+          const url = `http://localhost:3000/read/${genre.title.toLowerCase()}`
+          return (
+            <Link href={url} target='_blank' key={index}>
+              <Card
+                className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 backdrop-blur-lg bg-gradient-to-br from-white/60 to-gray-100/60 dark:from-zinc-900/60 dark:to-zinc-800/60 rounded-3xl hover:scale-105 hover:-rotate-1 transition-transform duration-500 hover:shadow-xl'
+                onMouseEnter={() => setTooltipText(url)}
+                onMouseLeave={() => setTooltipText(null)}
+              >
+                <CardHeader className='flex items-center justify-center pb-2'>
+                  {genre.icon}
+                </CardHeader>
+                <CardContent className='text-center'>
+                  <CardTitle className='mb-3 text-xl font-semibold text-gray-800 dark:text-gray-100'>
+                    {genre.title}
+                  </CardTitle>
+                  <p className='text-gray-600 dark:text-gray-400'>
+                    {genre.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          )
+        })}
       </div>
       <PointerTooltip text={tooltipText} />
     </section>
