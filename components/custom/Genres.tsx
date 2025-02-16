@@ -188,7 +188,7 @@ const Genres = () => {
 
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto'>
         {genres.map((genre, index) => {
-          const url = `http://localhost:3000/read/${genre.title.toLowerCase()}`
+          const url = `http://localhost:3000/read/${genre?.title?.toLowerCase()}`
           return (
             <Link href={url} target='_blank' key={index}>
               <Card
