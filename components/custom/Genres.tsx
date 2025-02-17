@@ -191,7 +191,7 @@ const Genres = () => {
             >
               <Card
                 className='group cursor-pointer border border-zinc-400 dark:border-zinc-600 backdrop-blur-lg bg-gradient-to-br from-white/70 to-gray-100/70 dark:from-zinc-900/70 dark:to-zinc-800/70 rounded-3xl hover:scale-105 hover:-rotate-2 transition-transform duration-500 hover:shadow-2xl'
-                onMouseEnter={() => setTooltipText(url)}
+                onMouseEnter={() => setTooltipText(genre.title)}
                 onMouseLeave={() => setTooltipText(null)}
               >
                 <CardHeader className='flex items-center justify-center pb-2'>
