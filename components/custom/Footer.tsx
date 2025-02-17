@@ -26,7 +26,7 @@ const footerConfig = {
 
 const Footer = () => {
   return (
-    <footer className='relative overflow-hidden bg-neutral-50 flex flex-col items-center justify-center'>
+    <footer className='relative overflow-hidden bg-neutral-50 flex flex-col items-center justify-center mt-10'>
       <div className='grid grid-cols-1 lg:grid-cols-4 gap-6 w-full max-w-7xl max-lg:place-items-center py-8'>
 
         <div className='flex flex-col items-start w-full max-lg:items-center gap-y-2'>
