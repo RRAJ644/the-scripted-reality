@@ -2,7 +2,7 @@ import { Button } from '../ui/button'
 
 const MediaPartners = () => {
   return (
-    <section className='w-full h-full text-center flex flex-col items-center justify-center max-lg:px-20 max-sm:px-4'>
+    <section className='w-full h-full text-center flex flex-col items-center justify-center max-lg:px-20 max-sm:px-4 py-10'>
       <div className='relative bg-gradient-to-b from-neutral-900 via-zinc-800 to-neutral-900 text-white p-12 rounded-xl shadow-xl transform transition-transform duration-300 hover:scale-105 max-w-6xl flex flex-col gap-y-6 justify-center items-center'>
         <h3 className='text-2xl max-sm:text-lg md:text-3xl tracking-wide'>
           Elevate Your Brand with Expert Writing Services

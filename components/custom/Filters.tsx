@@ -1,9 +1,7 @@
-'use client'
-
-import { useState } from 'react'
 import Chip from './Chip'
+import { useSearchParams, useRouter } from 'next/navigation'
 
-const GENRES: string[] = [
+const GENRES = [
   'Crime',
   'Psychological',
   'Romance',
@@ -32,14 +30,23 @@ const GENRES: string[] = [
 ]
 
 const Filters = () => {
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([])
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  const selectedGenres = searchParams.get('genres')?.split(',') || []
 
   const handleGenreClick = (genre: string) => {
-    setSelectedGenres((prev) =>
-      prev.includes(genre)
-        ? prev.filter((item) => item !== genre)
-        : [...prev, genre]
-    )
+    const newGenres = selectedGenres.includes(genre)
+      ? selectedGenres.filter((g) => g !== genre)
+      : [...selectedGenres, genre]
+
+    const params = new URLSearchParams(searchParams)
+    if (newGenres.length) {
+      params.set('genres', newGenres.join(','))
+    } else {
+      params.delete('genres')
+    }
+    router.push(`?${params.toString()}`, { scroll: false })
   }
 
   return (

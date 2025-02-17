@@ -1,24 +1,11 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 
-const Search = () => {
-  const [query, setQuery] = useState('')
-  const [debouncedQuery, setDebouncedQuery] = useState('')
+interface SearchProps {
+  query: string
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedQuery(query)
-    }, 300)
-
-    return () => clearTimeout(handler)
-  }, [query])
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value)
-  }
-
+const Search = ({ query, handleChange }: SearchProps) => {
   return (
     <section className='container max-auto flex flex-wrap gap-3'>
       <Input

@@ -20,53 +20,56 @@ const trendingStories = [
     date: 'Sep 5, 2024',
   },
   {
-    title: 'Writing for the Web1',
-    description:
-      'Learn techniques to write engaging content for online audiences.',
-    date: 'Sep 5, 2024',
+    title: 'The Future of AI in Storytelling',
+    description: 'Understand how AI is shaping the future of content creation.',
+    date: 'Sep 4, 2024',
   },
   {
-    title: 'Writing for the Web2',
+    title: 'The Psychology of Stories',
     description:
-      'Learn techniques to write engaging content for online audiences.',
-    date: 'Sep 5, 2024',
+      'Dive into the cognitive impact of narratives on human behavior.',
+    date: 'Sep 3, 2024',
   },
   {
-    title: 'Writing for the Web3',
-    description:
-      'Learn techniques to write engaging content for online audiences.',
-    date: 'Sep 5, 2024',
+    title: 'Interactive Fiction Today',
+    description: 'Explore the rise of interactive storytelling experiences.',
+    date: 'Sep 2, 2024',
   },
 ]
 
 const TrendingStories = () => {
   return (
-    <section className='py-16 px-6 md:px-12'>
-      
-      <div className='max-w-6xl mx-auto text-center'>
-        <h2 className='text-4xl md:text-5xl font-normal bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 text-transparent bg-clip-text py-6'>
+    <section className='w-full flex flex-col items-center justify-center gap-y-6'>
+      {/* Heading */}
+      <div className='max-w-6xl mx-auto text-center px-4'>
+        <h2 className='max-sm:text-3xl text-4xl lg:text-5xl font-bold bg-gradient-to-r from-neutral-800 via-zinc-700 to-gray-800 text-transparent bg-clip-text'>
           Trending Stories
         </h2>
       </div>
 
-      <div className='max-w-7xl mx-auto'>
-        <div className='space-y-6'>
+      {/* Story Cards */}
+      <div className='w-full max-w-6xl px-4'>
+        <div className='flex flex-col gap-6'>
           {trendingStories.map((story, index) => (
             <div
               key={index}
-              className='flex items-center gap-6 border border-zinc-300 dark:border-zinc-700 py-6 px-5 bg-white dark:bg-zinc-900 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.03] transition-all duration-300 cursor-pointer'
+              className='flex items-center gap-5 border border-zinc-300 dark:border-zinc-700 py-5 px-4 bg-white dark:bg-zinc-900 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-transform cursor-pointer'
+              aria-label={`Story: ${story.title}`}
             >
-              <div className='p-4 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-full shadow-md'>
-                <BookOpen className='w-7 h-7' />
+              {/* Icon */}
+              <div className='p-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-full shadow-md'>
+                <BookOpen className='w-6 h-6' />
               </div>
+
+              {/* Story Details */}
               <div className='flex-1'>
-                <h3 className='text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2'>
+                <h3 className='text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 truncate'>
                   {story.title}
                 </h3>
-                <p className='text-zinc-700 dark:text-zinc-300 text-base mb-2'>
+                <p className='text-zinc-700 dark:text-zinc-300 text-sm mb-2'>
                   {story.description}
                 </p>
-                <span className='text-sm text-zinc-500 dark:text-zinc-400'>
+                <span className='text-xs text-zinc-500 dark:text-zinc-400'>
                   {story.date}
                 </span>
               </div>
