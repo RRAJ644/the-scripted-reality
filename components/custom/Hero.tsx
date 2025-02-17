@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Stats from './Stats'
+import Link from 'next/link'
 
 const Hero = () => {
   return (
@@ -14,12 +15,14 @@ const Hero = () => {
           aspiring screenwriters worldwide.
         </p>
         <div className='mt-6 space-x-4'>
-          <Button
-            variant='outline'
-            className='px-6 py-5 text-lg border-2 border-gray-600 text-gray-700 dark:text-gray-300 shadow-sm hover:bg-zinc-800 hover:text-white transition-all rounded-3xl'
-          >
-            Join the Community
-          </Button>
+          <Link href='/work'>
+            <Button
+              variant='outline'
+              className='px-6 py-5 text-lg rounded-2xl text-gray-50 bg-neutral-800 border-2 hover:bg-neutral-800 hover:text-gray-50'
+            >
+              Work with us
+            </Button>
+          </Link>
         </div>
       </div>
 

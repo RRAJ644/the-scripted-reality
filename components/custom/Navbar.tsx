@@ -17,9 +17,10 @@ const Navbar = () => {
   const navLinks = [
     // { name: 'Our Work', href: '/work' },
     { name: 'Read', href: '/read' },
+    { name: 'Blogs', href: '/blogs' },
     // { name: 'Services', href: '/services' },
     { name: 'About', href: '/about' },
-    { name: 'Blogs', href: '/blogs' },
+    // { name: "Let's Work", href: '/work' },
   ]
 
   return (
@@ -32,7 +33,7 @@ const Navbar = () => {
           Read-Reality
         </Link>
 
-        <ul className='hidden md:flex space-x-6'>
+        <ul className='hidden md:flex space-x-6 justify-center items-center'>
           {navLinks.map((link) => (
             <li key={link.name}>
               <Link
