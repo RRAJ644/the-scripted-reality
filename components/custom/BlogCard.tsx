@@ -22,7 +22,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
 
   return (
     <Link href={`/blog/${slug}`}>
-      <Card className='w-full max-w-md bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 flex flex-col justify-between gap-y-2 cursor-pointer'>
+      <Card className='w-full max-w-md bg-white shadow-lg rounded-xl overflow-hidden transform transition-transform duration-300 hover:scale-105 flex flex-col justify-between gap-y-2 cursor-pointer'>
         <div className='relative'>
           <AspectRatio ratio={16 / 9} className='w-full'>
             <Image
@@ -48,7 +48,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
 
             <Button
               variant='outline'
-              className='flex items-center justify-between text-sm text-gray-700 hover:bg-gray-200'
+              className='flex items-center justify-between text-sm text-gray-700 rounded-3xl'
             >
               <span>Read More</span>
               <ArrowRight className='w-4 h-4 text-gray-700' />
