@@ -15,12 +15,13 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
 
   const navLinks = [
-    // { name: 'Our Work', href: '/work' },
-    { name: 'Read', href: '/read' },
+    { name: 'Scripts', href: '/scripts' },
+    // { name: 'Audio Scripts', href: '/audio-scripts' },
     { name: 'Blogs', href: '/blogs' },
-    // { name: 'Services', href: '/services' },
     { name: 'About', href: '/about' },
+    // { name: 'Our Work', href: '/work' },
     // { name: "Let's Work", href: '/work' },
+    // { name: 'Services', href: '/services' },
   ]
 
   return (
@@ -30,7 +31,7 @@ const Navbar = () => {
           href={'/'}
           className='text-2xl font-normal cursor-pointer tracking-wide text-gray-800 dark:text-white'
         >
-          Read-Reality
+          The-Scripted-Reality
         </Link>
 
         <ul className='hidden md:flex space-x-6 justify-center items-center'>

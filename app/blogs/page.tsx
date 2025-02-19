@@ -63,7 +63,7 @@ const Blog = () => {
     <section className='flex flex-col items-center justify-center px-6 md:px-12 text-center mt-28'>
       <div className='max-w-6xl flex flex-col'>
         <h1 className='text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text drop-shadow-md py-2'>
-          Unlock the Secrets of Screenwriting: Tips, Techniques, and Insights
+          Unlock the Secrets of Scriptwriting: Tips, Techniques, and Insights
         </h1>
         <p className='mt-5 text-xl text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto'>
           From rookie scribbler to seasoned script wizard, unlock the secrets of

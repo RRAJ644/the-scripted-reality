@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Read Reality - Read the screens',
+  title: 'TheScriptedReality - We Write Scripts',
   description: 'Screenwriters chasing projects with the mind blowing scripts',
 }
 

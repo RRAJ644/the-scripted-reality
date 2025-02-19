@@ -7,7 +7,7 @@ import ScreenplayGrid from '@/components/custom/ScreenplayGrid'
 import Search from '@/components/custom/Search'
 import { SCREEN_PLAYS } from '@/lib/constants'
 
-const Read = () => {
+const Scripts = () => {
   const [query, setQuery] = useState('')
 
   const searchParams = useSearchParams()
@@ -39,4 +39,4 @@ const Read = () => {
   )
 }
 
-export default Read
+export default Scripts
