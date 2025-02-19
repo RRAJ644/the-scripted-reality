@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <AuthProvider>
+    <AuthProvider>
+      <html lang='en'>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-800-700 dark:text-zinc-200`}
         >
@@ -35,7 +35,7 @@ export default function RootLayout({
           <main className='min-h-screen'>{children}</main>
           <Footer />
         </body>
-      </AuthProvider>
-    </html>
+      </html>
+    </AuthProvider>
   )
 }
