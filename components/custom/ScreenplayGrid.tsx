@@ -27,7 +27,7 @@ export default function ScreenplayGrid({ screenplays }: ScreenplayGridProps) {
         <Card
           key={item.id}
           className='relative group w-full rounded-xl overflow-hidden shadow-xl border border-gray-700 cursor-pointer flex flex-col'
-          onClick={() => router.push(`/read/${item.id}`)}
+          onClick={() => router.push(`/script/${item.id}`)}
         >
           <AspectRatio ratio={16 / 9} className='relative'>
             <Image

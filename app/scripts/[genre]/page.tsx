@@ -28,7 +28,7 @@ const GenreInner = () => {
         </p>
       </div>
 
-      <Search />
+      {/* <Search  /> */}
       <ScreenplayGrid screenplays={screenPlay} />
     </section>
   )

@@ -181,7 +181,7 @@ const Genres = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4'>
         {genres.map((genre, index) => {
-          const url = `/read/${genre.title.toLowerCase()}`
+          const url = `/scripts/${genre.title.toLowerCase()}`
           return (
             <Link
               href={url}
