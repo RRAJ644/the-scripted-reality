@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { FaPenNib, FaBookOpen, FaUsers } from 'react-icons/fa'
 
 const config = {
-  heading: 'Explore the Art of Screenwriting with Us',
+  heading: 'Explore the Art of Writing with Us',
   description:
     'Welcome to our premier screenwriting platform, where creativity meets industry expertise. Discover compelling screenplays, insightful articles, and invaluable resources designed to inspire and educate aspiring and professional screenwriters alike. Join us as we share our work, insights, and passion for storytelling.',
   buttons: [
