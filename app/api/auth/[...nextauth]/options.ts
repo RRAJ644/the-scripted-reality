@@ -39,7 +39,6 @@ export const authOptions: NextAuthOptions = {
 
           return user
         } catch (error: any) {
-          console.log(error, '===dd')
           throw new Error(error)
         }
       },

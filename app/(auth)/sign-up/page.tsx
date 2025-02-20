@@ -36,7 +36,7 @@ const SignUp = () => {
       name: '',
       email: '',
       password: '',
-      role: 'writer', // Default role
+      role: 'writer',
     },
   })
 
@@ -46,12 +46,11 @@ const SignUp = () => {
       const response = await axios.post('/api/sign-up', data)
 
       if (response.data.success) {
-        router.replace('/dashboard')
+        router.replace('/sign-in')
       } else {
         setError(response.data.message)
       }
     } catch (err: any) {
-      console.log(err, '=====')
       setError(err.response?.data?.message || 'Something went wrong')
     }
   }
