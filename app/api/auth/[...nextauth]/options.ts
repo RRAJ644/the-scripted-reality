@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
         await connectToDatabase()
         try {
           const user = await User.findOne({
-            email: credentials.identifier.email,
+            email: credentials.email,
           })
 
           if (!user) {
@@ -39,6 +39,7 @@ export const authOptions: NextAuthOptions = {
 
           return user
         } catch (error: any) {
+          console.log(error, '===dd')
           throw new Error(error)
         }
       },
@@ -47,7 +48,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.NEXT_AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, token }) {
       return session
