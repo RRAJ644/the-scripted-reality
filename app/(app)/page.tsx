@@ -1,8 +1,8 @@
-import Featured from '@/components/custom/Featured'
-import Genres from '@/components/custom/Genres'
-import Hero from '@/components/custom/Hero'
-import MediaPartners from '@/components/custom/MediaPartners'
-import TrendingStories from '@/components/custom/TrendingStories'
+import Featured from '@/app/components/custom/Featured'
+import Genres from '@/app/components/custom/Genres'
+import Hero from '@/app/components/custom/Hero'
+import MediaPartners from '@/app/components/custom/MediaPartners'
+import TrendingStories from '@/app/components/custom/TrendingStories'
 
 export default function Home() {
   return (
