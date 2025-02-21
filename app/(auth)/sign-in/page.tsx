@@ -46,7 +46,6 @@ const SignIn = () => {
 
       router.replace('/dashboard')
     } catch (error: any) {
-      console.log(error, '===error')
       setError(error.message)
     }
   }
