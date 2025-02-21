@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import '../globals.css'
 import AuthProvider from '@/context/AuthProvider'
 import Navbar from '@/components/private/Navbar'
+import Sidebar from '@/components/private/Sidebar'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,9 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'TheScriptedReality - We Write Scripts',
-  description: 'Screenwriters chasing projects with the mind blowing scripts',
+  description: 'Screenwriters chasing projects with the mind-blowing scripts',
 }
-
 export default function DashboardLayout({
   children,
 }: Readonly<{
@@ -26,12 +26,15 @@ export default function DashboardLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang='en'>
+      <html lang='en' className='h-full'>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-800-700 dark:text-zinc-200`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-900 dark:text-zinc-200 h-full overflow-hidden`}
         >
           <Navbar />
-          <main className='min-h-screen'>{children}</main>
+          <main className='flex h-screen mt-16'>
+            <Sidebar />
+            <div className='flex-1 flex-grow overflow-auto'>{children}</div>
+          </main>
         </body>
       </html>
     </AuthProvider>
