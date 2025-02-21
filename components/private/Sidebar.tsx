@@ -1,40 +1,52 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import {
   LucideIcon,
   FileText,
   ScrollText,
   Pencil,
   Lightbulb,
+  Edit,
 } from 'lucide-react'
+import Link from 'next/link'
 
 interface NavLink {
   name: string
   onClick?: () => void
   icon: LucideIcon
+  href: string
 }
 
 const links: NavLink[] = [
   {
-    name: 'Blogs',
-    onClick: () => console.log('Blogs clicked'),
-    icon: FileText,
-  },
-  {
-    name: 'Scripts',
-    onClick: () => console.log('Scripts clicked'),
-    icon: ScrollText,
+    name: 'Editor',
+    onClick: () => console.log('Ideas clicked'),
+    icon: Edit,
+    href: '/ideas',
   },
   {
     name: 'Drafts',
     onClick: () => console.log('Drafts clicked'),
     icon: Pencil,
+    href: '/drafts',
   },
   {
     name: 'Ideas',
     onClick: () => console.log('Ideas clicked'),
     icon: Lightbulb,
+    href: '/ideas',
+  },
+  {
+    name: 'Blogs',
+    onClick: () => console.log('Blogs clicked'),
+    icon: FileText,
+    href: '/dashboard/blogs',
+  },
+  {
+    name: 'Scripts',
+    onClick: () => console.log('Scripts clicked'),
+    icon: ScrollText,
+    href: '/dashboard/scripts',
   },
 ]
 
@@ -44,14 +56,16 @@ export default function Sidebar() {
       <nav>
         <ul className='space-y-4'>
           {links.map(({ name, onClick, icon: Icon }) => (
-            <li
+            <Link
+              href={''}
               key={name}
-              className='list-none flex items-center justify-center gap-4 text-2xl border-b-2 py-3'
+              className='cursor-pointer list-none flex items-center justify-center gap-4 text-xl border-b-2 py-3'
               role='link'
+              onClick={onClick}
             >
-              <Icon size={30} />
+              <Icon size={25} />
               {name}
-            </li>
+            </Link>
           ))}
         </ul>
       </nav>

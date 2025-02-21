@@ -33,7 +33,7 @@ export default function DashboardLayout({
           <Navbar />
           <main className='flex h-screen mt-16'>
             <Sidebar />
-            <div className='flex-1 flex-grow overflow-auto'>{children}</div>
+            <div className='flex-1 flex-grow h-full overflow-auto'>{children}</div>
           </main>
         </body>
       </html>
