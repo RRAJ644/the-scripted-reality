@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 
 import Filters from '@/components/custom/Filters'
@@ -32,7 +32,9 @@ const Scripts = () => {
 
   return (
     <section className='w-full flex justify-center items-center flex-col gap-y-9 py-6 px-44'>
-      <Search query={query} handleChange={handleChange} />
+      <Suspense>
+        <Search query={query} handleChange={handleChange} />
+      </Suspense>
       <Filters />
       <ScreenplayGrid screenplays={SCREEN_PLAYS} />
     </section>

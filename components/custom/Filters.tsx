@@ -1,5 +1,6 @@
 import Chip from './Chip'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { Suspense } from 'react'
 
 const GENRES = [
   'Crime',
@@ -50,16 +51,18 @@ const Filters = () => {
   }
 
   return (
-    <section className='container max-auto flex flex-wrap gap-3'>
-      {GENRES.map((genre) => (
-        <Chip
-          key={genre}
-          label={genre}
-          selected={selectedGenres.includes(genre)}
-          onClick={() => handleGenreClick(genre)}
-        />
-      ))}
-    </section>
+    <Suspense>
+      <section className='container max-auto flex flex-wrap gap-3'>
+        {GENRES.map((genre) => (
+          <Chip
+            key={genre}
+            label={genre}
+            selected={selectedGenres.includes(genre)}
+            onClick={() => handleGenreClick(genre)}
+          />
+        ))}
+      </section>
+    </Suspense>
   )
 }
 
