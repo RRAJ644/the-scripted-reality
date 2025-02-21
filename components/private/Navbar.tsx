@@ -2,10 +2,8 @@
 
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 
 const Navbar = () => {
-  const router = useRouter()
   const { data: session } = useSession()
 
   return (
