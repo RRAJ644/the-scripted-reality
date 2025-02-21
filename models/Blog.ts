@@ -4,6 +4,7 @@ export interface IBlog {
   _id?: mongoose.Types.ObjectId
   title: string
   description: Schema.Types.Mixed
+  status: 'Draft' | 'Published'
   imageUrl: string
   createdAt?: Date
   updatedAt?: Date
@@ -19,6 +20,12 @@ const blogSchema = new Schema<IBlog>(
     description: {
       type: Schema.Types.Mixed,
       required: true,
+    },
+    status: {
+      type: String,
+      enum: ['Draft', 'Published'],
+      required: true,
+      default: 'Draft',
     },
     imageUrl: {
       type: String,
