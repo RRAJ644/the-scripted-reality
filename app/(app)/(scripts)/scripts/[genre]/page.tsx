@@ -1,5 +1,5 @@
 'use client'
-import ScreenplayGrid from '@/components/custom/ScreenplayGrid'
+import ScreenplayGrid from '@/app/components/custom/ScreenplayGrid'
 import { SCREEN_PLAYS } from '@/lib/constants'
 import { useParams } from 'next/navigation'
 import React from 'react'

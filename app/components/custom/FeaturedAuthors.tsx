@@ -1,13 +1,9 @@
 import React from 'react'
-import {
-  Card,
-  CardContent,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card'
+
 import { Badge } from '../ui/badge'
 import Image from 'next/image'
 import { AspectRatio } from '../ui/aspect-ratio'
+import { Card, CardContent, CardDescription, CardTitle } from '../ui/card'
 
 interface Author {
   name: string

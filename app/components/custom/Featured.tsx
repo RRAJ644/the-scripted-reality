@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Sparkles, PenTool, BookOpenText } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 const features = [
   {
@@ -47,7 +47,7 @@ const Featured = () => {
               {feature.icon}
             </CardHeader>
             <CardContent className='text-center'>
-              <CardTitle className='mb-3 text-xl font-semibold text-gray-800 dark:text-gray-100'>
+              <CardTitle  className='mb-3 text-xl font-semibold text-gray-800 dark:text-gray-100'>
                 {feature.title}
               </CardTitle>
               <p className='text-gray-600 dark:text-gray-400'>

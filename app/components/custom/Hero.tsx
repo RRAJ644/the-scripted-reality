@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
-import Stats from './Stats'
 import Link from 'next/link'
+import { Button } from '../ui/button'
+import Stats from './Stats'
 
 const Hero = () => {
   return (

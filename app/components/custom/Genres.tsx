@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
 import {
   Book,
   Brain,
@@ -30,6 +30,7 @@ import {
 } from 'lucide-react'
 import PointerTooltip from './PointerTooltip'
 import Link from 'next/link'
+import { CardTitle, Card, CardContent, CardHeader } from '../ui/card'
 
 const Genres = () => {
   const [tooltipText, setTooltipText] = useState<string | null>(null)

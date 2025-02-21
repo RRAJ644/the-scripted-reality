@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { Card } from '@/components/ui/card'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Card } from '../ui/card'
+import { AspectRatio } from '../ui/aspect-ratio'
 
 interface Screenplay {
   id: string

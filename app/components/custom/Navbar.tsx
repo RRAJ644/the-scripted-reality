@@ -1,15 +1,15 @@
 'use client'
 import React, { useState } from 'react'
-import { Button } from '@/components/ui/button'
 import {
   Sheet,
   SheetTrigger,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from '@/components/ui/sheet'
+} from '../ui/sheet'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import { Button } from '../ui/button'
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
