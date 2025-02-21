@@ -29,13 +29,13 @@ const Scripts = () => {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <section className='w-full flex justify-center items-center flex-col gap-y-9 py-6 px-44'>
+    <section className='w-full flex justify-center items-center flex-col gap-y-9 py-6 px-44'>
+      <Suspense fallback={<div>Loading...</div>}>
         <Search query={query} handleChange={handleChange} />
-        <Filters />
-        <ScreenplayGrid screenplays={SCREEN_PLAYS} />
-      </section>
-    </Suspense>
+      </Suspense>
+      <Filters />
+      <ScreenplayGrid screenplays={SCREEN_PLAYS} />
+    </section>
   )
 }
 
