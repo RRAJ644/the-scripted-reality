@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Navbar = () => {
+  const router = useRouter()
   const { data: session } = useSession()
 
   return (
@@ -19,7 +21,9 @@ const Navbar = () => {
 
         {session && (
           <button
-            onClick={() => signOut()}
+            onClick={() => {
+              signOut({ callbackUrl: '/sign-in' })
+            }}
             className='px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition'
           >
             Sign Out
