@@ -6,7 +6,7 @@ import ScreenplayGrid from '@/app/components/custom/ScreenplayGrid'
 import Search from '@/app/components/custom/Search'
 import { SCREEN_PLAYS } from '@/lib/constants'
 
-const Scripts = () => {
+const ScriptsContent = () => {
   const [query, setQuery] = useState('')
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -29,12 +29,18 @@ const Scripts = () => {
   }
 
   return (
+    <section className='w-full flex justify-center items-center flex-col gap-y-9 py-6 px-44'>
+      <Search query={query} handleChange={handleChange} />
+      <Filters />
+      <ScreenplayGrid screenplays={SCREEN_PLAYS} />
+    </section>
+  )
+}
+
+const Scripts = () => {
+  return (
     <Suspense fallback={<div>Loading...</div>}>
-      <section className='w-full flex justify-center items-center flex-col gap-y-9 py-6 px-44'>
-        <Search query={query} handleChange={handleChange} />
-        <Filters />
-        <ScreenplayGrid screenplays={SCREEN_PLAYS} />
-      </section>
+      <ScriptsContent />
     </Suspense>
   )
 }
