@@ -2,7 +2,7 @@ import { connectToDatabase } from '@/lib/db'
 import User from '@/models/User'
 
 export async function POST(request: Request) {
-  const conn = await connectToDatabase()
+  await connectToDatabase()
   try {
     const { name, email, password, role } = await request.json()
 

@@ -2,12 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import Link from 'next/link'
 import { signInSchema } from '@/schemas/signInSchema'
-import { signUpSchema } from '@/schemas/signUpSchema'
-import { ApiResponse } from '@/types/ApiResponse'
-import axios, { AxiosError } from 'axios'
-import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import {
@@ -20,6 +15,7 @@ import {
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { signIn } from 'next-auth/react'
 
 const SignIn = () => {
   const router = useRouter()

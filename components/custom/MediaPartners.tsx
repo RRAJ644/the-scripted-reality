@@ -17,7 +17,7 @@ const MediaPartners = () => {
           variant='outline'
           className='px-6 py-5 text-lg border-2 border-neutral-600 text-neutral-200 shadow-md rounded-3xl bg-zinc-900 hover:bg-zinc-800 hover:text-white transition-colors duration-300'
         >
-          Let's connect
+          Let&apos;s connect
         </Button>
 
         <div className='absolute top-0 left-0 w-20 h-20 bg-white opacity-10 blur-xl rounded-full animate-pulse'></div>

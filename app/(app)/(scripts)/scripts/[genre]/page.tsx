@@ -1,8 +1,7 @@
 'use client'
 import ScreenplayGrid from '@/components/custom/ScreenplayGrid'
-import Search from '@/components/custom/Search'
 import { SCREEN_PLAYS } from '@/lib/constants'
-import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import React from 'react'
 
 const GenreInner = () => {

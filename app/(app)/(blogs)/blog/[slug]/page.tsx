@@ -2,7 +2,7 @@
 
 import { slugify } from '@/lib/constants'
 import Image from 'next/image'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams  } from 'next/navigation'
 import { useMemo } from 'react'
 
 export interface Blog {
