@@ -2,7 +2,6 @@ import { connectToDatabase } from '@/lib/db'
 import Blog from '@/models/Blog'
 import { NextResponse } from 'next/server'
 
-// 📌 GET single blog by ID
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
@@ -23,7 +22,6 @@ export async function GET(
   }
 }
 
-// 📌 UPDATE blog by ID
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
@@ -56,7 +54,6 @@ export async function PUT(
   }
 }
 
-// 📌 DELETE blog by ID
 export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }
