@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: 'Screenwriters chasing projects with the mind blowing scripts',
 }
 
-export default function RootLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
