@@ -25,16 +25,16 @@ const links: NavLink[] = [
     href: '/ideas',
   },
   {
+    name: 'Thoughts',
+    onClick: () => console.log('thoughts clicked'),
+    icon: Lightbulb,
+    href: '/thoughts',
+  },
+  {
     name: 'Drafts',
     onClick: () => console.log('Drafts clicked'),
     icon: Pencil,
     href: '/drafts',
-  },
-  {
-    name: 'Ideas',
-    onClick: () => console.log('Ideas clicked'),
-    icon: Lightbulb,
-    href: '/ideas',
   },
   {
     name: 'Blogs',
