@@ -4,11 +4,11 @@ import { NextResponse } from 'next/server'
 
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectToDatabase()
-    const { id } = context.params
+    const { id } = params
 
     const blog = await Blog.findById(id)
     if (!blog) {
