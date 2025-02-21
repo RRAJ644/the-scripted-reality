@@ -8,7 +8,6 @@ import { SCREEN_PLAYS } from '@/lib/constants'
 
 const Scripts = () => {
   const [query, setQuery] = useState('')
-
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -31,7 +30,7 @@ const Scripts = () => {
 
   return (
     <section className='w-full flex justify-center items-center flex-col gap-y-9 py-6 px-44'>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <Search query={query} handleChange={handleChange} />
       </Suspense>
       <Filters />
