@@ -11,11 +11,12 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from '@/components/ui/form'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+} from '@/app/components/ui/form'
+
 import { signIn } from 'next-auth/react'
+import { Input } from '@/app/components/ui/input'
+import { Button } from '@/app/components/ui/button'
+import { Label } from '@/app/components/ui/label'
 
 const SignIn = () => {
   const router = useRouter()
