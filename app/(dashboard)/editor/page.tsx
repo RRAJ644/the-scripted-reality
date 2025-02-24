@@ -4,8 +4,6 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import React, { useState } from 'react'
 
 const Editor: React.FC = () => {
-  const [content, setContent] = useState<string>('')
-
   return (
     <section className='w-full h-full flex flex-col items-center px-6 py-6'>
       <Tabs
