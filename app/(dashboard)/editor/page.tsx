@@ -1,27 +1,34 @@
 'use client'
 
-import { useEffect } from 'react'
-import Quill from 'quill'
-import 'quill/dist/quill.snow.css'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import React, { useState } from 'react'
 
-const Editor = () => {
-  useEffect(() => {
-    const quill = new Quill('#editor', {
-      theme: 'snow',
-      placeholder: 'Write something amazing...',
-      modules: {
-        toolbar: [
-          [{ header: [1, 2, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          ['blockquote', 'code-block'],
-          ['link', 'image'],
-        ],
-      },
-    })
-  }, [])
+const Editor: React.FC = () => {
+  const [content, setContent] = useState<string>('')
 
-  return <section id='editor' className='h-full bg-white'></section>
+  return (
+    <section className='w-full h-full flex flex-col items-center px-6 py-6'>
+      <Tabs
+        defaultValue='write'
+        className='w-full max-w-xl bg-white border border-gray-200 rounded-xl'
+      >
+        <TabsList className='flex bg-gray-100 w-full gap-x-2 overflow-hidden h-full rounded-xl'>
+          <TabsTrigger
+            value='write'
+            className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl h-full py-2'
+          >
+            Write
+          </TabsTrigger>
+          <TabsTrigger
+            value='preview'
+            className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
+          >
+            Preview
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+    </section>
+  )
 }
 
 export default Editor

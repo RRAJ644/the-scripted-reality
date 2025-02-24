@@ -52,14 +52,14 @@ const links: NavLink[] = [
 
 export default function Sidebar() {
   return (
-    <aside className='w-56 h-screen border-2 text-neutral-900 px-4 py-6 sticky top-0'>
+    <aside className='w-56 h-screen border border-neutral-500 text-neutral-900 px-4 py-6 sticky top-0'>
       <nav>
         <ul className='space-y-4'>
           {links.map(({ name, onClick, href,  icon: Icon }) => (
             <Link
               href={href}
               key={name}
-              className='cursor-pointer list-none flex items-center justify-center gap-4 text-xl border-b-2 py-3'
+              className='cursor-pointer list-none flex items-center justify-center gap-4 text-xl border-b-2 border-neutral-400 py-3'
               role='link'
               onClick={onClick}
             >

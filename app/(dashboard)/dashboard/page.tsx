@@ -6,7 +6,7 @@ const Dashboard = () => {
   const { data: session } = useSession()
 
   return (
-    <section className='w-full h-full flex flex-col justify-start mt-20 items-center text-center px-6'>
+    <section className='w-full h-full flex flex-col justify-start items-center text-center px-6 border-2 border-blue-700'>
       {session?.user ? (
         <div className='flex flex-col gap-y-4 justify-center items-center'>
           <h1 className='text-5xl font-semibold'>
