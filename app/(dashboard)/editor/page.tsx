@@ -1,7 +1,7 @@
 'use client'
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Children, useEffect, useRef, useState } from 'react'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 
@@ -32,7 +32,7 @@ const Editor: React.FC = () => {
     }
 
     return () => {
-      quillRef.current = null
+      quillRef.current?.off('text-change')
     }
   }, [])
 
@@ -58,15 +58,10 @@ const Editor: React.FC = () => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value='write' key='write'>
-          <div ref={editorRef} className='' />
-        </TabsContent>
+        <TabsContent value='write' ref={editorRef} />
 
-        <TabsContent value='preview' key='preview'>
-          <div
-            className='prose'
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+        <TabsContent value='preview'>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
         </TabsContent>
       </Tabs>
     </section>
