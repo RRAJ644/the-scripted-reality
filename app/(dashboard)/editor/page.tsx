@@ -1,7 +1,7 @@
 'use client'
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import React, { Children, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 
@@ -27,20 +27,22 @@ const Editor: React.FC = () => {
         placeholder: 'Write your blog post here...',
       })
 
-      quillRef.current.on('text-change', () => {
+      const handleTextChange = () => {
         setContent(quillRef.current?.root.innerHTML || '')
-      })
-    }
+      }
 
-    return () => {
-      quillRef.current?.off('text-change')
+      quillRef.current.on('text-change', handleTextChange)
+
+      return () => {
+        quillRef.current?.off('text-change', handleTextChange)
+      }
     }
   }, [])
 
   return (
     <section className='w-full h-full flex flex-col items-center px-6 py-6'>
       <Tabs
-        defaultValue='write'
+        value={activeTab}
         className='w-full bg-white border-gray-200 rounded-xl'
         onValueChange={(value) => setActiveTab(value as 'write' | 'preview')}
       >
@@ -60,11 +62,20 @@ const Editor: React.FC = () => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value='write' ref={editorRef} />
+        <div className={`${activeTab === 'write' ? 'block' : 'hidden'}`}>
+          <TabsContent value='write' forceMount>
+            <div ref={editorRef} />
+          </TabsContent>
+        </div>
 
-        <TabsContent value='preview'>
-          <div dangerouslySetInnerHTML={{ __html: content }}></div>
-        </TabsContent>
+        {activeTab === 'preview' && (
+          <TabsContent value='preview'>
+            <div
+              dangerouslySetInnerHTML={{ __html: content }}
+              className='border-2'
+            ></div>
+          </TabsContent>
+        )}
       </Tabs>
     </section>
   )
