@@ -9,6 +9,7 @@ const Editor: React.FC = () => {
   const quillRef = useRef<Quill | null>(null)
   const editorRef = useRef<HTMLDivElement | null>(null)
   const [content, setContent] = useState('')
+  const [activeTab, setActiveTab] = useState<'write' | 'preview'>('write')
 
   useEffect(() => {
     if (editorRef.current && !quillRef.current) {
@@ -41,6 +42,7 @@ const Editor: React.FC = () => {
       <Tabs
         defaultValue='write'
         className='w-full bg-white border-gray-200 rounded-xl'
+        onValueChange={(value) => setActiveTab(value as 'write' | 'preview')}
       >
         <TabsList className='w-full max-w-3xl flex gap-x-4 items-center justify-center mx-auto bg-gray-100 overflow-hidden rounded-xl h-16 px-3'>
           <TabsTrigger
