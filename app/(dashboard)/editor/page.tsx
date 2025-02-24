@@ -62,11 +62,13 @@ const Editor: React.FC = () => {
           </TabsTrigger>
         </TabsList>
 
-        <div className={`${activeTab === 'write' ? 'block' : 'hidden'}`}>
-          <TabsContent value='write' forceMount>
-            <div ref={editorRef} />
-          </TabsContent>
-        </div>
+        <TabsContent
+          className={`${activeTab === 'write' ? 'block' : 'hidden'}`}
+          value='write'
+          forceMount
+        >
+          <div ref={editorRef} />
+        </TabsContent>
 
         <TabsContent value='preview'>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
