@@ -68,14 +68,9 @@ const Editor: React.FC = () => {
           </TabsContent>
         </div>
 
-        {activeTab === 'preview' && (
-          <TabsContent value='preview'>
-            <div
-              dangerouslySetInnerHTML={{ __html: content }}
-              className='border-2'
-            ></div>
-          </TabsContent>
-        )}
+        <TabsContent value='preview'>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        </TabsContent>
       </Tabs>
     </section>
   )
