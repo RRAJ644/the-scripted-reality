@@ -161,7 +161,7 @@ const Editor: React.FC = () => {
               forceMount
               className={`${activeTab === 'write' ? 'block' : 'hidden'}`}
             >
-              <div ref={editorRef}/>
+              <div ref={editorRef} />
             </TabsContent>
 
             <TabsContent value='preview'>
@@ -175,7 +175,7 @@ const Editor: React.FC = () => {
 
           <Button
             type='submit'
-            className='w-fit bg-blue-600 text-white rounded-xl py-2 hover:bg-blue-700'
+            className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
           >
             Save
           </Button>
