@@ -12,13 +12,14 @@ import {
   FormMessage,
 } from '@/app/components/ui/form'
 import { useForm } from 'react-hook-form'
-import React, { useEffect, useRef, useState } from 'react'
-import Quill from 'quill'
+import React, { useEffect, useState } from 'react'
+import ReactQuill from 'react-quill-new'
 import 'quill/dist/quill.snow.css'
 
 const Editor: React.FC = () => {
-  const quillRef = useRef<Quill | null>(null)
-  const editorRef = useRef<HTMLDivElement | null>(null)
+  const [content, setContent] = useState<string>(
+    localStorage.getItem('content') || ''
+  )
   const [activeTab, setActiveTab] = useState<'write' | 'preview'>('write')
 
   const form = useForm({
@@ -29,37 +30,13 @@ const Editor: React.FC = () => {
   })
 
   useEffect(() => {
-    if (editorRef.current) {
-      if (!quillRef.current) {
-        quillRef.current = new Quill(editorRef.current, {
-          theme: 'snow',
-          modules: {
-            toolbar: [
-              [{ header: [1, 2, 3, false] }],
-              ['bold', 'italic', 'underline', 'strike'],
-              [{ list: 'ordered' }, { list: 'bullet' }],
-              ['link', 'image'],
-              ['clean'],
-            ],
-          },
-          placeholder: 'Write your blog post here...',
-        })
-
-        quillRef.current.root.innerHTML = localStorage.getItem('content') || ''
-
-        quillRef.current.on('text-change', () => {
-          const newContent = quillRef.current?.root.innerHTML || ''
-          localStorage.setItem('content', newContent)
-        })
-      }
-    }
-  }, [activeTab])
+    localStorage.setItem('content', content)
+  }, [content])
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
       const maxSize = 2 * 1024 * 1024 // 2MB limit
-
       if (file.size > maxSize) {
         alert('File size exceeds 2MB. Please upload a smaller image.')
         return
@@ -78,7 +55,7 @@ const Editor: React.FC = () => {
   const onSubmit = (data: any) => {
     const blogData = {
       title: data.title,
-      description: quillRef.current?.root.innerHTML || '',
+      description: content,
       imageUrl: data.image || '',
     }
 
@@ -158,20 +135,16 @@ const Editor: React.FC = () => {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent
-              value='write'
-              forceMount
-              className={`${activeTab === 'write' ? 'block' : 'hidden'}`}
-            >
-              <div ref={editorRef} />
+            <TabsContent value='write'>
+              <ReactQuill
+                value={content}
+                onChange={setContent}
+                placeholder='Write your blog post here...'
+              />
             </TabsContent>
 
             <TabsContent value='preview'>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: quillRef.current?.root.innerHTML || '',
-                }}
-              ></div>
+              <div dangerouslySetInnerHTML={{ __html: content }}></div>
             </TabsContent>
           </Tabs>
 
