@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string; subId: string } } // Ensure proper typing
+  context: { params: { id: string; subId: string } }
 ) {
   try {
     await connectToDatabase()
@@ -12,8 +12,8 @@ export async function PUT(
 
     const updatedThought = await Thought.findOneAndUpdate(
       {
-        _id: params.id, // Use `id` instead of `thoughtId`
-        'subThoughts._id': params.subId,
+        _id: context.params.id,
+        'subThoughts._id': context.params.subId,
       },
       {
         $set: {
@@ -41,13 +41,13 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string; subId: string } }
+  context: { params: { id: string; subId: string } }
 ) {
   try {
     await connectToDatabase()
     const updatedThought = await Thought.findByIdAndUpdate(
-      params.id, // Use `id` instead of `thoughtId`
-      { $pull: { subThoughts: { _id: params.subId } } },
+      context.params.id,
+      { $pull: { subThoughts: { _id: context.params.subId } } },
       { new: true }
     )
 
