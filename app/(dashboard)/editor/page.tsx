@@ -29,29 +29,31 @@ const Editor: React.FC = () => {
   })
 
   useEffect(() => {
-    if (editorRef.current && !quillRef.current) {
-      quillRef.current = new Quill(editorRef.current, {
-        theme: 'snow',
-        modules: {
-          toolbar: [
-            [{ header: [1, 2, 3, false] }],
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link', 'image'],
-            ['clean'],
-          ],
-        },
-        placeholder: 'Write your blog post here...',
-      })
+    if (editorRef.current) {
+      if (!quillRef.current) {
+        quillRef.current = new Quill(editorRef.current, {
+          theme: 'snow',
+          modules: {
+            toolbar: [
+              [{ header: [1, 2, 3, false] }],
+              ['bold', 'italic', 'underline', 'strike'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              ['link', 'image'],
+              ['clean'],
+            ],
+          },
+          placeholder: 'Write your blog post here...',
+        })
 
-      quillRef.current.root.innerHTML = localStorage.getItem('content') || ''
+        quillRef.current.root.innerHTML = localStorage.getItem('content') || ''
 
-      quillRef.current.on('text-change', () => {
-        const newContent = quillRef.current?.root.innerHTML || ''
-        localStorage.setItem('content', newContent)
-      })
+        quillRef.current.on('text-change', () => {
+          const newContent = quillRef.current?.root.innerHTML || ''
+          localStorage.setItem('content', newContent)
+        })
+      }
     }
-  }, [])
+  }, [activeTab])
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
