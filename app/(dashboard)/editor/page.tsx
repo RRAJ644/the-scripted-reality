@@ -12,8 +12,8 @@ import {
 } from '@/app/components/ui/form'
 import { useForm } from 'react-hook-form'
 import React, { useEffect, useState } from 'react'
-import ReactQuill from 'react-quill'
-import 'quill/dist/quill.snow.css'
+import ReactQuill from 'react-quill-new'
+import 'react-quill-new/dist/quill.snow.css'
 
 const Editor: React.FC = () => {
   const [content, setContent] = useState<string>('')
