@@ -1,10 +1,10 @@
-import { connectToDatabase } from "@/lib/db";
-import Thought from "@/models/Thought";
-import { NextRequest, NextResponse } from "next/server";
+import { connectToDatabase } from '@/lib/db'
+import Thought from '@/models/Thought'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string; subId: string } }
+  { params }: { params: { id: string; subId: string } } // Ensure proper typing
 ) {
   try {
     await connectToDatabase()
