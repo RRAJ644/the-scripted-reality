@@ -1,5 +1,4 @@
 'use client'
-
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Input } from '@/app/components/ui/input'
 import { Button } from '@/app/components/ui/button'
