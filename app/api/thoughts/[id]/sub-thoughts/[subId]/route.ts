@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function PUT(
   req: NextRequest,
-  context: { params: { id: string; subId: string } }
+  context: { params: { id: string; subId: string } } // Updated to use context directly
 ) {
   try {
     await connectToDatabase()
@@ -12,7 +12,7 @@ export async function PUT(
 
     const updatedThought = await Thought.findOneAndUpdate(
       {
-        _id: context.params.id,
+        _id: context.params.id, // Use `id` from context.params
         'subThoughts._id': context.params.subId,
       },
       {
