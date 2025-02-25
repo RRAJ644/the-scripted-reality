@@ -1,4 +1,5 @@
 'use client'
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Input } from '@/app/components/ui/input'
 import { Button } from '@/app/components/ui/button'
@@ -16,27 +17,20 @@ import ReactQuill from 'react-quill-new'
 import 'react-quill-new/dist/quill.snow.css'
 
 const Editor: React.FC = () => {
-  const [content, setContent] = useState<string>('')
+  const [content, setContent] = useState<string>(
+    localStorage.getItem('content') || ''
+  )
   const [activeTab, setActiveTab] = useState<'write' | 'preview'>('write')
 
   const form = useForm({
     defaultValues: {
-      title: '',
-      image: '',
+      title: localStorage.getItem('title') || '',
+      image: localStorage.getItem('image') || '',
     },
   })
 
-  // Load stored values only on client
   useEffect(() => {
-    setContent(localStorage.getItem('content') || '')
-    form.setValue('title', localStorage.getItem('title') || '')
-    form.setValue('image', localStorage.getItem('image') || '')
-  }, [])
-
-  useEffect(() => {
-    if (content) {
-      localStorage.setItem('content', content)
-    }
+    localStorage.setItem('content', content)
   }, [content])
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +88,7 @@ const Editor: React.FC = () => {
               <FormField
                 control={form.control}
                 name='image'
-                render={() => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Upload Image</FormLabel>
                     <FormControl>
