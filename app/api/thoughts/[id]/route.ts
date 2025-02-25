@@ -2,13 +2,16 @@ import { connectToDatabase } from '@/lib/db'
 import Thought from '@/models/Thought'
 import { NextResponse } from 'next/server'
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: Request) {
   try {
     await connectToDatabase()
-    const thought = await Thought.findById(params.id)
+
+    const url = new URL(req.url)
+    const id = url.pathname.split('/').pop() // Extracts the ID from the URL
+
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 })
+
+    const thought = await Thought.findById(id)
     if (!thought)
       return NextResponse.json({ error: 'Thought not found' }, { status: 404 })
 
@@ -21,15 +24,18 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(req: Request) {
   try {
     await connectToDatabase()
+
+    const url = new URL(req.url)
+    const id = url.pathname.split('/').pop() // Extract ID
+
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 })
+
     const { title } = await req.json()
     const updatedThought = await Thought.findByIdAndUpdate(
-      params.id,
+      id,
       { title, updatedAt: new Date() },
       { new: true }
     )
@@ -46,21 +52,21 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  console.log('Received ID:', params.id) // Debugging log
+export async function DELETE(req: Request) {
   try {
     await connectToDatabase()
 
-    const deletedThought = await Thought.findByIdAndDelete(params.id)
+    const url = new URL(req.url)
+    const id = url.pathname.split('/').pop() // Extract ID
+
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 })
+
+    const deletedThought = await Thought.findByIdAndDelete(id)
     if (!deletedThought)
       return NextResponse.json({ error: 'Thought not found' }, { status: 404 })
 
     return NextResponse.json({ message: 'Thought deleted successfully' })
   } catch (error) {
-    console.log(error, '====ee')
     return NextResponse.json(
       { error: 'Failed to delete thought' },
       { status: 500 }
