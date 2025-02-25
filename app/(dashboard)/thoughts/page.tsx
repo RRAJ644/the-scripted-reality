@@ -2,30 +2,30 @@
 import { useState } from 'react'
 import { Button } from '@/app/components/ui/button'
 import { Input } from '@/app/components/ui/input'
-import { ChevronDown, Plus, Trash } from 'lucide-react'
-
-interface Thought {
-  title: string
-  expanded: boolean
-  points: string[]
-}
+import { Card } from '@/app/components/ui/card'
+import { ChevronDown, ChevronUp, Trash, Edit, Save } from 'lucide-react'
 
 const Thoughts: React.FC = () => {
   const [thought, setThought] = useState<string>('')
-  const [thoughts, setThoughts] = useState<Thought[]>([])
-  const [editingPoint, setEditingPoint] = useState<{
-    thoughtIndex: number
-    pointIndex: number
-  } | null>(null)
-  const [editValue, setEditValue] = useState<string>('')
+  const [thoughts, setThoughts] = useState<
+    {
+      title: string
+      expanded: boolean
+      subThoughts: { text: string; isEditing: boolean }[]
+    }[]
+  >([])
 
-  const addThoughts = (): void => {
-    if (thought.trim() === '') return
-    setThoughts([...thoughts, { title: thought, expanded: false, points: [] }])
-    setThought('')
+  const addThought = () => {
+    if (thought.trim()) {
+      setThoughts([
+        ...thoughts,
+        { title: thought, expanded: false, subThoughts: [] },
+      ])
+      setThought('')
+    }
   }
 
-  const toggleExpand = (index: number): void => {
+  const toggleExpand = (index: number) => {
     setThoughts(
       thoughts.map((t, i) =>
         i === index ? { ...t, expanded: !t.expanded } : t
@@ -33,157 +33,162 @@ const Thoughts: React.FC = () => {
     )
   }
 
-  const addPoint = (index: number, point: string): void => {
-    if (point.trim() === '') return
-    setThoughts(
-      thoughts.map((t, i) =>
-        i === index ? { ...t, points: [...t.points, point] } : t
+  const addSubThought = (index: number, subThought: string) => {
+    if (subThought.trim()) {
+      setThoughts(
+        thoughts.map((t, i) =>
+          i === index
+            ? {
+                ...t,
+                subThoughts: [
+                  ...t.subThoughts,
+                  { text: subThought, isEditing: false },
+                ],
+              }
+            : t
+        )
       )
-    )
+    }
   }
 
-  const deletePoint = (thoughtIndex: number, pointIndex: number): void => {
+  const deleteThought = (index: number) => {
+    setThoughts(thoughts.filter((_, i) => i !== index))
+  }
+
+  const deleteSubThought = (tIndex: number, sIndex: number) => {
     setThoughts(
       thoughts.map((t, i) =>
-        i === thoughtIndex
-          ? { ...t, points: t.points.filter((_, pi) => pi !== pointIndex) }
+        i === tIndex
+          ? { ...t, subThoughts: t.subThoughts.filter((_, j) => j !== sIndex) }
           : t
       )
     )
   }
 
-  const startEditing = (
-    thoughtIndex: number,
-    pointIndex: number,
-    value: string
-  ): void => {
-    setEditingPoint({ thoughtIndex, pointIndex })
-    setEditValue(value)
+  const editSubThought = (tIndex: number, sIndex: number, text: string) => {
+    setThoughts(
+      thoughts.map((t, i) =>
+        i === tIndex
+          ? {
+              ...t,
+              subThoughts: t.subThoughts.map((s, j) =>
+                j === sIndex ? { ...s, text, isEditing: false } : s
+              ),
+            }
+          : t
+      )
+    )
   }
 
-  const saveEdit = (): void => {
-    if (editingPoint) {
-      setThoughts(
-        thoughts.map((t, i) =>
-          i === editingPoint.thoughtIndex
-            ? {
-                ...t,
-                points: t.points.map((p, pi) =>
-                  pi === editingPoint.pointIndex ? editValue : p
-                ),
-              }
-            : t
-        )
+  const toggleEditSubThought = (tIndex: number, sIndex: number) => {
+    setThoughts(
+      thoughts.map((t, i) =>
+        i === tIndex
+          ? {
+              ...t,
+              subThoughts: t.subThoughts.map((s, j) =>
+                j === sIndex ? { ...s, isEditing: !s.isEditing } : s
+              ),
+            }
+          : t
       )
-      setEditingPoint(null)
-    }
+    )
   }
 
   return (
     <section className='w-full min-h-screen flex flex-col items-center px-6 py-8 bg-gray-100'>
-      <h2 className='text-3xl font-semibold text-gray-800 mb-6'>
-        Manage Thoughts
-      </h2>
-
-      <div className='w-full bg-white shadow-md border border-gray-300 p-5 rounded-lg'>
+      <Card className='w-full bg-white shadow-md border border-gray-300 p-5 flex flex-col gap-y-4 rounded-2xl'>
         <Input
           type='text'
           value={thought}
           onChange={(e) => setThought(e.target.value)}
-          className='rounded-md py-3 px-4 border-gray-300 focus:ring-2 focus:ring-blue-500'
+          className='rounded-[0.5rem] h-12 border-gray-300 focus:ring-2 focus:ring-blue-500'
           placeholder='Write something...'
         />
         <Button
-          className='mt-3 bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700 transition'
-          onClick={addThoughts}
+          onClick={addThought}
+          className='w-fit text-lg bg-neutral-800 text-white rounded-xl py-3 px-6 hover:bg-neutral-900'
         >
           Add Thought
         </Button>
-      </div>
+      </Card>
 
-      <div className='w-full mt-6'>
+      <div className='w-full mt-6 space-y-4'>
         {thoughts.map((t, index) => (
-          <div
+          <Card
             key={index}
-            className='mb-4 border border-gray-500 rounded-xl overflow-hidden p-4'
+            className='bg-white shadow-md border border-gray-300 p-5 rounded-2xl'
           >
-            <div
-              className='flex justify-between items-center bg-white shadow-lg rounded-xl border border-gray-300 p-4 cursor-pointer'
-              onClick={() => toggleExpand(index)}
-            >
-              <p className='font-normal text-gray-800 text-xl'>{t.title}</p>
-              <ChevronDown
-                className={`transition-transform ${
-                  t.expanded ? 'rotate-180' : ''
-                }`}
-              />
+            <div className='flex justify-between items-center'>
+              <h3 className='text-lg font-semibold'>{t.title}</h3>
+              <div className='flex gap-2'>
+                <Button onClick={() => toggleExpand(index)} className='p-2'>
+                  {t.expanded ? (
+                    <ChevronUp size={20} />
+                  ) : (
+                    <ChevronDown size={20} />
+                  )}
+                </Button>
+                <Button onClick={() => deleteThought(index)} className='p-2'>
+                  <Trash size={20} className='text-red-500' />
+                </Button>
+              </div>
             </div>
-
             {t.expanded && (
-              <div className='mt-2 bg-gray-50 border border-gray-300 rounded-lg p-4'>
-                {t.points.map((point, i) => (
+              <div className='mt-4 space-y-3'>
+                {t.subThoughts.map((sub, sIndex) => (
                   <div
-                    key={i}
-                    className='flex items-center justify-between border-b py-2'
+                    key={sIndex}
+                    className='flex justify-between text-2xl items-center bg-gray-200 px-6 py-4 rounded-xl'
                   >
-                    {editingPoint?.thoughtIndex === index &&
-                    editingPoint.pointIndex === i ? (
+                    {sub.isEditing ? (
                       <Input
                         type='text'
-                        value={editValue}
-                        onChange={(e) => setEditValue(e.target.value)}
-                        onBlur={saveEdit}
-                        onKeyDown={(e) => e.key === 'Enter' && saveEdit()}
-                        autoFocus
-                        className='w-full text-gray-700 px-2 py-1 border rounded-md'
+                        defaultValue={sub.text}
+                        className='flex-1 border-gray-300 rounded-lg'
+                        onBlur={(e) =>
+                          editSubThought(index, sIndex, e.target.value)
+                        }
                       />
                     ) : (
-                      <p
-                        className='text-gray-700 cursor-pointer'
-                        onClick={() => startEditing(index, i, point)}
-                      >
-                        • {point}
-                      </p>
+                      <span>{sub.text}</span>
                     )}
-                    <Button
-                      variant='ghost'
-                      className='hover:text-red-600'
-                      onClick={() => deletePoint(index, i)}
-                    >
-                      <Trash size={16} />
-                    </Button>
+                    <div className='flex gap-2'>
+                      <Button
+                        onClick={() => toggleEditSubThought(index, sIndex)}
+                        className='p-2'
+                      >
+                        {sub.isEditing ? (
+                          <Save size={16} className='text-green-500' />
+                        ) : (
+                          <Edit size={16} />
+                        )}
+                      </Button>
+                      <Button
+                        onClick={() => deleteSubThought(index, sIndex)}
+                        className='p-2'
+                      >
+                        <Trash size={16} className='text-red-500' />
+                      </Button>
+                    </div>
                   </div>
                 ))}
-                <div className='flex items-center gap-x-2 mt-3'>
+                <div className='flex gap-2'>
                   <Input
                     type='text'
-                    placeholder='Add a point...'
-                    className='flex-1 border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500'
+                    className='rounded-[0.5rem] h-12 border-gray-300 focus:ring-2 focus:ring-blue-500'
+                    placeholder='Add a sub-thought...'
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        addPoint(index, e.currentTarget.value)
+                      if (e.key === 'Enter' && e.currentTarget.value.trim()) {
+                        addSubThought(index, e.currentTarget.value)
                         e.currentTarget.value = ''
                       }
                     }}
                   />
-                  <Button
-                    variant='outline'
-                    className='border-gray-400 hover:bg-gray-200'
-                    onClick={(e) => {
-                      const input = e.currentTarget
-                        .previousSibling as HTMLInputElement
-                      if (input) {
-                        addPoint(index, input.value)
-                        input.value = ''
-                      }
-                    }}
-                  >
-                    <Plus size={16} />
-                  </Button>
                 </div>
               </div>
             )}
-          </div>
+          </Card>
         ))}
       </div>
     </section>
