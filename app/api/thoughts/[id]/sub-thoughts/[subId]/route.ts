@@ -4,14 +4,17 @@ import { NextResponse } from 'next/server'
 
 export async function PUT(
   req: Request,
-  { params }: { params: { thoughtId: string; subId: string } }
+  context: { params: { thoughtId: string; subId: string } }
 ) {
   try {
     await connectToDatabase()
     const { text } = await req.json()
 
     const updatedThought = await Thought.findOneAndUpdate(
-      { _id: params.thoughtId, 'subThoughts._id': params.subId },
+      {
+        _id: context.params.thoughtId,
+        'subThoughts._id': context.params.subId,
+      },
       {
         $set: {
           'subThoughts.$.text': text,
@@ -38,13 +41,13 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { thoughtId: string; subId: string } }
+  context: { params: { thoughtId: string; subId: string } }
 ) {
   try {
     await connectToDatabase()
     const updatedThought = await Thought.findByIdAndUpdate(
-      params.thoughtId,
-      { $pull: { subThoughts: { _id: params.subId } } },
+      context.params.thoughtId,
+      { $pull: { subThoughts: { _id: context.params.subId } } },
       { new: true }
     )
 
