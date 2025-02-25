@@ -2,17 +2,15 @@ import { connectToDatabase } from '@/lib/db'
 import Thought from '@/models/Thought'
 import { NextRequest, NextResponse } from 'next/server'
 
-// The PUT route handler
 export async function PUT(req: NextRequest) {
   try {
     await connectToDatabase()
     const { text } = await req.json()
 
-    // Extracting `id` and `subId` from the request URL
     const url = new URL(req.url)
     const pathSegments = url.pathname.split('/')
-    const id = pathSegments[pathSegments.length - 3] // Get `id` from the path
-    const subId = pathSegments[pathSegments.length - 1] // Get `subId` from the path
+    const id = pathSegments[pathSegments.length - 3]
+    const subId = pathSegments[pathSegments.length - 1]
 
     if (!id || !subId) {
       return NextResponse.json(
@@ -23,8 +21,8 @@ export async function PUT(req: NextRequest) {
 
     const updatedThought = await Thought.findOneAndUpdate(
       {
-        _id: id, // Use `id`
-        'subThoughts._id': subId, // Use `subId`
+        _id: id,
+        'subThoughts._id': subId,
       },
       {
         $set: {
@@ -50,16 +48,14 @@ export async function PUT(req: NextRequest) {
   }
 }
 
-// The DELETE route handler
 export async function DELETE(req: NextRequest) {
   try {
     await connectToDatabase()
 
-    // Extracting `id` and `subId` from the request URL
     const url = new URL(req.url)
     const pathSegments = url.pathname.split('/')
-    const id = pathSegments[pathSegments.length - 3] // Get `id` from the path
-    const subId = pathSegments[pathSegments.length - 1] // Get `subId` from the path
+    const id = pathSegments[pathSegments.length - 3]
+    const subId = pathSegments[pathSegments.length - 1]
 
     if (!id || !subId) {
       return NextResponse.json(
@@ -69,7 +65,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     const updatedThought = await Thought.findByIdAndUpdate(
-      id, // Use `id`
+      id,
       { $pull: { subThoughts: { _id: subId } } },
       { new: true }
     )

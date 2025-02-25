@@ -3,15 +3,21 @@ import mongoose from 'mongoose'
 import { connectToDatabase } from '@/lib/db'
 import Thought from '@/models/Thought'
 
-export async function POST(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(req: Request) {
   try {
     await connectToDatabase()
     const { text } = await req.json()
+
+    const url = new URL(req.url)
+    const pathSegments = url.pathname.split('/')
+    const id = pathSegments[pathSegments.length - 2]
+
+    if (!id) {
+      return NextResponse.json({ error: 'Invalid ID' }, { status: 400 })
+    }
+
     const updatedThought = await Thought.findByIdAndUpdate(
-      params.id,
+      id,
       {
         $push: {
           subThoughts: {
