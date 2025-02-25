@@ -19,20 +19,34 @@ import 'react-quill-new/dist/quill.snow.css'
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 
 const Editor: React.FC = () => {
-  const [content, setContent] = useState<string>(
-    localStorage.getItem('content') || ''
-  )
+  const [content, setContent] = useState<string>('')
   const [activeTab, setActiveTab] = useState<'write' | 'preview'>('write')
 
   const form = useForm({
     defaultValues: {
-      title: localStorage.getItem('title') || '',
-      image: localStorage.getItem('image') || '',
+      title: '',
+      image: '',
     },
   })
 
+  // Load data from localStorage on the client side
   useEffect(() => {
-    localStorage.setItem('content', content)
+    if (typeof window !== 'undefined') {
+      const storedContent = localStorage.getItem('content') || ''
+      const storedTitle = localStorage.getItem('title') || ''
+      const storedImage = localStorage.getItem('image') || ''
+
+      setContent(storedContent)
+      form.setValue('title', storedTitle)
+      form.setValue('image', storedImage)
+    }
+  }, [])
+
+  // Save content to localStorage when it changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('content', content)
+    }
   }, [content])
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +62,9 @@ const Editor: React.FC = () => {
       reader.onload = (e) => {
         const imageData = e.target?.result as string
         form.setValue('image', imageData)
-        localStorage.setItem('image', imageData)
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('image', imageData)
+        }
       }
       reader.readAsDataURL(file)
     }
@@ -90,7 +106,7 @@ const Editor: React.FC = () => {
               <FormField
                 control={form.control}
                 name='image'
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Upload Image</FormLabel>
                     <FormControl>
