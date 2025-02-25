@@ -16,20 +16,27 @@ import ReactQuill from 'react-quill'
 import 'quill/dist/quill.snow.css'
 
 const Editor: React.FC = () => {
-  const [content, setContent] = useState<string>(
-    localStorage.getItem('content') || ''
-  )
+  const [content, setContent] = useState<string>('')
   const [activeTab, setActiveTab] = useState<'write' | 'preview'>('write')
 
   const form = useForm({
     defaultValues: {
-      title: localStorage.getItem('title') || '',
-      image: localStorage.getItem('image') || '',
+      title: '',
+      image: '',
     },
   })
 
+  // Load stored values only on client
   useEffect(() => {
-    localStorage.setItem('content', content)
+    setContent(localStorage.getItem('content') || '')
+    form.setValue('title', localStorage.getItem('title') || '')
+    form.setValue('image', localStorage.getItem('image') || '')
+  }, [])
+
+  useEffect(() => {
+    if (content) {
+      localStorage.setItem('content', content)
+    }
   }, [content])
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +94,7 @@ const Editor: React.FC = () => {
               <FormField
                 control={form.control}
                 name='image'
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Upload Image</FormLabel>
                     <FormControl>
