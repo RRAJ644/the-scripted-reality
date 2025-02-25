@@ -29,7 +29,6 @@ const Editor: React.FC = () => {
     },
   })
 
-  // Load data from localStorage on the client side
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedContent = localStorage.getItem('content') || ''
@@ -42,7 +41,6 @@ const Editor: React.FC = () => {
     }
   }, [])
 
-  // Save content to localStorage when it changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('content', content)
@@ -82,13 +80,32 @@ const Editor: React.FC = () => {
 
   return (
     <section className='w-full h-full flex flex-col items-center px-6 py-6'>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='w-full space-y-6'
-        >
-          {activeTab === 'write' && (
-            <>
+      <Tabs
+        value={activeTab}
+        className='w-full bg-white border-gray-200 rounded-xl'
+        onValueChange={(value) => setActiveTab(value as 'write' | 'preview')}
+      >
+        <TabsList className='w-full max-w-3xl flex gap-x-4 items-center justify-center mx-auto bg-gray-100 overflow-hidden rounded-xl h-16 px-3'>
+          <TabsTrigger
+            value='write'
+            className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
+          >
+            Write
+          </TabsTrigger>
+          <TabsTrigger
+            value='preview'
+            className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
+          >
+            Preview
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value='write'>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className='w-full space-y-6'
+            >
               <FormField
                 control={form.control}
                 name='title'
@@ -128,52 +145,26 @@ const Editor: React.FC = () => {
                   className='max-w-3xl rounded-lg shadow'
                 />
               )}
-            </>
-          )}
 
-          <Tabs
-            value={activeTab}
-            className='w-full bg-white border-gray-200 rounded-xl'
-            onValueChange={(value) =>
-              setActiveTab(value as 'write' | 'preview')
-            }
-          >
-            <TabsList className='w-full max-w-3xl flex gap-x-4 items-center justify-center mx-auto bg-gray-100 overflow-hidden rounded-xl h-16 px-3'>
-              <TabsTrigger
-                value='write'
-                className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
-              >
-                Write
-              </TabsTrigger>
-              <TabsTrigger
-                value='preview'
-                className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
-              >
-                Preview
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value='write'>
               <ReactQuill
                 value={content}
                 onChange={setContent}
                 placeholder='Write your blog post here...'
               />
-            </TabsContent>
+              <Button
+                type='submit'
+                className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
+              >
+                Save
+              </Button>
+            </form>
+          </Form>
+        </TabsContent>
 
-            <TabsContent value='preview'>
-              <div dangerouslySetInnerHTML={{ __html: content }}></div>
-            </TabsContent>
-          </Tabs>
-
-          <Button
-            type='submit'
-            className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
-          >
-            Save
-          </Button>
-        </form>
-      </Form>
+        <TabsContent value='preview'>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        </TabsContent>
+      </Tabs>
     </section>
   )
 }
