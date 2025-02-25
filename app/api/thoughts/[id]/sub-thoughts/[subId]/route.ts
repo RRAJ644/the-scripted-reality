@@ -1,10 +1,10 @@
 import { connectToDatabase } from '@/lib/db'
 import Thought from '@/models/Thought'
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 
 export async function PUT(
-  req: Request,
-  context: { params: { thoughtId: string; subId: string } }
+  req: NextRequest,
+  { params }: { params: { thoughtId: string; subId: string } }
 ) {
   try {
     await connectToDatabase()
@@ -12,8 +12,8 @@ export async function PUT(
 
     const updatedThought = await Thought.findOneAndUpdate(
       {
-        _id: context.params.thoughtId,
-        'subThoughts._id': context.params.subId,
+        _id: params.thoughtId,
+        'subThoughts._id': params.subId,
       },
       {
         $set: {
@@ -40,14 +40,14 @@ export async function PUT(
 }
 
 export async function DELETE(
-  req: Request,
-  context: { params: { thoughtId: string; subId: string } }
+  req: NextRequest,
+  { params }: { params: { thoughtId: string; subId: string } }
 ) {
   try {
     await connectToDatabase()
     const updatedThought = await Thought.findByIdAndUpdate(
-      context.params.thoughtId,
-      { $pull: { subThoughts: { _id: context.params.subId } } },
+      params.thoughtId,
+      { $pull: { subThoughts: { _id: params.subId } } },
       { new: true }
     )
 
