@@ -13,8 +13,10 @@ import {
 } from '@/app/components/ui/form'
 import { useForm } from 'react-hook-form'
 import React, { useEffect, useState } from 'react'
-import ReactQuill from 'react-quill-new'
+import dynamic from 'next/dynamic'
 import 'react-quill-new/dist/quill.snow.css'
+
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 
 const Editor: React.FC = () => {
   const [content, setContent] = useState<string>(
