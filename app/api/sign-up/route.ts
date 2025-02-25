@@ -6,8 +6,6 @@ export async function POST(request: Request) {
   try {
     const { name, email, password, role } = await request.json()
 
-    console.log({ name, email, password }, '====data')
-
     const existingUser = await User.findOne({ email })
 
     if (existingUser) {
