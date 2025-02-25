@@ -2,18 +2,29 @@ import { connectToDatabase } from '@/lib/db'
 import Thought from '@/models/Thought'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string; subId: string } }
-) {
+// The PUT route handler
+export async function PUT(req: NextRequest) {
   try {
     await connectToDatabase()
     const { text } = await req.json()
 
+    // Extracting `id` and `subId` from the request URL
+    const url = new URL(req.url)
+    const pathSegments = url.pathname.split('/')
+    const id = pathSegments[pathSegments.length - 3] // Get `id` from the path
+    const subId = pathSegments[pathSegments.length - 1] // Get `subId` from the path
+
+    if (!id || !subId) {
+      return NextResponse.json(
+        { error: 'Invalid ID or Sub-ID' },
+        { status: 400 }
+      )
+    }
+
     const updatedThought = await Thought.findOneAndUpdate(
       {
-        _id: params.id,
-        'subThoughts._id': params.subId,
+        _id: id, // Use `id`
+        'subThoughts._id': subId, // Use `subId`
       },
       {
         $set: {
@@ -39,15 +50,27 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string; subId: string } }
-) {
+// The DELETE route handler
+export async function DELETE(req: NextRequest) {
   try {
     await connectToDatabase()
+
+    // Extracting `id` and `subId` from the request URL
+    const url = new URL(req.url)
+    const pathSegments = url.pathname.split('/')
+    const id = pathSegments[pathSegments.length - 3] // Get `id` from the path
+    const subId = pathSegments[pathSegments.length - 1] // Get `subId` from the path
+
+    if (!id || !subId) {
+      return NextResponse.json(
+        { error: 'Invalid ID or Sub-ID' },
+        { status: 400 }
+      )
+    }
+
     const updatedThought = await Thought.findByIdAndUpdate(
-      params.id,
-      { $pull: { subThoughts: { _id: params.subId } } },
+      id, // Use `id`
+      { $pull: { subThoughts: { _id: subId } } },
       { new: true }
     )
 
