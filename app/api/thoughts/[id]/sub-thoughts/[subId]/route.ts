@@ -1,20 +1,18 @@
 import { connectToDatabase } from '@/lib/db'
 import Thought from '@/models/Thought'
+import { Params } from 'next/dist/server/request/params'
 import { NextRequest, NextResponse } from 'next/server'
 
 // The PUT route handler
-export async function PUT(
-  req: NextRequest,
-  context: { params: { id: string; subId: string } } // Typing context correctly
-) {
+export async function PUT(req: NextRequest, { params }: { params: Params }) {
   try {
     await connectToDatabase()
     const { text } = await req.json()
 
     const updatedThought = await Thought.findOneAndUpdate(
       {
-        _id: context.params.id, // Use `id` from `context.params`
-        'subThoughts._id': context.params.subId, // Use `subId` from `context.params`
+        _id: params.id, // Use `id` from `params`
+        'subThoughts._id': params.subId, // Use `subId` from `params`
       },
       {
         $set: {
@@ -41,15 +39,12 @@ export async function PUT(
 }
 
 // The DELETE route handler
-export async function DELETE(
-  req: NextRequest,
-  context: { params: { id: string; subId: string } } // Typing context correctly
-) {
+export async function DELETE(req: NextRequest, { params }: { params: Params }) {
   try {
     await connectToDatabase()
     const updatedThought = await Thought.findByIdAndUpdate(
-      context.params.id, // Use `id` from `context.params`
-      { $pull: { subThoughts: { _id: context.params.subId } } },
+      params.id, // Use `id` from `params`
+      { $pull: { subThoughts: { _id: params.subId } } },
       { new: true }
     )
 
