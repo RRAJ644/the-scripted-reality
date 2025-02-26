@@ -5,17 +5,19 @@ import type { NextRequest } from 'next/server'
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
-  if (!token && pathname === '/sign-in') {
-    return NextResponse.redirect(new URL('/sign-in', request.url))
+
+  // Make `/sign-up` completely inaccessible
+  if (pathname === '/sign-up') {
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
+  // Redirect authenticated users away from `/sign-in`
   if (token && pathname === '/sign-in') {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  // Protect restricted routes, redirect unauthenticated users to sign-in
+  // Protect restricted routes, redirect unauthenticated users to `/sign-in`
   const protectedRoutes = [
-    '/sign-up',
     '/dashboard',
     '/thoughts',
     '/editor',
@@ -23,10 +25,6 @@ export async function middleware(request: NextRequest) {
     '/drafts',
     '/dashboard/scripts',
   ]
-
-  if (!token && !protectedRoutes.includes(pathname)) {
-    return NextResponse.redirect(new URL('/', request.url))
-  }
 
   if (!token && protectedRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL('/', request.url))
