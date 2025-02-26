@@ -128,7 +128,7 @@ const Thoughts: React.FC = () => {
   }
 
   return (
-    <section className='w-full min-h-screen flex flex-col items-center px-6 py-8 bg-gray-100'>
+    <section className='w-full min-h-screen flex flex-col items-center px-6 py-4 bg-gray-100'>
       <Card className='w-full bg-white shadow-md border border-gray-300 p-5 flex flex-col gap-y-4 rounded-2xl'>
         <Input
           type='text'
@@ -139,7 +139,7 @@ const Thoughts: React.FC = () => {
         />
         <Button
           onClick={addThought}
-          className='w-fit text-lg bg-neutral-800 text-white rounded-xl py-3 px-6 hover:bg-neutral-900'
+          className='w-fit text-lg bg-neutral-800 text-white rounded-xl p-6 hover:bg-neutral-900'
         >
           Add Thought
         </Button>
@@ -148,7 +148,7 @@ const Thoughts: React.FC = () => {
       {loading ? (
         <p className='mt-6 text-gray-600'>Loading thoughts...</p>
       ) : (
-        <div className='w-full mt-6 space-y-4'>
+        <div className='w-full space-y-4 cursor-pointer py-6'>
           {thoughts.map((t) => (
             <Card
               key={t._id}
