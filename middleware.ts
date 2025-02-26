@@ -6,17 +6,14 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
 
-  // Make `/sign-up` completely inaccessible
   if (pathname === '/sign-up') {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
-  // Redirect authenticated users away from `/sign-in`
   if (token && pathname === '/sign-in') {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  // Protect restricted routes, redirect unauthenticated users to `/sign-in`
   const protectedRoutes = [
     '/dashboard',
     '/thoughts',

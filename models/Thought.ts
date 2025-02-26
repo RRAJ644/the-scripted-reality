@@ -11,6 +11,7 @@ export interface IThought {
   _id?: mongoose.Types.ObjectId
   title: string
   subThoughts: ISubThought[]
+  userId: mongoose.Types.ObjectId
   createdAt: Date
   updatedAt?: Date
 }
@@ -26,6 +27,11 @@ const ThoughtSchema = new Schema<IThought>(
         updatedAt: { type: Date },
       },
     ],
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
   { timestamps: true }
 )
