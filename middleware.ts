@@ -12,6 +12,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (
+    request.nextUrl.pathname === '/dashboard' ||
     request.nextUrl.pathname === '/thoughts' ||
     request.nextUrl.pathname === '/editor' ||
     request.nextUrl.pathname === '/dashboard/blogs' ||
