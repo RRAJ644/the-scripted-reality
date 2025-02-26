@@ -1,5 +1,7 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
+
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button } from '@/app/components/ui/button'
@@ -20,6 +22,8 @@ interface Thought {
 }
 
 const Thoughts: React.FC = () => {
+  const { data: session } = useSession()
+
   const [thought, setThought] = useState('')
   const [thoughts, setThoughts] = useState<Thought[]>([])
   const [loading, setLoading] = useState(false)
@@ -177,7 +181,9 @@ const Thoughts: React.FC = () => {
                     className='w-full rounded-[0.5rem] h-12 border-gray-300 focus:ring-2 focus:ring-blue-500'
                   />
                 ) : (
-                  <h3 className='text-lg font-semibold'>{t.title}</h3>
+                  <h3 className='text-lg flex justify-between items-center'>
+                    {t.title}{' '}
+                  </h3>
                 )}
 
                 <div className='flex'>
@@ -186,7 +192,11 @@ const Thoughts: React.FC = () => {
                       <Check size={20} />
                     </Button>
                   ) : (
-                    <div>
+                    <div className='flex justify-between items-center gap-x-3'>
+                      {/* <span className='text-xs text-neutral-700'>
+                        {session?.user?.name}
+                      </span> */}
+
                       <Button
                         onClick={() =>
                           setEditingThought({ tId: t._id, title: t.title })
