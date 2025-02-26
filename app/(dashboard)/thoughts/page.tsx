@@ -152,64 +152,57 @@ const Thoughts: React.FC = () => {
           {thoughts.map((t) => (
             <Card
               key={t._id}
-              className='bg-white shadow-md border border-gray-300 p-5 rounded-2xl'
+              className='bg-white shadow-md border border-gray-300 p-6 rounded-2xl'
             >
-              <div className='flex justify-between items-center'>
-                <div className='flex items-center gap-2'>
-                  {editingThought && editingThought.tId === t._id ? (
-                    <Input
-                      type='text'
-                      value={editingThought.title}
-                      onChange={(e) =>
-                        setEditingThought({
-                          ...editingThought,
-                          title: e.target.value,
-                        })
-                      }
-                      className='rounded-[0.5rem] h-10 border-gray-300 focus:ring-2 focus:ring-blue-500'
-                    />
-                  ) : (
-                    <h3 className='text-lg font-semibold'>{t.title}</h3>
-                  )}
+              <div
+                className='flex justify-between items-center gap-x-3'
+                onClick={() =>
+                  setThoughts(
+                    thoughts.map((th) =>
+                      th._id === t._id ? { ...th, expanded: !th.expanded } : th
+                    )
+                  )
+                }
+              >
+                {editingThought && editingThought.tId === t._id ? (
+                  <Input
+                    type='text'
+                    value={editingThought.title}
+                    onChange={(e) =>
+                      setEditingThought({
+                        ...editingThought,
+                        title: e.target.value,
+                      })
+                    }
+                    className='w-full rounded-[0.5rem] h-12 border-gray-300 focus:ring-2 focus:ring-blue-500'
+                  />
+                ) : (
+                  <h3 className='text-lg font-semibold'>{t.title}</h3>
+                )}
 
+                <div className='flex'>
                   {editingThought && editingThought.tId === t._id ? (
                     <Button onClick={updateThought} className='p-2'>
-                      <Check size={20} className='text-green-500' />
+                      <Check size={20} />
                     </Button>
                   ) : (
-                    <Button
-                      onClick={() =>
-                        setEditingThought({ tId: t._id, title: t.title })
-                      }
-                      className='p-2'
-                    >
-                      <Edit size={20} className='text-blue-500' />
-                    </Button>
+                    <div>
+                      <Button
+                        onClick={() =>
+                          setEditingThought({ tId: t._id, title: t.title })
+                        }
+                        className='p-2'
+                      >
+                        <Edit size={20} />
+                      </Button>
+                      <Button
+                        onClick={() => deleteThought(t._id)}
+                        className='p-2'
+                      >
+                        <Trash size={20} />
+                      </Button>
+                    </div>
                   )}
-                </div>
-
-                <div className='flex gap-2'>
-                  <Button
-                    onClick={() =>
-                      setThoughts(
-                        thoughts.map((th) =>
-                          th._id === t._id
-                            ? { ...th, expanded: !th.expanded }
-                            : th
-                        )
-                      )
-                    }
-                    className='p-2'
-                  >
-                    {t.expanded ? (
-                      <ChevronUp size={20} />
-                    ) : (
-                      <ChevronDown size={20} />
-                    )}
-                  </Button>
-                  <Button onClick={() => deleteThought(t._id)} className='p-2'>
-                    <Trash size={20} className='text-red-500' />
-                  </Button>
                 </div>
               </div>
               {t.expanded && (
