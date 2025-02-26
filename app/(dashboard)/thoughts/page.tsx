@@ -155,7 +155,7 @@ const Thoughts: React.FC = () => {
               className='bg-white shadow-md border border-gray-300 p-5 rounded-2xl'
             >
               <div className='flex justify-between items-center'>
-                <h3 className='text-lg font-semibold'>
+                <div className='flex items-center gap-2'>
                   {editingThought && editingThought.tId === t._id ? (
                     <Input
                       type='text'
@@ -169,9 +169,25 @@ const Thoughts: React.FC = () => {
                       className='rounded-[0.5rem] h-10 border-gray-300 focus:ring-2 focus:ring-blue-500'
                     />
                   ) : (
-                    t.title
+                    <h3 className='text-lg font-semibold'>{t.title}</h3>
                   )}
-                </h3>
+
+                  {editingThought && editingThought.tId === t._id ? (
+                    <Button onClick={updateThought} className='p-2'>
+                      <Check size={20} className='text-green-500' />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() =>
+                        setEditingThought({ tId: t._id, title: t.title })
+                      }
+                      className='p-2'
+                    >
+                      <Edit size={20} className='text-blue-500' />
+                    </Button>
+                  )}
+                </div>
+
                 <div className='flex gap-2'>
                   <Button
                     onClick={() =>
