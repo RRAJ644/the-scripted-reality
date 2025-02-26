@@ -152,7 +152,7 @@ const Thoughts: React.FC = () => {
           {thoughts.map((t) => (
             <Card
               key={t._id}
-              className='bg-white shadow-md border border-gray-300 p-6 rounded-2xl'
+              className='bg-white shadow-md border border-gray-300 py-3 px-6 rounded-2xl'
             >
               <div
                 className='flex justify-between items-center gap-x-3'
@@ -206,7 +206,7 @@ const Thoughts: React.FC = () => {
                 </div>
               </div>
               {t.expanded && (
-                <div className='mt-4 space-y-3'>
+                <div className='space-y-3 py-4'>
                   {t.subThoughts.map((sub) => (
                     <div
                       key={sub._id}
