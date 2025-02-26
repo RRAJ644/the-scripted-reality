@@ -11,7 +11,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
+  if (request.nextUrl.pathname === '/thoughts') {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
   if (token && url.pathname.startsWith('/sign-in')) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+
+  if (token && url.pathname.startsWith('/thoughts')) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
