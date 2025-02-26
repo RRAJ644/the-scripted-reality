@@ -11,7 +11,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
-  if (request.nextUrl.pathname === '/thoughts') {
+  if (
+    request.nextUrl.pathname === '/thoughts' ||
+    request.nextUrl.pathname === '/editor' ||
+    request.nextUrl.pathname === '/dashboard/blogs' ||
+    request.nextUrl.pathname === '/drafts' ||
+    request.nextUrl.pathname === '/dashboard/scripts'
+  ) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
