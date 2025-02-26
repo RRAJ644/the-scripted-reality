@@ -5,6 +5,7 @@ import type { NextRequest } from 'next/server'
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
+
   if (token && pathname === '/sign-in') {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
@@ -21,6 +22,10 @@ export async function middleware(request: NextRequest) {
   ]
 
   if (!token && !protectedRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  if (!token && protectedRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
