@@ -1,15 +1,20 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { FaTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa'
+import { FaTwitter, FaLinkedin, FaFacebook, FaEnvelope } from 'react-icons/fa'
 
 const footerConfig = {
   companyName: 'The Scripted Reality',
   year: new Date().getFullYear(),
   tagline: 'Your Gateway to Engaging Screenwriting & Digital Storytelling',
   socialLinks: [
-    { name: 'Twitter', url: 'https://twitter.com', icon: FaTwitter },
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: FaLinkedin },
-    { name: 'Facebook', url: 'https://facebook.com', icon: FaFacebook },
+    // { name: 'Twitter', url: 'https://twitter.com', icon: FaTwitter },
+    // { name: 'LinkedIn', url: 'https://linkedin.com', icon: FaLinkedin },
+    // { name: 'Facebook', url: 'https://facebook.com', icon: FaFacebook },
+    {
+      name: 'Email',
+      url: 'mailto:the.scripted.reality27@gmail.com',
+      icon: FaEnvelope,
+    },
   ],
   links: [
     { label: 'Privacy Policy', url: '/privacy' },
@@ -18,7 +23,7 @@ const footerConfig = {
   ],
   mainLinks: [
     { label: 'About Us', url: '/about' },
-    { label: 'Contact', url: '/contact' },
+    { label: 'Contact', url: 'mailto:the.scripted.reality27@gmail.com' },
   ],
 }
 
@@ -55,13 +60,13 @@ const Footer = () => {
 
         <div className='flex flex-col items-center gap-y-2 w-full max-lg:items-center'>
           <h4 className='text-sm font-bold uppercase text-neutral-900'>
-            Connect With Us
+            Let's Connect
           </h4>
           <div className='flex space-x-4'>
             {footerConfig.socialLinks.map((link) => {
               const Icon = link.icon
               return (
-                <a
+                <Link
                   key={link.name}
                   href={link.url}
                   target='_blank'
@@ -71,23 +76,21 @@ const Footer = () => {
                   title={`Follow ${footerConfig.companyName} on ${link.name}`}
                 >
                   <Icon className='h-5 w-5 text-neutral-600 transition-colors duration-200 group-hover:text-white' />
-                </a>
+                </Link>
               )
             })}
           </div>
+
           <p className='text-sm text-neutral-600'>
             Follow us for insights into screenwriting & marketing.
           </p>
         </div>
       </div>
 
-      <div className='w-full flex flex-col md:flex-row items-center justify-between border-t border-neutral-200 py-6 px-4'>
+      <div className='w-full flex flex-col md:flex-row items-center justify-center border-t border-neutral-200 py-4'>
         <p className='text-sm text-neutral-600'>
           &copy; {footerConfig.year} {footerConfig.companyName}. All rights
           reserved.
-        </p>
-        <p className='text-sm text-neutral-500 text-center md:text-right'>
-          Empowering Creativity Through Storytelling Excellence
         </p>
       </div>
     </footer>
