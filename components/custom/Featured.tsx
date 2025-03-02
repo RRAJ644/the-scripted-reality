@@ -29,7 +29,7 @@ const Featured = () => {
   return (
     <section className='w-full flex flex-col items-center justify-center gap-y-6'>
       <div className='max-w-6xl mx-auto text-center space-y-4'>
-        <h2 className='max-sm:text-3xl text-4xl md:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
+        <h2 className='max-sm:text-3xl md:text-3xl lg:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
           We Love Our Readers
         </h2>
         <p className='text-lg text-gray-700 dark:text-gray-300'>
@@ -37,7 +37,7 @@ const Featured = () => {
           imagination with every read.
         </p>
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 w-full max-w-5xl'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 w-full max-w-5xl max-lg:px-10'>
         {features.map((feature, index) => (
           <Card
             key={index}

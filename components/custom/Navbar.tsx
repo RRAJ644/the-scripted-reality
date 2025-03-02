@@ -18,7 +18,7 @@ const Navbar = () => {
     { name: 'Scripts', href: '/scripts' },
     // { name: 'Voice Scripts', href: '/voice-scripts' },
     { name: 'Blogs', href: '/blogs' },
-    { name: 'About', href: '/about' },
+    // { name: 'About', href: '/about' },
     // { name: 'Our Work', href: '/work' },
     // { name: "Let's Work", href: '/work' },
     // { name: 'Services', href: '/services' },
