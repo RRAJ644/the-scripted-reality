@@ -40,3 +40,32 @@ export async function GET() {
     )
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    await connectToDatabase()
+    const { searchParams } = new URL(req.url)
+    const blogId = searchParams.get('id') // Getting the blog ID from query params
+
+    if (!blogId) {
+      return NextResponse.json(
+        { error: 'Blog ID is required' },
+        { status: 400 }
+      )
+    }
+
+    const deletedBlog = await Blog.findByIdAndDelete(blogId)
+
+    if (!deletedBlog) {
+      return NextResponse.json({ error: 'Blog not found' }, { status: 404 })
+    }
+
+    return NextResponse.json({ message: 'Blog deleted successfully' })
+  } catch (error) {
+    console.log(error)
+    return NextResponse.json(
+      { error: 'Failed to delete blog' },
+      { status: 500 }
+    )
+  }
+}

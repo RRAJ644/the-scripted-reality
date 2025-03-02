@@ -31,6 +31,17 @@ const Blogs = () => {
     fetchBlogs()
   }, [])
 
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await axios.delete(`/api/blogs?id=${id}`)
+      if (response.status === 200) {
+        setBlogs(blogs.filter((blog) => blog._id !== id))
+      }
+    } catch (error) {
+      console.error('Failed to delete blog')
+    }
+  }
+
   return (
     <section className='h-full flex flex-col items-center p-6'>
       <div className='w-full max-w-2xl space-y-4'>
@@ -63,15 +74,18 @@ const Blogs = () => {
                       Check
                     </Link>
                   </Button>
+
                   <Button
                     variant='outline'
                     className='bg-neutral-900 text-white rounded-xl'
                   >
-                    Edit
+                    <Link href={''}>Edit</Link>
                   </Button>
+
                   <Button
-                    className='bg-neutral-900 text-white rounded-xl'
-                    variant='destructive'
+                    variant='outline'
+                    className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
+                    onClick={() => handleDelete(blog._id)}
                   >
                     Delete
                   </Button>
