@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-// Blog interface
 export interface Blog {
   title: string
   description: string
@@ -28,17 +27,17 @@ const BLOG_DATA: Blog[] = [
   },
 ]
 
-// Correct BlogPostProps type
 interface BlogPostProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
-// ✅ Metadata generation
 export async function generateMetadata({
   params,
 }: BlogPostProps): Promise<Metadata> {
+  const { slug } = await params
+
   const blog = BLOG_DATA.find(
-    (b) => b.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+    (b) => b.title.toLowerCase().replace(/\s+/g, '-') === slug
   )
 
   if (!blog) {
@@ -56,10 +55,11 @@ export async function generateMetadata({
   }
 }
 
-// ✅ BlogPost Component
-export default function BlogPost({ params }: BlogPostProps) {
+export default async function BlogPost({ params }: BlogPostProps) {
+  const { slug } = await params
+
   const blog = BLOG_DATA.find(
-    (b) => b.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+    (b) => b.title.toLowerCase().replace(/\s+/g, '-') === slug
   )
 
   if (!blog) return notFound()
