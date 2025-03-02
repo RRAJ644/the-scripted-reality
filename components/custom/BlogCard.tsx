@@ -10,7 +10,7 @@ interface Blog {
   title: string
   description: string
   imageUrl: string
-  date: string
+  createdAt: string
 }
 
 interface BlogCardProps {
@@ -45,7 +45,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
           ></p>
 
           <div className='flex justify-between items-center'>
-            <p className='text-sm text-gray-500'>{blog.date}</p>
+            <p className='text-sm text-gray-500'>
+              {new Date(blog.createdAt).toLocaleDateString()}
+            </p>
 
             <Button
               variant='outline'

@@ -8,7 +8,7 @@ interface BlogCardConfig {
   title: string
   description: string
   imageUrl: string
-  date: string
+  createdAt: string
 }
 
 const Blog = () => {

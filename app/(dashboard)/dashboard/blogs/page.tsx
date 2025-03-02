@@ -43,12 +43,18 @@ const Blogs = () => {
                 <CardTitle>{blog.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className='text-gray-600'>{blog.description}</p>
+                <p
+                  className='text-gray-600'
+                  dangerouslySetInnerHTML={{ __html: blog.description }}
+                ></p>
                 <p className='text-sm text-gray-500 mt-2'>
                   {new Date(blog.createdAt).toLocaleDateString()}
                 </p>
                 <div className='mt-4 flex gap-2'>
-                  <Button variant='outline'>
+                  <Button
+                    variant='outline'
+                    className='bg-neutral-900 text-white rounded-xl'
+                  >
                     <Link
                       href={`/blog/${blog.title
                         .toLowerCase()
@@ -57,8 +63,18 @@ const Blogs = () => {
                       Check
                     </Link>
                   </Button>
-                  <Button variant='outline'>Edit</Button>
-                  <Button variant='destructive'>Delete</Button>
+                  <Button
+                    variant='outline'
+                    className='bg-neutral-900 text-white rounded-xl'
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className='bg-neutral-900 text-white rounded-xl'
+                    variant='destructive'
+                  >
+                    Delete
+                  </Button>
                 </div>
               </CardContent>
             </Card>
