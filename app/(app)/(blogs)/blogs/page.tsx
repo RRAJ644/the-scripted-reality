@@ -34,8 +34,6 @@ const Blog = () => {
     fetchBlogs()
   }, [])
 
-  console.log(blogs, '======fff')
-
   return (
     <section className='flex flex-col items-center justify-center px-6 md:px-12 text-center mt-14'>
       <div className='max-w-6xl flex flex-col'>
@@ -48,9 +46,6 @@ const Blog = () => {
           page and plots that twist, turn, and captivate audiences on screen.
         </p>
       </div>
-
-      {/* {loading && <p className="mt-10 text-lg text-gray-600">Loading blogs...</p>} */}
-      {/* {error && <p className='mt-10 text-lg text-red-600'>{error}</p>} */}
 
       <div className='mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10'>
         {blogs?.map((blog, index) => (
