@@ -30,13 +30,14 @@ const BLOG_DATA: Blog[] = [
 
 // ✅ Fix: Use `Record<string, string>` for Next.js
 interface BlogPostProps {
-  params: Record<string, string>
+  params: { slug: string }
 }
 
-// Metadata function
 export async function generateMetadata({
   params,
-}: BlogPostProps): Promise<Metadata> {
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
   const blog = BLOG_DATA.find(
     (b) => b.title.toLowerCase().replace(/\s+/g, '-') === params.slug
   )
