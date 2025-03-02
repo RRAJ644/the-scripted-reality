@@ -18,9 +18,7 @@ const footerConfig = {
   ],
   mainLinks: [
     { label: 'About Us', url: '/about' },
-    { label: 'Key Features', url: '/features' },
-    { label: 'Pricing Plans', url: '/pricing' },
-    { label: 'Contact Support', url: '/contact' },
+    { label: 'Contact', url: '/contact' },
   ],
 }
 
@@ -28,7 +26,6 @@ const Footer = () => {
   return (
     <footer className='relative overflow-hidden bg-neutral-50 flex flex-col items-center justify-center mt-10'>
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-7xl max-lg:place-items-center py-8'>
-
         <div className='flex flex-col items-start w-full max-lg:items-center gap-y-2'>
           <h3 className='text-xl font-semibold text-neutral-900'>
             {footerConfig.companyName}
@@ -55,26 +52,6 @@ const Footer = () => {
             ))}
           </ul>
         </div>
-
-        {/* <div className='flex flex-col items-start gap-y-2 w-full max-lg:items-center'>
-          <h4 className='text-sm text-center font-bold uppercase text-neutral-900'>
-            Legal Information
-          </h4>
-          <ul className='space-y-3 flex flex-col items-center justify-center'>
-            {footerConfig.links.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.url}
-                  className='group inline-flex items-center text-sm text-neutral-600 hover:text-neutral-900'
-                  aria-label={`Read our ${link.label}`}
-                >
-                  <span>{link.label}</span>
-                  <ArrowRight className='ml-2 h-4 w-4 opacity-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:opacity-100' />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div> */}
 
         <div className='flex flex-col items-center gap-y-2 w-full max-lg:items-center'>
           <h4 className='text-sm font-bold uppercase text-neutral-900'>
