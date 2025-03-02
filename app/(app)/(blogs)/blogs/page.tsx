@@ -19,10 +19,11 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch('/api/blogs')
+        const response = await fetch('/api/blogs?status=Published')
         if (!response.ok) throw new Error('Failed to fetch blogs')
 
         const data = await response.json()
+
         setBlogs(data?.blogs)
       } catch (err: any) {
         setError(err.message)

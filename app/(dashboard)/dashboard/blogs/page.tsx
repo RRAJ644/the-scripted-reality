@@ -21,7 +21,7 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const { data } = await axios.get('/api/blogs')
+        const { data } = await axios.get('/api/blogs?status=Draft')
         setBlogs(data.blogs)
       } catch (err) {
         console.error('Failed to fetch blogs')
@@ -88,6 +88,12 @@ const Blogs = () => {
                     onClick={() => handleDelete(blog._id)}
                   >
                     Delete
+                  </Button>
+                  <Button
+                    variant='outline'
+                    className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
+                  >
+                    Publish
                   </Button>
                 </div>
               </CardContent>

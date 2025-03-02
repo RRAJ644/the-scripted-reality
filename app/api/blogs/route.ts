@@ -27,11 +27,15 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     await connectToDatabase()
-    const blogs = await Blog.find({ status: 'Draft' }).sort({ createdAt: -1 })
-    return NextResponse.json({ success: true, blogs }, { status: 200 })
+    const { searchParams } = new URL(req.url)
+    const status = searchParams.get('status')
+
+    const blogs = await Blog.find({ status })
+
+    return NextResponse.json({ blogs })
   } catch (error) {
     console.log(error)
     return NextResponse.json(
@@ -45,7 +49,7 @@ export async function DELETE(req: Request) {
   try {
     await connectToDatabase()
     const { searchParams } = new URL(req.url)
-    const blogId = searchParams.get('id') // Getting the blog ID from query params
+    const blogId = searchParams.get('id')
 
     if (!blogId) {
       return NextResponse.json(
