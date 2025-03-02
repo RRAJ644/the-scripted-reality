@@ -79,7 +79,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
         />
       </div>
       <div className='w-11/12 md:w-full mt-4'>
-        <p className='max-w-7xl mx-auto px-4 text-lg'>{blog.description}</p>
+        <p
+          className='max-w-7xl mx-auto px-4 text-lg'
+          dangerouslySetInnerHTML={{ __html: blog.description }}
+        ></p>
       </div>
     </section>
   )

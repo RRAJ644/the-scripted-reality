@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form'
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import 'react-quill-new/dist/quill.snow.css'
+import axios from 'axios'
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 
@@ -68,14 +69,24 @@ const Editor: React.FC = () => {
     }
   }
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     const blogData = {
       title: data.title,
       description: content,
       imageUrl: data.image || '',
+      status: 'Draft',
     }
 
-    console.log(blogData, 'Saved Blog Data')
+    try {
+      const response = await axios.post('api/blogs', blogData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      console.log('Blog saved successfully:', response.data)
+    } catch (error) {
+      console.error('Error saving blog:', error)
+    }
   }
 
   return (

@@ -39,9 +39,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
             {blog.title}
           </h3>
 
-          <p className='text-sm text-gray-600 line-clamp-3'>
-            {blog.description}
-          </p>
+          <p
+            className='text-sm text-gray-600 line-clamp-3'
+            dangerouslySetInnerHTML={{ __html: blog.description }}
+          ></p>
 
           <div className='flex justify-between items-center'>
             <p className='text-sm text-gray-500'>{blog.date}</p>

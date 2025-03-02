@@ -19,6 +19,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, blog: newBlog }, { status: 201 })
   } catch (error) {
     console.log(error)
+
     return NextResponse.json(
       { error: 'Failed to create blog' },
       { status: 500 }
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
 export async function GET() {
   try {
     await connectToDatabase()
-    const blogs = await Blog.find().sort({ createdAt: -1 }) // Sort by latest first
+    const blogs = await Blog.find({ status: 'Draft' }).sort({ createdAt: -1 })
     return NextResponse.json({ success: true, blogs }, { status: 200 })
   } catch (error) {
     console.log(error)

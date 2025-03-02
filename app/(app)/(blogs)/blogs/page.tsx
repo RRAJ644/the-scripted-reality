@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import BlogCard from '@/components/custom/BlogCard'
 import type { Metadata } from 'next'
 
@@ -8,64 +11,31 @@ interface BlogCardConfig {
   date: string
 }
 
-export const metadata: Metadata = {
-  title: 'The Scripted Reality - Master Screenwriting & Cinematic Storytelling',
-  description:
-    'Explore expert insights on screenwriting, script development, and cinematic storytelling. Learn how to craft compelling characters, engaging dialogues, and unforgettable plots to elevate your scripts to Hollywood standards.',
-}
-
-const blogCardConfig: BlogCardConfig[] = [
-  {
-    title: 'The Secrets of Screenwriting',
-    description:
-      "Dive into the world of screenwriting and learn the tricks of the trade to make your scripts stand out. From structure to dialogue, we've got it all.",
-    imageUrl:
-      'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
-    date: 'February 15, 2025',
-  },
-  {
-    title: 'Building Compelling Characters',
-    description:
-      'Discover how to create memorable characters that resonate with your audience. From protagonists to sidekicks, learn the art of character development.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
-    date: 'February 10, 2025',
-  },
-  {
-    title: 'Crafting the Perfect Dialogue',
-    description:
-      'Learn the importance of crafting authentic and dynamic dialogue that keeps the audience engaged and makes your characters come to life.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
-    date: 'February 5, 2025',
-  },
-  {
-    title: 'Crafting the Perfect Dialogue1',
-    description:
-      'Learn the importance of crafting authentic and dynamic dialogue that keeps the audience engaged and makes your characters come to life.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
-    date: 'February 5, 2025',
-  },
-  {
-    title: 'Crafting the Perfect Dialogue2',
-    description:
-      'Learn the importance of crafting authentic and dynamic dialogue that keeps the audience engaged and makes your characters come to life.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
-    date: 'February 5, 2025',
-  },
-  {
-    title: 'Crafting the Perfect Dialogue3',
-    description:
-      'Learn the importance of crafting authentic and dynamic dialogue that keeps the audience engaged and makes your characters come to life.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80',
-    date: 'February 5, 2025',
-  },
-]
-
 const Blog = () => {
+  const [blogs, setBlogs] = useState<BlogCardConfig[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch('/api/blogs')
+        if (!response.ok) throw new Error('Failed to fetch blogs')
+
+        const data = await response.json()
+        setBlogs(data?.blogs)
+      } catch (err: any) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchBlogs()
+  }, [])
+
+  console.log(blogs, '======fff')
+
   return (
     <section className='flex flex-col items-center justify-center px-6 md:px-12 text-center mt-14'>
       <div className='max-w-6xl flex flex-col'>
@@ -79,8 +49,11 @@ const Blog = () => {
         </p>
       </div>
 
+      {/* {loading && <p className="mt-10 text-lg text-gray-600">Loading blogs...</p>} */}
+      {/* {error && <p className='mt-10 text-lg text-red-600'>{error}</p>} */}
+
       <div className='mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10'>
-        {blogCardConfig.map((blog, index) => (
+        {blogs?.map((blog, index) => (
           <BlogCard key={index} blog={blog} />
         ))}
       </div>
