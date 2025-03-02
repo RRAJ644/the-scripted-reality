@@ -28,16 +28,15 @@ const BLOG_DATA: Blog[] = [
   },
 ]
 
-// ✅ Fix: Use `Record<string, string>` for Next.js
+// Correct BlogPostProps type
 interface BlogPostProps {
   params: { slug: string }
 }
 
+// ✅ Metadata generation
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string }
-}): Promise<Metadata> {
+}: BlogPostProps): Promise<Metadata> {
   const blog = BLOG_DATA.find(
     (b) => b.title.toLowerCase().replace(/\s+/g, '-') === params.slug
   )
@@ -57,7 +56,7 @@ export async function generateMetadata({
   }
 }
 
-// BlogPost Component
+// ✅ BlogPost Component
 export default function BlogPost({ params }: BlogPostProps) {
   const blog = BLOG_DATA.find(
     (b) => b.title.toLowerCase().replace(/\s+/g, '-') === params.slug
@@ -76,11 +75,11 @@ export default function BlogPost({ params }: BlogPostProps) {
           alt={blog.title}
           width={800}
           height={600}
-          className='max-w-full h-auto'
+          className='max-w-full h-auto rounded-lg'
         />
       </div>
       <div className='w-11/12 md:w-full mt-4'>
-        <p className='max-w-7xl mx-auto px-4'>{blog.description}</p>
+        <p className='max-w-7xl mx-auto px-4 text-lg'>{blog.description}</p>
       </div>
     </section>
   )
