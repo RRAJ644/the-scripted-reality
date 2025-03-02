@@ -1,4 +1,4 @@
-import BlogCard from '@/app/components/custom/BlogCard'
+import BlogCard from '@/components/custom/BlogCard'
 
 interface BlogCardConfig {
   title: string

@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import Filters from '@/app/components/custom/Filters'
-import ScreenplayGrid from '@/app/components/custom/ScreenplayGrid'
-import Search from '@/app/components/custom/Search'
+import Filters from '@/components/custom/Filters'
+import ScreenplayGrid from '@/components/custom/ScreenplayGrid'
+import Search from '@/components/custom/Search'
 import { SCREEN_PLAYS } from '@/lib/constants'
 
 const ScriptsContent = () => {

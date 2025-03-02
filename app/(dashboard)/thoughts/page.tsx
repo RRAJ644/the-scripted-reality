@@ -4,9 +4,9 @@ import { useSession } from 'next-auth/react'
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Button } from '@/app/components/ui/button'
-import { Input } from '@/app/components/ui/input'
-import { Card } from '@/app/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card } from '@/components/ui/card'
 import { ChevronDown, ChevronUp, Trash, Edit, Check } from 'lucide-react'
 
 interface SubThought {

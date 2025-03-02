@@ -1,8 +1,8 @@
 'use client'
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Input } from '@/app/components/ui/input'
-import { Button } from '@/app/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -10,7 +10,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/app/components/ui/form'
+} from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
