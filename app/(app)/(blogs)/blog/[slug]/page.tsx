@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+// Blog interface
 export interface Blog {
   title: string
   description: string
@@ -27,10 +28,12 @@ const BLOG_DATA: Blog[] = [
   },
 ]
 
-type BlogPostProps = {
-  params: { slug: string }
+// ✅ Fix: Use `Record<string, string>` for Next.js
+interface BlogPostProps {
+  params: Record<string, string>
 }
 
+// Metadata function
 export async function generateMetadata({
   params,
 }: BlogPostProps): Promise<Metadata> {
@@ -53,6 +56,7 @@ export async function generateMetadata({
   }
 }
 
+// BlogPost Component
 export default function BlogPost({ params }: BlogPostProps) {
   const blog = BLOG_DATA.find(
     (b) => b.title.toLowerCase().replace(/\s+/g, '-') === params.slug
