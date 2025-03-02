@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { FaTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa'
 
 const footerConfig = {
-  companyName: 'Read Reality',
+  companyName: 'The Scripted Reality',
   year: new Date().getFullYear(),
   tagline: 'Your Gateway to Engaging Screenwriting & Digital Storytelling',
   socialLinks: [
@@ -27,7 +27,7 @@ const footerConfig = {
 const Footer = () => {
   return (
     <footer className='relative overflow-hidden bg-neutral-50 flex flex-col items-center justify-center mt-10'>
-      <div className='grid grid-cols-1 lg:grid-cols-4 gap-6 w-full max-w-7xl max-lg:place-items-center py-8'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-7xl max-lg:place-items-center py-8'>
 
         <div className='flex flex-col items-start w-full max-lg:items-center gap-y-2'>
           <h3 className='text-xl font-semibold text-neutral-900'>
@@ -36,7 +36,7 @@ const Footer = () => {
           <p className='text-sm text-neutral-700'>{footerConfig.tagline}</p>
         </div>
 
-        <div className='flex flex-col items-start w-full max-lg:items-center gap-y-2'>
+        <div className='flex flex-col items-center w-full max-lg:items-center gap-y-2'>
           <h4 className='text-sm font-bold uppercase text-neutral-900'>
             About Company
           </h4>
@@ -56,8 +56,8 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className='flex flex-col items-start gap-y-2 w-full max-lg:items-center'>
-          <h4 className='text-sm font-bold uppercase text-neutral-900'>
+        {/* <div className='flex flex-col items-start gap-y-2 w-full max-lg:items-center'>
+          <h4 className='text-sm text-center font-bold uppercase text-neutral-900'>
             Legal Information
           </h4>
           <ul className='space-y-3 flex flex-col items-center justify-center'>
@@ -74,9 +74,9 @@ const Footer = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
-        <div className='flex flex-col items-start gap-y-2 w-full max-lg:items-center'>
+        <div className='flex flex-col items-center gap-y-2 w-full max-lg:items-center'>
           <h4 className='text-sm font-bold uppercase text-neutral-900'>
             Connect With Us
           </h4>
@@ -104,7 +104,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='w-full max-w-6xl flex flex-col md:flex-row items-center justify-between border-t border-neutral-200 py-6 px-4'>
+      <div className='w-full flex flex-col md:flex-row items-center justify-between border-t border-neutral-200 py-6 px-4'>
         <p className='text-sm text-neutral-600'>
           &copy; {footerConfig.year} {footerConfig.companyName}. All rights
           reserved.

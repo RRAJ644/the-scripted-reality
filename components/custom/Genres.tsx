@@ -171,8 +171,8 @@ const Genres = () => {
   return (
     <section className='w-full flex flex-col items-center justify-center gap-y-6 py-10'>
       <div className='max-w-6xl mx-auto text-center px-4'>
-        <h2 className='max-sm:text-3xl text-4xl lg:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
-          Discover Popular Entertainment Genres
+        <h2 className='max-sm:text-3xl md:text-3xl lg:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
+          Discover Popular Genres
         </h2>
         <p className='text-lg text-gray-700 dark:text-gray-300'>
           Explore diverse entertainment genres, from action thrillers to

@@ -32,7 +32,7 @@ const Featured = () => {
         <h2 className='max-sm:text-3xl md:text-3xl lg:text-5xl font-normal bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text'>
           We Love Our Readers
         </h2>
-        <p className='text-lg text-gray-700 dark:text-gray-300'>
+        <p className='text-lg max-sm:px-8 text-gray-700 dark:text-gray-300'>
           Dive into compelling stories, unlock new perspectives, and fuel your
           imagination with every read.
         </p>
