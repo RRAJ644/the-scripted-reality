@@ -2,7 +2,7 @@
 
 import { slugify } from '@/lib/constants'
 import Image from 'next/image'
-import { useParams  } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 
 export interface Blog {
@@ -92,16 +92,6 @@ export default function BlogPost() {
       </div>
 
       <div className='w-11/12 md:w-1/2 flex items-center justify-center gap-x-6 py-2'>
-        {/* <div className='flex gap-3 items-center'>
-          <Image
-            src=''
-            alt='profile'
-            width={48}
-            height={48}
-            className='rounded-full'
-          />
-          <span>UNCHAINED</span>
-        </div> */}
         <h3 className='text-lg'>{date}</h3>
       </div>
 

@@ -16,8 +16,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'TheScriptedReality - We Write Scripts',
-  description: 'Screenwriters chasing projects with the mind blowing scripts',
+  title: 'The Scripted Reality - Elevating Cinematic Storytelling',
+  description:
+    'A hub for compelling screenplays, scriptwriting, and cinematic blogs. Showcasing top-tier writing to captivate film studios, production houses, and brands.',
 }
 
 export default function RootLayout({

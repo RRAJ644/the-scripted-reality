@@ -1,10 +1,17 @@
 import BlogCard from '@/components/custom/BlogCard'
+import type { Metadata } from 'next'
 
 interface BlogCardConfig {
   title: string
   description: string
   imageUrl: string
   date: string
+}
+
+export const metadata: Metadata = {
+  title: 'The Scripted Reality - Master Screenwriting & Cinematic Storytelling',
+  description:
+    'Explore expert insights on screenwriting, script development, and cinematic storytelling. Learn how to craft compelling characters, engaging dialogues, and unforgettable plots to elevate your scripts to Hollywood standards.',
 }
 
 const blogCardConfig: BlogCardConfig[] = [
