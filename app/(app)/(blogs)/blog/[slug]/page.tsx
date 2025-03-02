@@ -1,9 +1,7 @@
-'use client'
-
 import { slugify } from '@/lib/constants'
 import Image from 'next/image'
-import { useParams } from 'next/navigation'
-import { useMemo } from 'react'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 export interface Blog {
   title: string
@@ -68,23 +66,48 @@ const BLOG_DATA: Blog[] = [
   },
 ]
 
-export default function BlogPost() {
-  const { slug } = useParams<{ slug: string }>()
-
-  const blog = useMemo(() => {
-    return BLOG_DATA?.find((blog: Blog) => slugify(blog?.title) === slug)
-  }, [slug])
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
+  const blog = BLOG_DATA.find((blog) => slugify(blog.title) === params.slug)
 
   if (!blog) {
-    return <p>Loading...</p>
+    return { title: 'Blog Not Found', description: 'This blog does not exist.' }
+  }
+
+  return {
+    title: `${blog.title} | Your Blog Name`,
+    description: blog.description,
+    openGraph: {
+      type: 'article',
+      url: `https://yourwebsite.com/blog/${params.slug}`,
+      title: blog.title,
+      description: blog.description,
+      images: [{ url: blog.imageUrl, width: 800, height: 600 }],
+      publishedTime: blog.date,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.description,
+      images: [blog.imageUrl],
+    },
+  }
+}
+
+export default function BlogPost({ params }: { params: { slug: string } }) {
+  const blog = BLOG_DATA.find((blog) => slugify(blog.title) === params.slug)
+
+  if (!blog) {
+    return notFound()
   }
 
   const { title, description, imageUrl, date } = blog
 
   return (
     <section className='flex flex-col items-center mt-8'>
-      {/* <div className='bg-blue-500 text-white text-sm px-4 py-1 mb-4'>{tag}</div> */}
-
       <div className='w-11/12 md:w-1/2 text-center py-4'>
         <h1 className='text-2xl xl:text-5xl lg:text-4xl md:text-3xl font-roboto'>
           {title}
@@ -92,13 +115,13 @@ export default function BlogPost() {
       </div>
 
       <div className='w-11/12 md:w-1/2 flex items-center justify-center gap-x-6 py-2'>
-        <h3 className='text-lg'>{date}</h3>
+        <h3 className='text-lg'>{new Date(date).toDateString()}</h3>
       </div>
 
       <div className='w-11/12 md:w-1/2 flex justify-center'>
         <Image
           src={imageUrl}
-          alt='Title Img'
+          alt={title}
           width={800}
           height={600}
           className='max-w-full h-auto'
