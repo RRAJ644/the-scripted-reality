@@ -17,7 +17,10 @@ const Navbar = () => {
   const navLinks = [
     // { name: 'Scripts', href: '/scripts' },
     // { name: 'Voice Scripts', href: '/voice-scripts' },
+
     { name: 'Blogs', href: '/blogs' },
+    { name: 'Reviews', href: '/reviews' },
+
     // { name: 'About', href: '/about' },
     // { name: 'Our Work', href: '/work' },
     // { name: "Let's Work", href: '/work' },
