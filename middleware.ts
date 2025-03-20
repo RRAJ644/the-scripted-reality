@@ -6,9 +6,9 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
 
-  if (pathname === '/sign-up') {
-    return NextResponse.redirect(new URL('/', request.url))
-  }
+  // if (pathname === '/sign-up') {
+  //   return NextResponse.redirect(new URL('/', request.url))
+  // }
 
   if (token && pathname === '/sign-in') {
     return NextResponse.redirect(new URL('/dashboard', request.url))

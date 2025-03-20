@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import BlogCard from '@/components/custom/BlogCard'
 import type { Metadata } from 'next'
 
-interface BlogCardConfig {
+export interface BlogCardConfig {
   title: string
   description: string
   imageUrl: string

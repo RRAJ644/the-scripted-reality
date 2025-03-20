@@ -56,19 +56,28 @@ export async function generateMetadata({
 }
 
 export default async function BlogPost({ params }: BlogPostProps) {
+  let blogData: any = []
+
+  const fetchBlogs = async () => {
+    try {
+      const response = await fetch('/api/blogs?status=Published')
+      if (!response.ok) throw new Error('Failed to fetch blogs')
+
+      blogData = await response.json()
+    } catch (err: any) {
+      console.log(err)
+    }
+  }
+
+  fetchBlogs()
 
   const { slug } = await params
 
-  console.log(slug, '====slug')
-
-  
-  const blog = BLOG_DATA.find(
-    (b) => b.title.toLowerCase().replace(/\s+/g, '-') === slug
+  const blog = blogData?.find(
+    (b: any) => b.title.toLowerCase().replace(/\s+/g, '-') === slug
   )
 
   if (!blog) return notFound()
-
-  console.log(blog, '=====blog')
 
   return (
     <section className='flex flex-col items-center mt-8'>
