@@ -56,13 +56,19 @@ export async function generateMetadata({
 }
 
 export default async function BlogPost({ params }: BlogPostProps) {
+
   const { slug } = await params
 
+  console.log(slug, '====slug')
+
+  
   const blog = BLOG_DATA.find(
     (b) => b.title.toLowerCase().replace(/\s+/g, '-') === slug
   )
 
   if (!blog) return notFound()
+
+  console.log(blog, '=====blog')
 
   return (
     <section className='flex flex-col items-center mt-8'>

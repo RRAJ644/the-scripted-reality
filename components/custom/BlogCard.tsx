@@ -18,6 +18,7 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
+  console.log(blog, '-===dd')
   const slug = slugify(blog.title)
 
   return (

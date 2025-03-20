@@ -17,6 +17,7 @@ interface Blog {
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([])
+  const [publishedStatus, setPublishedStatus] = useState<string>('Draft')
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -39,6 +40,16 @@ const Blogs = () => {
       }
     } catch (error) {
       console.error('Failed to delete blog')
+    }
+  }
+
+  const handlePublish = async (id: string) => {
+    try {
+      const response = await axios.put(`/api/blogs?id=${id}`)
+      setPublishedStatus(response.data.status)
+    } catch (error) {
+      console.log(error, '=====rr')
+      console.error('Failed to publish blog')
     }
   }
 
@@ -92,6 +103,8 @@ const Blogs = () => {
                   <Button
                     variant='outline'
                     className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
+                    onClick={() => handlePublish(blog._id)}
+                    disabled={blog.status !== publishedStatus}
                   >
                     Publish
                   </Button>

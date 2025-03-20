@@ -77,6 +77,8 @@ const Editor: React.FC = () => {
       status: 'Draft',
     }
 
+    console.log(blogData, '=-----')
+
     try {
       const response = await axios.post('api/blogs', blogData, {
         headers: {
@@ -166,7 +168,7 @@ const Editor: React.FC = () => {
                 type='submit'
                 className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
               >
-                Save
+                Save1
               </Button>
             </form>
           </Form>

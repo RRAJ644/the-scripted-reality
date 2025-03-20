@@ -73,3 +73,32 @@ export async function DELETE(req: Request) {
     )
   }
 }
+
+export async function PUT(req: Request) {
+  try {
+    await connectToDatabase()
+    const { searchParams } = new URL(req.url)
+    const blogId = searchParams.get('id')
+
+    if (!blogId)
+      return NextResponse.json({ error: 'Invalid ID' }, { status: 400 })
+
+    const blog = await Blog.findByIdAndUpdate(
+      blogId,
+      { status: 'Published' },
+      { new: true }
+    )
+
+    if (!blog)
+      return NextResponse.json({ error: 'Blog not updated' }, { status: 404 })
+
+    return NextResponse.json(blog)
+  } catch (error) {
+    console.log(error)
+
+    return NextResponse.json(
+      { error: 'Failed to create blog' },
+      { status: 500 }
+    )
+  }
+}
