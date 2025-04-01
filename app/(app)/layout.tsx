@@ -1,14 +1,13 @@
 import type { Metadata } from 'next'
-import { Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import '../globals.css'
 import Navbar from '@/components/custom/Navbar'
 import Footer from '@/components/custom/Footer'
 import AuthProvider from '@/context/AuthProvider'
-import localFont from 'next/font/local'
 
-const geistSans = localFont({
-  src: '../public/fonts/Geist-Regular.woff2',
+const geistSans = Geist({
   variable: '--font-geist-sans',
+  subsets: ['latin'],
 })
 
 const geistMono = Geist_Mono({
@@ -28,16 +27,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-800 dark:text-neutral-700 dark:text-zinc-200`}
-      >
-        <AuthProvider>
+    <AuthProvider>
+      <html lang='en'>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-800-700 dark:text-zinc-200`}
+        >
           <Navbar />
           <main className='min-h-screen overflow-hidden'>{children}</main>
           <Footer />
-        </AuthProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </AuthProvider>
   )
 }
