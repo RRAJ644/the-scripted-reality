@@ -27,16 +27,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${''} ${''} antialiased text-neutral-800-700 dark:text-zinc-200`}
-      >
-        <AuthProvider>
+    <AuthProvider>
+      <html lang='en'>
+        <body
+          className={`${''} ${''} antialiased text-neutral-800-700 dark:text-zinc-200`}
+        >
           <Navbar />
           <main className='min-h-screen overflow-hidden'>{children}</main>
           <Footer />
-        </AuthProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </AuthProvider>
   )
 }
