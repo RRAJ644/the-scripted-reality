@@ -43,8 +43,8 @@ const SignUp = () => {
 
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
     try {
-      setError(null)
       setLoading(true)
+      setError(null)
       const response = await axios.post('/api/sign-up', data)
 
       if (response.data.success) {
