@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import '../globals.css'
 import Navbar from '@/components/custom/Navbar'
 import Footer from '@/components/custom/Footer'
@@ -28,15 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     // <AuthProvider>
-      <html lang='en'>
-        <body
-          className={`${''} ${''} antialiased text-neutral-800-700 dark:text-zinc-200`}
-        >
-          <Navbar />
-          <main className='min-h-screen overflow-hidden'>{children}</main>
-          <Footer />
-        </body>
-      </html>
+    <html lang='en'>
+      <body
+        className={`${''} ${''} antialiased text-neutral-800-700 dark:text-zinc-200`}
+      >
+        <Navbar />
+        <main className='min-h-screen overflow-hidden'>{children}</main>
+        <Footer />
+      </body>
+    </html>
     // </AuthProvider>
   )
 }
