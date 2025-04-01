@@ -10,16 +10,17 @@ import {
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../ui/button'
+import Image from 'next/image'
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
 
   const navLinks = [
-    // { name: 'Scripts', href: '/scripts' },
+    { name: 'Scripts', href: '/scripts' },
     // { name: 'Voice Scripts', href: '/voice-scripts' },
 
-    { name: 'Blogs', href: '/blogs' },
-    { name: 'Reviews', href: '/reviews' },
+    // { name: 'Blogs', href: '/blogs' },
+    // { name: 'Reviews', href: '/reviews' },
 
     // { name: 'About', href: '/about' },
     // { name: 'Our Work', href: '/work' },
@@ -28,13 +29,16 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className='w-full top-0 z-50 shadow-sm text-xl bg-white dark:bg-gray-900'>
+    <nav className='w-full py-3 top-0 z-50 shadow-sm text-xl bg-white dark:bg-gray-900'>
       <div className='max-w-7xl mx-auto px-6 flex justify-between items-center h-16'>
-        <Link
-          href={'/'}
-          className='text-2xl font-normal cursor-pointer tracking-wide text-gray-800 dark:text-white'
-        >
-          The-Scripted-Reality
+        <Link href={'/'}>
+          <Image
+            src={'/logo.webp'}
+            alt='Logo'
+            width={150}
+            height={150}
+            className='border-2'
+          />
         </Link>
 
         <ul className='hidden md:flex space-x-6 justify-center items-center'>

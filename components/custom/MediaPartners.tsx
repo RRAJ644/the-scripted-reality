@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from '../ui/button'
 
 const MediaPartners = () => {
@@ -13,12 +14,14 @@ const MediaPartners = () => {
           digital media to help your brand stand out and drive results.
         </p>
 
-        <Button
-          variant='outline'
-          className='px-6 py-5 text-lg border-2 border-neutral-600 text-neutral-200 shadow-md rounded-3xl bg-zinc-900 hover:bg-zinc-800 hover:text-white transition-colors duration-300'
-        >
-          Let&apos;s connect
-        </Button>
+        <Link href={process.env.NEXT_MEETING!} target='_blank'>
+          <Button
+            variant='outline'
+            className='px-6 py-5 text-lg border-2 border-neutral-600 text-neutral-200 shadow-md rounded-3xl bg-zinc-900 hover:bg-zinc-800 hover:text-white transition-colors duration-300'
+          >
+            Let&apos;s connect
+          </Button>
+        </Link>
 
         <div className='absolute top-0 left-0 w-20 h-20 bg-white opacity-10 blur-xl rounded-full animate-pulse'></div>
         <div className='absolute bottom-0 right-0 w-20 h-20 bg-zinc-400 opacity-10 blur-xl rounded-full animate-pulse'></div>

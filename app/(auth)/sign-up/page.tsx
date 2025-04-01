@@ -29,6 +29,7 @@ import { signUpSchema } from '@/schemas/signUpSchema'
 const SignUp = () => {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean | null>(false)
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -41,8 +42,9 @@ const SignUp = () => {
   })
 
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
-    setError(null)
     try {
+      setError(null)
+      setLoading(true)
       const response = await axios.post('/api/sign-up', data)
 
       if (response.data.success) {
@@ -52,6 +54,8 @@ const SignUp = () => {
       }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Something went wrong')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -133,7 +137,7 @@ const SignUp = () => {
                   <SelectTrigger>
                     <SelectValue placeholder='Select a role' />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className='bg-white'>
                     <SelectItem value='superadmin'>Superadmin</SelectItem>
                     <SelectItem value='admin'>Admin</SelectItem>
                     <SelectItem value='writer'>Writer</SelectItem>
@@ -148,7 +152,11 @@ const SignUp = () => {
           {error && <p className='text-red-500 text-sm text-center'>{error}</p>}
 
           {/* Submit Button */}
-          <Button type='submit' className='w-full'>
+          <Button
+            type='submit'
+            className='w-full p-3 text-lg border-gray-500 border-2'
+            disabled={loading === true}
+          >
             Sign Up
           </Button>
         </form>

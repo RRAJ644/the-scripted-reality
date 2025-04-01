@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { FaTwitter, FaLinkedin, FaFacebook, FaEnvelope } from 'react-icons/fa'
 
 const footerConfig = {
-  companyName: 'The Scripted Reality',
   year: new Date().getFullYear(),
   tagline: 'Your Gateway to Engaging Screenwriting & Digital Storytelling',
   socialLinks: [
@@ -30,15 +30,22 @@ const footerConfig = {
 const Footer = () => {
   return (
     <footer className='relative overflow-hidden bg-neutral-50 flex flex-col items-center justify-center mt-10'>
-      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-7xl max-lg:place-items-center py-8'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-7xl max-lg:place-items-center py-8'>
         <div className='flex flex-col items-start w-full max-lg:items-center gap-y-2'>
-          <h3 className='text-xl font-semibold text-neutral-900'>
-            {footerConfig.companyName}
-          </h3>
+          <Link href={'/'}>
+            <Image
+              src={'/logo.webp'}
+              alt='Logo'
+              width={150}
+              height={150}
+              className='border-2'
+            />
+          </Link>
+
           <p className='text-sm text-neutral-700'>{footerConfig.tagline}</p>
         </div>
 
-        <div className='flex flex-col items-center w-full max-lg:items-center gap-y-2'>
+        {/* <div className='flex flex-col items-center w-full max-lg:items-center gap-y-2'>
           <h4 className='text-sm font-bold uppercase text-neutral-900'>
             About Company
           </h4>
@@ -56,11 +63,11 @@ const Footer = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         <div className='flex flex-col items-center gap-y-2 w-full max-lg:items-center'>
           <h4 className='text-sm font-bold uppercase text-neutral-900'>
-            Let's Connect
+            Contact Us
           </h4>
           <div className='flex space-x-4'>
             {footerConfig.socialLinks.map((link) => {
@@ -73,7 +80,7 @@ const Footer = () => {
                   rel='noopener noreferrer'
                   className='group rounded-full border border-neutral-300 p-2 hover:border-neutral-900 hover:bg-neutral-900'
                   aria-label={`Follow us on ${link.name}`}
-                  title={`Follow ${footerConfig.companyName} on ${link.name}`}
+                  title={`Follow on ${link.name}`}
                 >
                   <Icon className='h-5 w-5 text-neutral-600 transition-colors duration-200 group-hover:text-white' />
                 </Link>
@@ -89,7 +96,7 @@ const Footer = () => {
 
       <div className='w-full flex flex-col md:flex-row items-center justify-center border-t border-neutral-200 py-4'>
         <p className='text-sm text-neutral-600'>
-          &copy; {footerConfig.year} {footerConfig.companyName}. All rights
+          &copy; {footerConfig.year}. All rights
           reserved.
         </p>
       </div>

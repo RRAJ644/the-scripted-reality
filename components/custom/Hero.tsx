@@ -1,26 +1,26 @@
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import Stats from './Stats'
+import Image from 'next/image'
 
 const Hero = () => {
   return (
-    <section className='flex flex-col items-center justify-center md:px-12 text-center gap-y-20 w-full min-h-screen'>
-      <div className='max-w-6xl mx-auto'>
-        <h1 className='max-sm:px-3 max-sm:text-2xl md:text-4xl lg:text-6xl bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text drop-shadow-md'>
-          Discover the art of Screenwriting and Unlock the Secrets
+    <section className='flex flex-col items-center justify-center md:px-12 text-center gap-y-16 w-full md:h-[55rem] max-sm:h-[45rem]'>
+      <div className='max-w-6xl mx-auto flex flex-col items-center justify-center'>
+        <h1 className='max-sm:text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-neutral-700 via-zinc-600 to-gray-700 text-transparent bg-clip-text drop-shadow-md'>
+          Read the Best Screenplays & Stories
         </h1>
-        <p className='mt-5 text-xl max-sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-sm:px-5'>
-          Explore a vast collection of meticulously crafted screenplays,
-          industry insights, and engaging blogs designed to inspire and educate
-          aspiring screenwriters worldwide.
+        <p className='mt-5 max-w-4xl text-lg max-sm:text-base sm:leading-normal text-gray-700 dark:text-gray-300 leading-relaxed'>
+          Dive into the world of storytelling and scriptwriting from top writers
+          across genres.
         </p>
         <div className='mt-6 space-x-4'>
-          <Link href='/work'>
+          <Link href='/scripts'>
             <Button
               variant='outline'
-              className='px-6 py-5 text-lg rounded-2xl text-gray-50 bg-neutral-800 border-2 hover:bg-neutral-800 hover:text-gray-50'
+              className='px-6 py-6 text-xl rounded-xl text-gray-50 bg-neutral-800 border-2 hover:bg-neutral-800 hover:text-gray-50'
             >
-              Work with us
+              Read Now
             </Button>
           </Link>
         </div>
