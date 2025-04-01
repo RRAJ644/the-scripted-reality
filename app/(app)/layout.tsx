@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <html lang='en'>
         <body
           className={`${''} ${''} antialiased text-neutral-800-700 dark:text-zinc-200`}
@@ -37,6 +37,6 @@ export default function RootLayout({
           <Footer />
         </body>
       </html>
-    </AuthProvider>
+    // </AuthProvider>
   )
 }
