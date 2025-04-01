@@ -9,5 +9,6 @@ module.exports = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+    missingSuspenseWithCSRBailout: false,
   },
 }
