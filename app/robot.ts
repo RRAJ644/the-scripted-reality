@@ -2,11 +2,13 @@ import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '*',
-      disallow: ['/dashboard/*', '/editor/*'],
-    },
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/dashboard/*', '/editor/*'],
+      },
+    ],
     sitemap: 'https://www.thescriptedreality.com/sitemap.xml',
   }
 }
