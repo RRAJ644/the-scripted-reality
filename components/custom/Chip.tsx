@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { Button } from '../ui/button'
 
 interface ChipProps {
   label: string
@@ -10,16 +11,17 @@ interface ChipProps {
 
 const Chip: React.FC<ChipProps> = ({ label, selected, onClick }) => {
   return (
-    <button
-      className={`px-4 py-1 rounded-full text-sm transition-colors duration-300 cursor-pointer ${
+    <Button
+      variant={'default'}
+      className={`px-4 py-1 rounded-full text-sm cursor-pointer hover:bg-zinc-200  ${
         selected
-          ? 'bg-neutral-900 text-white'
-          : 'bg-zinc-200 text-gray-800 hover:bg-neutral-800 hover:text-white'
+          ? 'bg-neutral-900 text-white hover:bg-neutral-900  hover:text-white'
+          : 'bg-zinc-200 text-gray-800'
       }`}
       onClick={onClick}
     >
       {label}
-    </button>
+    </Button>
   )
 }
 

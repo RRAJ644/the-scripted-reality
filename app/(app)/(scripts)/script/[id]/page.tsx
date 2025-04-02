@@ -1,7 +1,5 @@
 const InnerScript = () => {
-  return <section>
-    
-  </section>
+  return <section></section>
 }
 
 export default InnerScript

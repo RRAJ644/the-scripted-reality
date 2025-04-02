@@ -1,6 +1,7 @@
 import Chip from './Chip'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Suspense } from 'react'
+import { Button } from '../ui/button'
 
 const GENRES = [
   'Crime',
@@ -35,18 +36,23 @@ const Filters = () => {
   const router = useRouter()
 
   const selectedGenres = searchParams.get('genres')?.split(',') || []
+  const params = new URLSearchParams(searchParams)
 
   const handleGenreClick = (genre: string) => {
     const newGenres = selectedGenres.includes(genre)
       ? selectedGenres.filter((g) => g !== genre)
       : [...selectedGenres, genre]
 
-    const params = new URLSearchParams(searchParams)
     if (newGenres.length) {
       params.set('genres', newGenres.join(','))
     } else {
       params.delete('genres')
     }
+    router.push(`?${params.toString()}`, { scroll: false })
+  }
+
+  const handleClear = () => {
+    params.delete('genres')
     router.push(`?${params.toString()}`, { scroll: false })
   }
 
@@ -61,6 +67,16 @@ const Filters = () => {
             onClick={() => handleGenreClick(genre)}
           />
         ))}
+
+        {selectedGenres.length > 0 && (
+          <Button
+            variant={'ghost'}
+            className='border-2 border-gray-50 rounded-full bg-red-500 text-slate-50 hover:text-slate-50 hover:bg-red-500'
+            onClick={handleClear}
+          >
+            Clear
+          </Button>
+        )}
       </section>
     </Suspense>
   )

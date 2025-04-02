@@ -28,11 +28,17 @@ const ScriptsContent = () => {
     router.push(`?${params.toString()}`, { scroll: false })
   }
 
+  const selectedGenres = searchParams.get('genres')?.split(',') || []
+
+  const filteredScreenplays = selectedGenres.length
+    ? SCREEN_PLAYS.filter((script) => selectedGenres.includes(script.genre))
+    : SCREEN_PLAYS
+
   return (
     <section className='w-full flex justify-center items-center flex-col gap-y-9 py-6 px-44'>
       <Search query={query} handleChange={handleChange} />
       <Filters />
-      <ScreenplayGrid screenplays={SCREEN_PLAYS} />
+      <ScreenplayGrid screenplays={filteredScreenplays} />
     </section>
   )
 }
