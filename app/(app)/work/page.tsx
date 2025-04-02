@@ -8,6 +8,45 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Professional Screenwriting Services | Script Consulting & More',
+  description:
+    'Expert screenwriting, script consulting, and dialogue writing services. Elevate your screenplay with industry-standard storytelling. Contact us today!',
+  keywords: [
+    'screenwriting services',
+    'script writing',
+    'script consulting',
+    'screenplay writer',
+    'film script',
+    'TV script',
+    'storytelling services',
+    'voiceover scriptwriting',
+  ],
+  openGraph: {
+    title: 'Professional Screenwriting Services | Script Consulting & More',
+    description:
+      'Expert screenwriting, script consulting, and dialogue writing services. Elevate your screenplay with industry-standard storytelling. Contact us today!',
+    url: 'https://www.thescriptedreality.com/work',
+    type: 'website',
+    images: [
+      {
+        url: 'https://www.thescriptedreality.com/logo.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Screenwriting Services',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Professional Screenwriting Services | Script Consulting & More',
+    description:
+      'Expert screenwriting, script consulting, and dialogue writing services. Elevate your screenplay with industry-standard storytelling. Contact us today!',
+    images: ['https://www.thescriptedreality.com/logo.webp'],
+  },
+}
 
 const services = [
   {

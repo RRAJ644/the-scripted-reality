@@ -16,7 +16,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
 
   const navLinks = [
-    { name: 'Scripts', href: '/scripts' },
+    // { name: 'Scripts', href: '/scripts' },
     // { name: 'Voice Scripts', href: '/voice-scripts' },
 
     // { name: 'Blogs', href: '/blogs' },
