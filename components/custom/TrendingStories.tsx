@@ -49,7 +49,6 @@ const TrendingStories = () => {
         </p>
       </div>
 
-      {/* Story Cards */}
       <div className='w-full max-w-6xl px-4'>
         <div className='flex flex-col gap-6'>
           {trendingStories.map((story, index) => (
@@ -58,12 +57,10 @@ const TrendingStories = () => {
               className='flex items-center gap-5 border border-zinc-300 dark:border-zinc-700 py-5 px-4 bg-white dark:bg-zinc-900 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-transform cursor-pointer'
               aria-label={`Story: ${story.title}`}
             >
-              {/* Icon */}
               <div className='p-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-full shadow-md'>
                 <BookOpen className='w-6 h-6' />
               </div>
 
-              {/* Story Details */}
               <div className='flex-1'>
                 <h3 className='text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 truncate'>
                   {story.title}
