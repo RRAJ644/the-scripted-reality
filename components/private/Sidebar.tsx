@@ -1,13 +1,6 @@
 'use client'
 import { useSession } from 'next-auth/react'
-import {
-  LucideIcon,
-  FileText,
-  ScrollText,
-  Pencil,
-  Lightbulb,
-  Edit,
-} from 'lucide-react'
+import { LucideIcon, FileText, ScrollText, Pencil, Edit } from 'lucide-react'
 import Link from 'next/link'
 
 interface NavLink {
@@ -23,11 +16,7 @@ const allLinks: NavLink[] = [
     icon: Edit,
     href: '/editor',
   },
-  {
-    name: 'Thoughts',
-    icon: Lightbulb,
-    href: '/thoughts',
-  },
+
   {
     name: 'Drafts',
     icon: Pencil,
