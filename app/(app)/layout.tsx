@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://www.thescriptedreality.com/logo.webp',
-        width: 1200,
-        height: 630,
+        url: 'https://www.thescriptedreality.com/_next/image?url=%2Flogo.webp&w=256&q=75',
+        width: 300,
+        height: 250,
         alt: 'The Scripted Reality Cover Image',
       },
     ],
@@ -42,6 +42,10 @@ export const metadata: Metadata = {
     description:
       'A hub for compelling screenplays, scriptwriting, and cinematic blogs.',
     images: ['https://www.thescriptedreality.com/logo.webp'],
+  },
+
+  icons: {
+    icon: 'https://www.thescriptedreality.com/logo.webp',
   },
 }
 
