@@ -13,7 +13,7 @@ const Search = ({ query, handleChange }: SearchProps) => {
         placeholder='Search...'
         value={query}
         onChange={handleChange}
-        className='p-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
+        className='py-5 pl-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
       />
     </section>
   )

@@ -1,5 +1,7 @@
 'use client'
 import ScreenplayGrid from '@/components/custom/ScreenplayGrid'
+import Search from '@/components/custom/Search'
+import useSearch from '@/hooks/useSearch'
 import { SCREEN_PLAYS } from '@/lib/constants'
 import { useParams } from 'next/navigation'
 import React from 'react'
@@ -213,12 +215,18 @@ const GenreInner = () => {
   const genre = params?.genre
   const genreStr = Array.isArray(genre) ? genre[0] : genre!
 
+  const { query, handleChange } = useSearch()
+
   const screenPlay = SCREEN_PLAYS.filter(
     (play) => genreStr?.toLowerCase() === play.genre.toLowerCase()
   )
 
-  const title = GENRE_DETAILS?.get(screenPlay[0].genre)?.title
-  const description = GENRE_DETAILS?.get(screenPlay[0].genre)?.description
+  const filteredScreenPlays = screenPlay.filter((play) =>
+    play.title.toLowerCase().includes(query.toLowerCase())
+  )
+
+  const title = GENRE_DETAILS?.get(screenPlay[0]?.genre)?.title
+  const description = GENRE_DETAILS?.get(screenPlay[0]?.genre)?.description
 
   return (
     <section className='w-full flex justify-center items-center flex-col gap-y-8 py-6 px-44 mt-6'>
@@ -231,7 +239,9 @@ const GenreInner = () => {
         </p>
       </div>
 
-      <ScreenplayGrid screenplays={screenPlay} />
+      <Search query={query} handleChange={handleChange} />
+
+      <ScreenplayGrid screenplays={filteredScreenPlays} />
     </section>
   )
 }
