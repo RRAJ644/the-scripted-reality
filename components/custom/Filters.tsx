@@ -35,7 +35,7 @@ const Filters = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  const selectedGenres = searchParams.get('genres')?.split(',') || []
+  const selectedGenres = searchParams.get('genres')?.split(' ') || []
   const params = new URLSearchParams(searchParams)
 
   const handleGenreClick = (genre: string) => {
@@ -44,7 +44,7 @@ const Filters = () => {
       : [...selectedGenres, genre]
 
     if (newGenres.length) {
-      params.set('genres', newGenres.join(','))
+      params.set('genres', newGenres.join(' '))
     } else {
       params.delete('genres')
     }

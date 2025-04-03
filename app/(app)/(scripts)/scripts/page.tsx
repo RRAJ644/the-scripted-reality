@@ -10,7 +10,7 @@ import { SCREEN_PLAYS } from '@/lib/constants'
 const ScriptsContent = () => {
   const { query, handleChange } = useSearch()
   const searchParams = useSearchParams()
-  const selectedGenres = searchParams.get('genres')?.split(',') || []
+  const selectedGenres = searchParams.get('genres')?.split(' ') || []
 
   const filteredByGenre = selectedGenres.length
     ? SCREEN_PLAYS.filter((script) => selectedGenres.includes(script.genre))
