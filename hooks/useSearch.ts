@@ -2,7 +2,7 @@ import { debounce } from 'lodash'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 
-const useSearch = (delay = 300) => {
+const useSearch = (delay = 800) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
