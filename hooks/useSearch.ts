@@ -6,7 +6,6 @@ const useSearch = (delay = 800) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
-
   const [query, setQuery] = useState(searchParams.get('query') || '')
 
   useEffect(() => {
