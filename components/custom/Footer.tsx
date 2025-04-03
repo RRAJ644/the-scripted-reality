@@ -12,7 +12,7 @@ const footerConfig = {
     // { name: 'Facebook', url: 'https://facebook.com', icon: FaFacebook },
     {
       name: 'Email',
-      url: 'mailto:the.scripted.reality27@gmail.com',
+      url: 'mailto:thescriptedreality217@gmail.com',
       icon: FaEnvelope,
     },
   ],

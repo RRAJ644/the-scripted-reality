@@ -96,7 +96,7 @@ const WorkWithUs = () => {
         </p>
 
         <div className='mt-6'>
-          <Link href='mailto:the.scripted.reality27@gmail.com'>
+          <Link href='mailto:thescriptedreality217@gmail.com'>
             <Button className='px-6 py-5 text-lg rounded-2xl text-gray-50 bg-neutral-800 border-2 hover:bg-neutral-800 hover:text-gray-50'>
               <Mail className='mr-2' size={20} />
               Let’s Work Together
