@@ -1,59 +1,52 @@
 'use client'
 
-import { useState } from 'react'
-
-const sampleScript = {
-  title: 'THE LAST HUNT',
-  writer: 'John Doe',
-  date: 'March 2024',
-  genre: 'Thriller',
-  scenes: [
-    {
-      heading: 'INT. ABANDONED WAREHOUSE - NIGHT',
-      action:
-        'A single light bulb flickers, casting eerie shadows. Footsteps echo in the vast emptiness.',
-      dialogues: [
-        {
-          character: 'JAMES',
-          parenthetical: '(whispers)',
-          line: 'Is anyone there?',
-        },
-        {
-          character: 'UNKNOWN VOICE',
-          line: 'You shouldn’t have come.',
-        },
-      ],
-      transition: 'CUT TO:',
-    },
-    {
-      heading: 'EXT. CITY STREET - NIGHT',
-      action:
-        'James runs down the rain-soaked alley, breath heavy. A shadow follows closely behind.',
-      dialogues: [
-        {
-          character: 'JAMES',
-          line: 'I have to find her before it’s too late!',
-        },
-      ],
-      transition: 'FADE OUT.',
-    },
-  ],
-}
+import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import axios from 'axios'
 
 const InnerScript = () => {
-  const [script] = useState(sampleScript)
+  const [script, setScript] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const { id } = useParams()
 
+  useEffect(() => {
+    const fetchScript = async () => {
+      try {
+        const res = await axios.get(`/api/scripts/${id}`)
+        setScript(res.data.data)
+      } catch (err: any) {
+        console.error('Error fetching script:', err)
+        setError('Failed to load script')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (id) fetchScript()
+  }, [id])
+
+  if (loading) return <div className='text-center mt-10'>Loading script...</div>
+  if (error)
+    return <div className='text-center text-red-500 mt-10'>{error}</div>
+  if (!script) return <div className='text-center mt-10'>No script found</div>
+
+
+  console.log(script, '----------')
+  
   return (
     <section className='max-w-7xl text-black font-mono mx-auto mt-10'>
       <div className='text-center mb-8'>
         <h1 className='text-3xl font-bold uppercase'>{script.title}</h1>
-        <p className='text-sm text-gray-600'>Written by {script.writer}</p>
         <p className='text-sm text-gray-600'>
-          {script.date} • {script.genre}
+          Written by {script.writer || 'Unknown'}
+        </p>
+        <p className='text-sm text-gray-600'>
+          {script.date || 'Unknown date'} • {script.genre}
         </p>
       </div>
 
-      {script.scenes.map((scene, index) => (
+      {script.script.map((scene: any, index: number) => (
         <div key={index} className='mb-8'>
           <h2 className='text-lg font-bold uppercase text-gray-900'>
             {scene.heading}
@@ -61,7 +54,7 @@ const InnerScript = () => {
 
           <p className='text-sm text-gray-700 italic my-2'>{scene.action}</p>
 
-          {scene.dialogues.map((dialogue, idx) => (
+          {scene.dialogues.map((dialogue: any, idx: number) => (
             <div key={idx} className='my-4 text-center'>
               <h3 className='text-md font-bold uppercase text-gray-900'>
                 {dialogue.character}
