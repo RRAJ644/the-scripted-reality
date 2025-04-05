@@ -2,14 +2,10 @@ import { connectToDatabase } from '@/lib/db'
 import Scripts from '@/models/Scripts'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Define the params type
-type RouteParams = {
-  params: {
-    id: string
-  }
-}
-
-export const GET = async (request: NextRequest, context: RouteParams) => {
+export const GET = async (
+  request: NextRequest,
+  context: { params: { id: string } }
+) => {
   try {
     await connectToDatabase()
 
