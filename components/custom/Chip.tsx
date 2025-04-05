@@ -13,7 +13,7 @@ const Chip: React.FC<ChipProps> = ({ label, selected, onClick }) => {
   return (
     <Button
       variant={'default'}
-      className={`px-4 py-1 rounded-full text-sm cursor-pointer hover:bg-zinc-200  ${
+      className={`rounded-full text-sm cursor-pointer hover:bg-zinc-200  ${
         selected
           ? 'bg-neutral-900 text-white hover:bg-neutral-900  hover:text-white'
           : 'bg-zinc-200 text-gray-800'

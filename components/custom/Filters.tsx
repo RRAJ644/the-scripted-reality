@@ -5,7 +5,6 @@ import { Button } from '../ui/button'
 
 const GENRES = [
   'Crime',
-  'Psychological',
   'Romance',
   'RomCom',
   'SitCom',
@@ -20,14 +19,12 @@ const GENRES = [
   'Drama',
   'Musical',
   'Documentary',
-  'Slice of Life',
   'Action-Comedy',
   'Superhero',
   'Family',
   'Coming-of-Age',
   'Noir',
   'Western',
-  'Psychological Thriller',
   'Satire',
 ]
 
@@ -58,7 +55,7 @@ const Filters = () => {
 
   return (
     <Suspense>
-      <section className='container max-auto flex flex-wrap gap-3'>
+      <section className='flex flex-wrap gap-3'>
         {GENRES.map((genre) => (
           <Chip
             key={genre}

@@ -21,7 +21,7 @@ const ScriptsContent = () => {
   )
 
   return (
-    <section className='w-full flex justify-center items-center flex-col gap-y-7 py-6 px-44'>
+    <section className='w-full flex justify-center items-center flex-col gap-y-7 px-14 max-sm:px-4 py-5'>
       <Search query={query} handleChange={handleChange} />
       <Filters />
       <ScreenplayGrid screenplays={finalFilteredScreenplays} />

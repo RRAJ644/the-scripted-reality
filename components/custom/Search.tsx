@@ -1,4 +1,4 @@
-import { Input } from "../ui/input"
+import { Input } from '../ui/input'
 
 interface SearchProps {
   query: string
@@ -7,7 +7,7 @@ interface SearchProps {
 
 const Search = ({ query, handleChange }: SearchProps) => {
   return (
-    <section className='container max-auto flex flex-wrap gap-3'>
+    <section className='w-full flex flex-wrap gap-3'>
       <Input
         type='text'
         placeholder='Search...'

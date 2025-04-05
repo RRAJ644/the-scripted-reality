@@ -45,11 +45,6 @@ const Genres = () => {
         description: 'Criminal activities, investigations, and justice.',
       },
       {
-        icon: <Brain className={iconClass} />,
-        title: 'Psychological',
-        description: 'Psychological twists and mind games.',
-      },
-      {
         icon: <Heart className={iconClass} />,
         title: 'Romance',
         description: 'Love stories and emotional journeys.',
