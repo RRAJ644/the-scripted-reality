@@ -2,15 +2,18 @@ import { connectToDatabase } from '@/lib/db'
 import Scripts from '@/models/Scripts'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Dynamic route handler
-export const GET = async (
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) => {
+// Define the params type
+type RouteParams = {
+  params: {
+    id: string
+  }
+}
+
+export const GET = async (request: NextRequest, context: RouteParams) => {
   try {
     await connectToDatabase()
 
-    const { id } = params
+    const { id } = context.params
 
     if (!id) {
       return NextResponse.json(
