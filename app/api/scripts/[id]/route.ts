@@ -1,23 +1,19 @@
 import { connectToDatabase } from '@/lib/db'
 import Scripts from '@/models/Scripts'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-// Define the expected params type
-interface Params {
-  id: string
-}
-
-export async function GET(
+// Dynamic route handler
+export const GET = async (
   request: NextRequest,
-  { params }: { params: Params }
-) {
+  { params }: { params: { id: string } }
+) => {
   try {
     await connectToDatabase()
 
     const { id } = params
 
     if (!id) {
-      return Response.json(
+      return NextResponse.json(
         {
           success: false,
           message: 'Script ID is required',
@@ -29,7 +25,7 @@ export async function GET(
     const script = await Scripts.findById(id)
 
     if (!script) {
-      return Response.json(
+      return NextResponse.json(
         {
           success: false,
           message: 'Script not found',
@@ -38,7 +34,7 @@ export async function GET(
       )
     }
 
-    return Response.json(
+    return NextResponse.json(
       {
         success: true,
         data: script,
@@ -47,7 +43,7 @@ export async function GET(
     )
   } catch (error) {
     console.error('Error fetching script by ID:', error)
-    return Response.json(
+    return NextResponse.json(
       {
         success: false,
         message: 'Error fetching script',
