@@ -1,53 +1,41 @@
-import { connectToDatabase } from '@/lib/db'
-import Scripts from '@/models/Scripts'
-import { NextRequest, NextResponse } from 'next/server'
+import { connectToDatabase } from '@/lib/db';
+import Scripts from '@/models/Scripts';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const GET = async (
-  request: NextRequest,
-  context: { params: { id: string } }
-) => {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    await connectToDatabase()
-
-    const { id } = context.params
+    const { id } = params;
 
     if (!id) {
       return NextResponse.json(
-        {
-          success: false,
-          message: 'Script ID is required',
-        },
+        { success: false, message: 'Script ID is required' },
         { status: 400 }
-      )
+      );
     }
 
-    const script = await Scripts.findById(id)
+    await connectToDatabase();
+
+    const script = await Scripts.findById(id);
 
     if (!script) {
       return NextResponse.json(
-        {
-          success: false,
-          message: 'Script not found',
-        },
+        { success: false, message: 'Script not found' },
         { status: 404 }
-      )
+      );
     }
 
     return NextResponse.json(
-      {
-        success: true,
-        data: script,
-      },
+      { success: true, data: script },
       { status: 200 }
-    )
+    );
   } catch (error) {
-    console.error('Error fetching script by ID:', error)
+    console.error('Error fetching script:', error);
     return NextResponse.json(
-      {
-        success: false,
-        message: 'Error fetching script',
-      },
+      { success: false, message: 'Internal Server Error' },
       { status: 500 }
-    )
+    );
   }
 }
