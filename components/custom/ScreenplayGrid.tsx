@@ -22,7 +22,7 @@ export default function ScreenplayGrid({ screenplays }: ScreenplayGridProps) {
   const router = useRouter()
 
   return (
-    <section className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12'>
+    <section className='w-full grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
       {screenplays.map((item) => (
         <Card
           key={item.id}

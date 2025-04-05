@@ -24,7 +24,6 @@ enum Genres {
   ComingOfAge = 'Coming-of-Age',
   Noir = 'Noir',
   Western = 'Western',
-  PsychologicalThriller = 'Psychological Thriller',
   Satire = 'Satire',
 }
 
