@@ -2,14 +2,19 @@ import { connectToDatabase } from '@/lib/db'
 import Scripts from '@/models/Scripts'
 import { NextRequest } from 'next/server'
 
+// Define the expected params type
+interface Params {
+  id: string
+}
+
 export async function GET(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: Params }
 ) {
   try {
     await connectToDatabase()
 
-    const { id } = await context.params
+    const { id } = params
 
     if (!id) {
       return Response.json(

@@ -47,11 +47,11 @@ export default function ScreenplayGrid({ screenplays }: ScreenplayGridProps) {
               objectFit='cover'
               className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700'
             />
-            <div className='flex flex-col gap-y-3 items-center justify-center py-4'>
+            <div className='flex flex-col gap-y-3 items-center justify-center py-5'>
               <h3 className='text-xl font-semibold text-neutral-800'>
                 {item.title}
               </h3>
-              <p className='text-sm text-gray-400'>{item.description}</p>
+              <p className='text-sm text-gray-900 text-center'>{item.description}</p>
             </div>
           </Card>
         )
