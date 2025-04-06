@@ -13,7 +13,7 @@ const InnerScript = () => {
   useEffect(() => {
     const fetchScript = async () => {
       try {
-        const res = await axios.get(`/api/scripts/${id}`)
+        const res = await axios.get(`/api/script/${id}`)
         setScript(res.data.data)
       } catch (err: any) {
         console.error('Error fetching script:', err)
@@ -33,7 +33,7 @@ const InnerScript = () => {
 
 
   console.log(script, '----------')
-  
+
   return (
     <section className='max-w-7xl text-black font-mono mx-auto mt-10'>
       <div className='text-center mb-8'>
