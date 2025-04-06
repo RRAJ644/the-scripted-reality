@@ -32,8 +32,6 @@ const ScriptsContent = () => {
     getScreenplays()
   }, [])
 
-  console.log(screenPlays, '=======screenPlays')
-
   const filteredByGenre = selectedGenres.length
     ? screenPlays.filter((script: any) =>
         selectedGenres?.includes(script.genre)
