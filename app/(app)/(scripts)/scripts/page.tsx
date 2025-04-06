@@ -51,63 +51,7 @@ const ScriptsContent = () => {
   )
 }
 
-const payload = {
-  title: 'The Midnight Heist',
-  description:
-    'A seasoned thief plans one last job before retirement, but everything goes wrong when his crew gets betrayed.',
-  imageUrl:
-    'https://images.unsplash.com/photo-1476842634003-7dcca8f832de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60',
-  hoverGif:
-    'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWlodTF3MjJ3NnJiY3Rlc2J0ZmE0c28yeWoxc3gxY2VtZzA5ejF1NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/syEfLvksYQnmM/giphy.gif',
-  genre: 'Crime',
-  script: [
-    {
-      heading: 'INT. BANK VAULT - NIGHT',
-      action:
-        'The dimly lit vault is filled with safety deposit boxes. JAKE (40s, grizzled) picks a lock with precision.',
-      dialogues: [
-        {
-          character: 'JAKE',
-          parenthetical: '(whispering)',
-          line: 'Almost there, just one more pin.',
-        },
-        {
-          character: 'SARAH',
-          line: 'Hurry up, Jake! The guards will be back any second.',
-        },
-      ],
-      transition: 'CUT TO:',
-    },
-    {
-      heading: 'EXT. BANK - NIGHT',
-      action:
-        'Rain pours down as SARAH (30s, nervous) keeps watch by the getaway car.',
-      dialogues: [
-        {
-          character: 'SARAH',
-          parenthetical: '(into radio)',
-          line: 'Status check, Jake. We’re on borrowed time.',
-        },
-      ],
-      transition: 'FADE OUT:',
-    },
-  ],
-}
-
 const Scripts = () => {
-  const postScript = async () => {
-    try {
-      const res = await axios.post('/api/scripts', payload)
-      console.log('✅ Script created:', res.data)
-    } catch (err) {
-      console.error('❌ Error creating script:', err)
-    }
-  }
-
-  useEffect(() => {
-    // postScript()
-  }, [])
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ScriptsContent />
