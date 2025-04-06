@@ -28,14 +28,12 @@ export default function DashboardLayout({
     <AuthProvider>
       <html lang='en' className='h-full'>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-900 dark:text-zinc-200 h-full overflow-hidden`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-900 dark:text-zinc-200 min-h-screen`}
         >
           <Navbar />
-          <main className='flex h-screen mt-16'>
+          <main className='flex mt-14 min-h-screen '>
             <Sidebar />
-            <div className='flex-1 flex-grow h-full overflow-auto'>
-              {children}
-            </div>
+            <div className='flex-1 flex-grow overflow-hidden'>{children}</div>
           </main>
         </body>
       </html>
