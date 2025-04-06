@@ -239,11 +239,8 @@ const GenreInner = () => {
     if (genreStr) getScreenPlay()
   }, [genre])
 
+  
   const { query, handleChange } = useSearch()
-
-  // const screenPlay = SCREEN_PLAYS.filter(
-  //   (play) => genreStr?.toLowerCase() === play.genre.toLowerCase()
-  // )
 
   const filteredScreenPlays = screenPlay?.filter((play) =>
     play.title.toLowerCase().includes(query.toLowerCase())

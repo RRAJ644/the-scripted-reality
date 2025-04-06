@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ genre: string }> }
+  context: { params?: { genre?: string } } = {}
 ) {
   try {
     await connectToDatabase()
@@ -61,13 +61,13 @@ export async function GET(
     const url = new URL(request.url)
     const searchParams = url.searchParams
 
-    const { genre } = await params
+    const genre = context.params?.genre
     const queryGenres = searchParams.get('genres')
 
     let filter = {}
 
     if (genre) {
-      filter = { genre: genre }
+      filter = { genre }
     } else if (queryGenres) {
       const genresArray = queryGenres.split('+').map(decodeURIComponent)
       filter = { genre: { $in: genresArray } }
@@ -75,6 +75,7 @@ export async function GET(
 
     const scripts = await Scripts.find(filter).sort({ createdAt: -1 })
 
+    console.log(scripts, '======scriptsdata')
     return Response.json(
       {
         success: true,
