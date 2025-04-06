@@ -10,29 +10,25 @@ const InnerScript = () => {
   const [error, setError] = useState('')
   const { id } = useParams()
 
-  useEffect(() => {
-    const fetchScript = async () => {
-      try {
-        const res = await axios.get(`/api/script/${id}`)
-        setScript(res.data.data)
-      } catch (err: any) {
-        console.error('Error fetching script:', err)
-        setError('Failed to load script')
-      } finally {
-        setLoading(false)
-      }
+  const fetchScript = async () => {
+    try {
+      const res = await axios.get(`/api/script/${id}`)
+      setScript(res.data.data)
+    } catch (err: any) {
+      console.error('Error fetching script:', err)
+      setError('Failed to load script')
+    } finally {
+      setLoading(false)
     }
+  }
 
+  useEffect(() => {
     if (id) fetchScript()
   }, [id])
 
   if (loading) return <div className='text-center mt-10'>Loading script...</div>
-  if (error)
-    return <div className='text-center text-red-500 mt-10'>{error}</div>
+
   if (!script) return <div className='text-center mt-10'>No script found</div>
-
-
-  console.log(script, '----------')
 
   return (
     <section className='max-w-7xl text-black font-mono mx-auto mt-10'>
