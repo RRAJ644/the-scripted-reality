@@ -31,9 +31,9 @@ export default function DashboardLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased text-neutral-900 dark:text-zinc-200 min-h-screen`}
         >
           <Navbar />
-          <main className='flex mt-14 min-h-screen '>
-            <Sidebar />
-            <div className='flex-1 flex-grow overflow-hidden'>{children}</div>
+          <Sidebar />
+          <main className='flex min-h-screen ml-56'>
+            <div className='flex-1 overflow-y-auto'>{children}</div>
           </main>
         </body>
       </html>

@@ -99,7 +99,7 @@ const ScriptsDashboard = () => {
   }
 
   return (
-    <div className='space-y-6 min-h-screen p-6 border-2 overflow-hidden'>
+    <div className='space-y-6 mt-12 p-6 border-2 overflow-hidden'>
       <div className='space-y-4 overflow-hidden'>
         <Input
           placeholder='Title'

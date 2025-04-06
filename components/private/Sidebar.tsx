@@ -45,7 +45,7 @@ export default function Sidebar() {
       : allLinks.filter((link) => link.name === 'Thoughts')
 
   return (
-    <aside className='w-56 min-h-screen border-r border-neutral-500 text-neutral-900 px-4 py-6 sticky top-0 flex flex-col items-center'>
+    <aside className='w-56 h-[calc(100vh-3.5rem)] fixed top-[3.5rem] left-0 border-r border-neutral-500 text-neutral-900 px-4 py-6'>
       <ul className='w-full'>
         {links.map(({ name, href, icon: Icon }) => (
           <Link
