@@ -5,11 +5,12 @@ import { connectToDatabase } from '@/lib/db'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params?: { id: string } } = {}
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectToDatabase()
-    const id = params?.id
+    const { id } = await params
+
     if (!id || !Types.ObjectId.isValid(id)) {
       return Response.json(
         { success: false, message: 'Invalid or missing script ID' },
