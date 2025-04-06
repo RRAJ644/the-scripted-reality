@@ -2,9 +2,9 @@
 import ScreenplayGrid from '@/components/custom/ScreenplayGrid'
 import Search from '@/components/custom/Search'
 import useSearch from '@/hooks/useSearch'
-import { SCREEN_PLAYS } from '@/lib/constants'
+import axios from 'axios'
 import { useParams } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const GENRE_DETAILS = new Map([
   [
@@ -215,13 +215,37 @@ const GenreInner = () => {
   const genre = params?.genre
   const genreStr = Array.isArray(genre) ? genre[0] : genre!
 
+  const [screenPlay, setScreenPlay] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  const getScreenPlay = async () => {
+    try {
+      setLoading(true)
+      const { data } = await axios.get(`/api/scripts/${genreStr}`)
+
+      if (data.success) {
+        setScreenPlay(data.data)
+      } else {
+        console.error('API error:', data.message)
+      }
+    } catch (error) {
+      console.error('Axios error:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (genreStr) getScreenPlay()
+  }, [genre])
+
   const { query, handleChange } = useSearch()
 
-  const screenPlay = SCREEN_PLAYS.filter(
-    (play) => genreStr?.toLowerCase() === play.genre.toLowerCase()
-  )
+  // const screenPlay = SCREEN_PLAYS.filter(
+  //   (play) => genreStr?.toLowerCase() === play.genre.toLowerCase()
+  // )
 
-  const filteredScreenPlays = screenPlay.filter((play) =>
+  const filteredScreenPlays = screenPlay?.filter((play) =>
     play.title.toLowerCase().includes(query.toLowerCase())
   )
 
