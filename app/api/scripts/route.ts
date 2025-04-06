@@ -51,24 +51,18 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(
-  request: NextRequest,
-  context: { params?: { genre?: Promise<{ genre?: string }> } } = {}
-) {
+export async function GET(request: NextRequest) {
   try {
     await connectToDatabase()
 
     const url = new URL(request.url)
     const searchParams = url.searchParams
 
-    const genre = context.params?.genre
     const queryGenres = searchParams.get('genres')
 
     let filter = {}
 
-    if (genre) {
-      filter = { genre }
-    } else if (queryGenres) {
+    if (queryGenres) {
       const genresArray = queryGenres.split('+').map(decodeURIComponent)
       filter = { genre: { $in: genresArray } }
     }
