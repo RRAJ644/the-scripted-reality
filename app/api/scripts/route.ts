@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
 export async function GET(
   request: NextRequest,
-  context: { params?: { genre?: string } } = {}
+  context: { params?: { genre?: Promise<{ genre: string }> } } = {}
 ) {
   try {
     await connectToDatabase()
