@@ -12,7 +12,7 @@ interface NavLink {
 
 const allLinks: NavLink[] = [
   {
-    name: 'Editor',
+    name: 'Blog Editor',
     icon: Edit,
     href: '/editor',
   },
@@ -22,11 +22,19 @@ const allLinks: NavLink[] = [
     icon: Pencil,
     href: '/drafts',
   },
+
   {
     name: 'Blogs',
     icon: FileText,
     href: '/dashboard/blogs',
   },
+
+  {
+    name: 'Script Editor',
+    icon: ScrollText,
+    href: '/dashboard/scripts/editor',
+  },
+
   {
     name: 'Scripts',
     icon: ScrollText,
@@ -51,7 +59,7 @@ export default function Sidebar() {
           <Link
             href={href}
             key={name}
-            className='cursor-pointer list-none flex items-center justify-center gap-4 text-xl border-b-2 border-neutral-400 py-3'
+            className='cursor-pointer list-none flex items-center justify-start gap-4 text-xl border-b-2 border-neutral-400 py-3'
             role='link'
           >
             <Icon size={25} />

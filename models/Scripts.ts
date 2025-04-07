@@ -46,6 +46,11 @@ enum Transitions {
   Superimpose = 'SUPERIMPOSE:',
 }
 
+enum STATUS {
+  Draft = 'Draft',
+  Publish = 'Publish',
+}
+
 export interface IScript {
   _id?: mongoose.Types.ObjectId
   title: string
@@ -63,6 +68,7 @@ export interface IScript {
     }[]
     transition?: Transitions
   }[]
+  status: STATUS
 }
 
 const scriptsSchema = new Schema<IScript>(
@@ -90,6 +96,12 @@ const scriptsSchema = new Schema<IScript>(
         },
       },
     ],
+    status: {
+      type: String,
+      enum: Object.values(STATUS),
+      required: true,
+      default: Object.values(STATUS)[0],
+    },
   },
   { timestamps: true }
 )
