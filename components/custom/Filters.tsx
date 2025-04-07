@@ -26,6 +26,7 @@ const GENRES = [
   'Noir',
   'Western',
   'Satire',
+  'Psychological'
 ]
 
 const Filters = () => {
