@@ -47,8 +47,8 @@ enum Transitions {
 }
 
 enum STATUS {
-  Draft = 'Draft',
-  Publish = 'Published',
+  Draft = 'draft',
+  Publish = 'published',
 }
 
 export interface IScript {

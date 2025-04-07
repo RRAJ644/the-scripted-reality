@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 
 const Scripts = () => {
   const [screenPlays, setScreenPlays] = useState<[]>([])
-  const [status, setStatus] = useState<'Draft' | 'Published'>('Draft')
+  const [status, setStatus] = useState<'draft' | 'published'>('draft')
 
   const getScreenplays = async (status: string) => {
     try {
@@ -30,11 +30,11 @@ const Scripts = () => {
     <section className='p-6'>
       <Tabs
         defaultValue='Draft'
-        onValueChange={(val) => setStatus(val as 'Draft' | 'Published')}
+        onValueChange={(val) => setStatus(val as 'draft' | 'published')}
       >
         <TabsList className='mb-4'>
-          <TabsTrigger value='Draft'>Draft</TabsTrigger>
-          <TabsTrigger value='Published'>Published</TabsTrigger>
+          <TabsTrigger value='draft'>Draft</TabsTrigger>
+          <TabsTrigger value='published'>Published</TabsTrigger>
         </TabsList>
 
         <TabsContent value='draft'>

@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
     if (status !== null) {
       where.status = status
     } else {
-      where.status = 'Published'
+      where.status = 'published'
     }
 
     const scripts = await Scripts.find(filter)
