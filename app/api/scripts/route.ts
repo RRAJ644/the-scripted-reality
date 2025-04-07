@@ -59,17 +59,27 @@ export async function GET(request: NextRequest) {
     const searchParams = url.searchParams
 
     const queryGenres = searchParams.get('genres')
+    const status = searchParams.get('status')
 
-    let filter = {}
+    let filter: any = {}
 
     if (queryGenres) {
       const genresArray = queryGenres.split('+').map(decodeURIComponent)
       filter = { genre: { $in: genresArray } }
     }
 
-    const scripts = await Scripts.find(filter).sort({ createdAt: -1 })
+    let where: any = {}
 
-    console.log(scripts, '======scriptsdata')
+    if (status !== null) {
+      where.status = status
+    } else {
+      where.status = 'Published'
+    }
+
+    const scripts = await Scripts.find(filter)
+      .sort({ createdAt: -1 })
+      .where(where)
+
     return Response.json(
       {
         success: true,
