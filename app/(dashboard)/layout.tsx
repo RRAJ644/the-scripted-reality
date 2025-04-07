@@ -32,7 +32,7 @@ export default function DashboardLayout({
         >
           <Navbar />
           <Sidebar />
-          <main className='flex min-h-screen ml-56 items-center justify-center'>
+          <main className='flex min-h-screen ml-56 items-start justify-center py-20'>
             <div className='flex-1 overflow-y-auto'>{children}</div>
           </main>
         </body>
