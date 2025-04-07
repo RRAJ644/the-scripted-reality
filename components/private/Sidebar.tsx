@@ -18,21 +18,15 @@ const allLinks: NavLink[] = [
   },
 
   {
-    name: 'Drafts',
-    icon: Pencil,
-    href: '/drafts',
+    name: 'Script Editor',
+    icon: ScrollText,
+    href: '/dashboard/scripts/editor',
   },
 
   {
     name: 'Blogs',
     icon: FileText,
     href: '/dashboard/blogs',
-  },
-
-  {
-    name: 'Script Editor',
-    icon: ScrollText,
-    href: '/dashboard/scripts/editor',
   },
 
   {
@@ -46,7 +40,6 @@ export default function Sidebar() {
   const { data: session } = useSession()
   const role = session?.user?.role
 
-  // Filter links based on role
   const links =
     role === 'superadmin'
       ? allLinks
