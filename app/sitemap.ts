@@ -9,6 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
+      url: 'https://www.thescriptedreality.com/blogs',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.5,
+    },
+    {
       url: 'https://www.thescriptedreality.com/hire',
       lastModified: new Date(),
       changeFrequency: 'yearly',
