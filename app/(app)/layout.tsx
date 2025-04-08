@@ -5,26 +5,32 @@ import Footer from '@/components/custom/Footer'
 import AuthProvider from '@/context/AuthProvider'
 
 export const metadata: Metadata = {
-  title: 'The Scripted Reality - Elevating Cinematic Storytelling',
+  title: 'The Scripted Reality | Original Scripts & Cinematic Writing',
   description:
-    'A hub for compelling screenplays, scriptwriting, and cinematic blogs. Showcasing top-tier writing to captivate film studios, production houses, and brands.',
+    'Discover professionally crafted film, web series, and TV show scripts. The Scripted Reality is your gateway to cinematic storytelling, screenwriting mastery, and visual narratives that captivate.',
   keywords: [
-    'screenplays',
-    'scriptwriting',
-    'cinematic storytelling',
-    'film studios',
-    'production houses',
-    'scripted reality',
-    'Fictional Stories',
-    'Stories live here',
+    'original scripts',
+    'professional screenwriting',
+    'film scripts',
+    'TV scripts',
+    'web series scripts',
+    'script writing portfolio',
+    'cinematic writing',
+    'storytelling for film',
+    'screenwriting samples',
+    'The Scripted Reality',
+    'visual storytelling',
+    'scriptwriter Ritu Raj Singh',
+    'hire scriptwriter',
   ],
   alternates: {
     canonical: 'https://www.thescriptedreality.com/',
   },
   openGraph: {
-    title: 'The Scripted Reality - Elevating Cinematic Storytelling',
+    title:
+      'The Scripted Reality | Original Scripts & Cinematic Writing by Ritu Raj Singh',
     description:
-      'A hub for compelling screenplays, scriptwriting, and cinematic blogs.',
+      'Explore premium original scripts for film, TV, and digital. Elevating storytelling through immersive screenwriting.',
     url: 'https://www.thescriptedreality.com/',
     type: 'website',
     images: [
@@ -38,12 +44,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Scripted Reality - Elevating Cinematic Storytelling',
+    title:
+      'The Scripted Reality | Professional Scripts & Cinematic Storytelling',
     description:
-      'A hub for compelling screenplays, scriptwriting, and cinematic blogs.',
+      'Read original scripts written by Ritu Raj Singh. For producers, studios & creators seeking powerful visual narratives.',
     images: ['https://www.thescriptedreality.com/logo.webp'],
   },
-
   icons: {
     icon: 'https://www.thescriptedreality.com/logo.webp',
   },
