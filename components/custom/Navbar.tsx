@@ -19,11 +19,12 @@ const Navbar = () => {
     // { name: 'Scripts', href: '/scripts' },
     // { name: 'Voice Scripts', href: '/voice-scripts' },
 
-    // { name: 'Blogs', href: '/blogs' },
+    { name: 'Blogs', href: '/blogs' },
+    { name: 'Hire', href: '/hire' },
+
     // { name: 'Reviews', href: '/reviews' },
 
     // { name: 'About', href: '/about' },
-    { name: 'Our Work', href: '/work' },
     // { name: "Let's Work", href: '/work' },
     // { name: 'Services', href: '/services' },
   ]
