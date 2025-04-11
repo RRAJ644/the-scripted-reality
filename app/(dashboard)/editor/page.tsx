@@ -51,7 +51,7 @@ const Editor: React.FC = () => {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      const maxSize = 2 * 1024 * 1024 // 2MB limit
+      const maxSize = 3 * 1024 * 1024 // 2MB limit
       if (file.size > maxSize) {
         alert('File size exceeds 2MB. Please upload a smaller image.')
         return
@@ -70,24 +70,36 @@ const Editor: React.FC = () => {
   }
 
   const onSubmit = async (data: any) => {
-    const blogData = {
-      title: data.title,
-      description: content,
-      imageUrl: data.image || '',
-      status: 'Draft',
-    }
-
-    console.log(blogData, '=-----')
-
     try {
-      const response = await axios.post('api/blogs', blogData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      console.log('Blog saved successfully:', response.data)
+      const payload = {
+        title: data.title,
+        imageUrl: data.image,
+        description: content,
+        status: 'draft',
+      }
+
+      const response = await axios.post('/api/blogs', payload)
+
+      if (response.status === 201) {
+        alert('Blog saved successfully!')
+        localStorage.removeItem('title')
+        localStorage.removeItem('image')
+        localStorage.removeItem('content')
+        form.reset()
+        setContent('')
+      } else {
+        alert('Failed to save blog.')
+      }
     } catch (error) {
       console.error('Error saving blog:', error)
+      alert('Something went wrong. Please try again.')
+    }
+  }
+
+  const removeImage = () => {
+    form.setValue('image', '')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('image')
     }
   }
 
@@ -152,11 +164,20 @@ const Editor: React.FC = () => {
               />
 
               {form.watch('image') && (
-                <img
-                  src={form.watch('image')}
-                  alt='Uploaded'
-                  className='max-w-3xl rounded-lg shadow'
-                />
+                <div className='relative w-fit'>
+                  <img
+                    src={form.watch('image')}
+                    alt='Uploaded'
+                    className='max-w-3xl rounded-lg shadow'
+                  />
+                  <Button
+                    type='button'
+                    onClick={removeImage}
+                    className='absolute top-2 right-2 bg-red-600 text-white text-sm px-3 py-1 rounded-md hover:bg-red-700'
+                  >
+                    Remove
+                  </Button>
+                </div>
               )}
 
               <ReactQuill
@@ -168,7 +189,7 @@ const Editor: React.FC = () => {
                 type='submit'
                 className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
               >
-                Save1
+                Save
               </Button>
             </form>
           </Form>

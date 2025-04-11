@@ -6,6 +6,7 @@ export interface IBlog {
   description: Schema.Types.Mixed
   status: 'draft' | 'published'
   imageUrl: string
+  slug: string
 }
 
 enum STATUS {
@@ -31,6 +32,10 @@ const blogSchema = new Schema<IBlog>(
       default: Object.values(STATUS)[0],
     },
     imageUrl: {
+      type: String,
+      required: true,
+    },
+    slug: {
       type: String,
       required: true,
     },

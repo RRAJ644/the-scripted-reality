@@ -20,3 +20,4 @@ export const slugify = (title: string): string => {
     .replace(/^-+/, '') // Remove leading hyphen if any
     .replace(/-+$/, '') // Remove trailing hyphen if any
 }
+
