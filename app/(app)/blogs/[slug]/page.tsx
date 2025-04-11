@@ -10,15 +10,6 @@ interface BlogData {
   createdAt: string
 }
 
-export const generateStaticParams = async () => {
-  // You can fetch all slugs here and return as params
-  // Example:
-  // const res = await fetch('...')
-  // const blogs = await res.json()
-  // return blogs.map((blog: BlogData) => ({ slug: blog.slug }))
-  return []
-}
-
 interface ReadPageProps {
   params: {
     slug: string
