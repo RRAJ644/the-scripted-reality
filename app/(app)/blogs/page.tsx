@@ -1,28 +1,18 @@
-'use client'
-
-import { useEffect, useState } from 'react'
+import axios from 'axios'
 import { IBlog } from '@/models/Blog'
 import BlogCard from '@/components/custom/BlogCard'
 
-const Blogs = () => {
-  const [blogs, setBlogs] = useState<IBlog[]>([])
-  const [loading, setLoading] = useState(true)
+const NEXT_FRONTEND_ENDPOINT = process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const res = await fetch('/api/blogs?status=published')
-        const data = await res.json()
-        setBlogs(data)
-      } catch (error) {
-        console.error('Error fetching blogs:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+const Blogs = async () => {
+  let blogs: IBlog[] = []
 
-    fetchBlogs()
-  }, [])
+  try {
+    const res = await axios.get(`${NEXT_FRONTEND_ENDPOINT}api/blogs?status=published`)
+    blogs = res.data
+  } catch (error) {
+    console.error('Error fetching blogs:', error)
+  }
 
   return (
     <section className='w-full max-w-7xl mx-auto px-4 py-12'>
@@ -36,13 +26,13 @@ const Blogs = () => {
         </p>
       </div>
 
-      {loading ? (
-        <p className='text-center text-gray-500'>Loading blogs...</p>
-      ) : blogs.length === 0 ? (
-        <p className='text-center text-gray-500'>No blogs published yet.</p>
+      {blogs.length === 0 ? (
+        <p className='text-center text-gray-500 mt-10'>
+          No blogs published yet.
+        </p>
       ) : (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full h-full mt-10'>
-          {blogs.map((blog: any) => (
+          {blogs?.map((blog: any) => (
             <BlogCard key={blog._id?.toString()} blog={blog} />
           ))}
         </div>

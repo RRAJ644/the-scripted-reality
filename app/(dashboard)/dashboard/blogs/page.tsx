@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Link from 'next/link'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 
 interface Blog {
   _id: string
@@ -15,30 +16,39 @@ interface Blog {
   createdAt: string
 }
 
+const Loader = ({ size = 28 }: { size?: number }) => (
+  <div
+    className='border-4 border-t-transparent border-neutral-900 rounded-full animate-spin'
+    style={{ width: size, height: size }}
+  />
+)
+
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([])
-  const [publishedStatus, setPublishedStatus] = useState<string>('Draft')
+  const [status, setStatus] = useState<'draft' | 'published'>('draft')
+  const [loading, setLoading] = useState(false)
+
+  const fetchBlogs = async (status: 'draft' | 'published') => {
+    try {
+      setLoading(true)
+      const { data } = await axios.get(`/api/blogs?status=${status}`)
+      setBlogs(data)
+    } catch (err) {
+      console.error('Failed to fetch blogs')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const { data } = await axios.get('/api/blogs?status=draft')
-        setBlogs(data)
-      } catch (err) {
-        console.error('Failed to fetch blogs')
-      }
-    }
+    fetchBlogs(status)
+  }, [status])
 
-    fetchBlogs()
-  }, [])
-
-  console.log(blogs, '=====blogs')
-  
   const handleDelete = async (id: string) => {
     try {
       const response = await axios.delete(`/api/blogs?id=${id}`)
       if (response.status === 200) {
-        setBlogs(blogs.filter((blog) => blog._id !== id))
+        setBlogs((prev) => prev.filter((blog) => blog._id !== id))
       }
     } catch (error) {
       console.error('Failed to delete blog')
@@ -48,7 +58,13 @@ const Blogs = () => {
   const handlePublish = async (id: string) => {
     try {
       const response = await axios.put(`/api/blogs?id=${id}`)
-      setPublishedStatus(response.data.status)
+      if (response.status === 200) {
+        setBlogs((prev) =>
+          prev.map((blog) =>
+            blog._id === id ? { ...blog, status: response.data.status } : blog
+          )
+        )
+      }
     } catch (error) {
       console.error('Failed to publish blog')
     }
@@ -56,66 +72,125 @@ const Blogs = () => {
 
   return (
     <section className='h-full flex flex-col items-center p-6'>
-      <div className='w-full max-w-2xl space-y-4'>
-        {blogs?.length === 0 ? (
-          <p className='text-gray-500'>No blogs found.</p>
-        ) : (
-          blogs?.map((blog) => (
-            <Card key={blog._id} className='shadow-md'>
-              <CardHeader>
-                <CardTitle>{blog.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p
-                  className='text-gray-600'
-                  dangerouslySetInnerHTML={{ __html: blog.description }}
-                ></p>
-                <p className='text-sm text-gray-500 mt-2'>
-                  {new Date(blog.createdAt).toLocaleDateString()}
-                </p>
-                <div className='mt-4 flex gap-2'>
-                  <Button
-                    variant='outline'
-                    className='bg-neutral-900 text-white rounded-xl'
-                  >
-                    <Link
-                      href={`/blog/${blog.title
-                        .toLowerCase()
-                        .replace(/\s+/g, '-')}`}
-                    >
-                      Check
-                    </Link>
-                  </Button>
+      <div className='w-full max-w-3xl'>
+        <Tabs
+          defaultValue='draft'
+          onValueChange={(val) => setStatus(val as 'draft' | 'published')}
+        >
+          <TabsList className='w-full flex justify-center mb-6'>
+            <TabsTrigger value='draft' className='w-full'>
+              Drafts
+            </TabsTrigger>
+            <TabsTrigger value='published' className='w-full'>
+              Published
+            </TabsTrigger>
+          </TabsList>
 
-                  <Button
-                    variant='outline'
-                    className='bg-neutral-900 text-white rounded-xl'
-                  >
-                    <Link href={''}>Edit</Link>
-                  </Button>
+          <TabsContent value='draft'>
+            {loading ? (
+              <div className='flex justify-center py-10'>
+                <Loader />
+              </div>
+            ) : (
+              <BlogList
+                blogs={blogs}
+                handleDelete={handleDelete}
+                handlePublish={handlePublish}
+                isDraft={true}
+              />
+            )}
+          </TabsContent>
 
-                  <Button
-                    variant='outline'
-                    className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
-                    onClick={() => handleDelete(blog._id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    variant='outline'
-                    className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
-                    onClick={() => handlePublish(blog._id)}
-                    disabled={blog.status !== publishedStatus}
-                  >
-                    Publish
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))
-        )}
+          <TabsContent value='published'>
+            {loading ? (
+              <div className='flex justify-center py-10'>
+                <Loader />
+              </div>
+            ) : (
+              <BlogList
+                blogs={blogs}
+                handleDelete={handleDelete}
+                handlePublish={handlePublish}
+                isDraft={false}
+              />
+            )}
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
+  )
+}
+
+const BlogList = ({
+  blogs,
+  handleDelete,
+  handlePublish,
+  isDraft,
+}: {
+  blogs: Blog[]
+  handleDelete: (id: string) => void
+  handlePublish: (id: string) => void
+  isDraft: boolean
+}) => {
+  if (blogs.length === 0) {
+    return <p className='text-gray-500'>No blogs found.</p>
+  }
+
+  return (
+    <div className='space-y-4'>
+      {blogs.map((blog) => (
+        <Card key={blog._id} className='shadow-md'>
+          <CardHeader>
+            <CardTitle>{blog.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p
+              className='text-gray-600'
+              dangerouslySetInnerHTML={{ __html: blog.description }}
+            ></p>
+            <p className='text-sm text-gray-500 mt-2'>
+              {new Date(blog.createdAt).toLocaleDateString()}
+            </p>
+            <div className='mt-4 flex flex-wrap gap-2'>
+              <Button
+                variant='outline'
+                className='bg-neutral-900 text-white rounded-xl'
+              >
+                <Link
+                  href={`/blog/${blog.title
+                    .toLowerCase()
+                    .replace(/\s+/g, '-')}`}
+                >
+                  Check
+                </Link>
+              </Button>
+              <Button
+                variant='outline'
+                className='bg-neutral-900 text-white rounded-xl'
+              >
+                <Link href={`/edit/${blog._id}`}>Edit</Link>
+              </Button>
+              <Button
+                variant='outline'
+                className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
+                onClick={() => handleDelete(blog._id)}
+              >
+                Delete
+              </Button>
+              {isDraft && (
+                <Button
+                  variant='outline'
+                  className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
+                  onClick={() => handlePublish(blog._id)}
+                >
+                  Publish
+                </Button>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   )
 }
 
