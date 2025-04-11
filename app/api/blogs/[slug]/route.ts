@@ -3,17 +3,15 @@ import Blog from '@/models/Blog'
 import { NextRequest } from 'next/server'
 
 // Define the type for params explicitly
-interface Params {
-  params: {
-    slug: string
-  }
-}
 
-export async function GET(request: NextRequest, { params }: Params) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
   try {
     await connectToDatabase()
 
-    const { slug } = params
+    const { slug } = await params
 
     if (!slug) {
       return Response.json(
