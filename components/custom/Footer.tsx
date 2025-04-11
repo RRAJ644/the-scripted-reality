@@ -1,7 +1,13 @@
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaTwitter, FaLinkedin, FaFacebook, FaEnvelope } from 'react-icons/fa'
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaFacebook,
+  FaEnvelope,
+  FaInstagram,
+} from 'react-icons/fa'
 
 const footerConfig = {
   year: new Date().getFullYear(),
@@ -10,6 +16,11 @@ const footerConfig = {
     // { name: 'Twitter', url: 'https://twitter.com', icon: FaTwitter },
     // { name: 'LinkedIn', url: 'https://linkedin.com', icon: FaLinkedin },
     // { name: 'Facebook', url: 'https://facebook.com', icon: FaFacebook },
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/thescripted.reality/',
+      icon: FaInstagram,
+    },
     {
       name: 'Email',
       url: 'mailto:thescriptedreality217@gmail.com',
@@ -69,7 +80,7 @@ const Footer = () => {
           <h4 className='text-sm font-bold uppercase text-neutral-900'>
             Contact Us
           </h4>
-          <div className='flex space-x-4'>
+          <div className='flex space-x-2'>
             {footerConfig.socialLinks.map((link) => {
               const Icon = link.icon
               return (
@@ -96,8 +107,7 @@ const Footer = () => {
 
       <div className='w-full flex flex-col md:flex-row items-center justify-center border-t border-neutral-200 py-4'>
         <p className='text-sm text-neutral-600'>
-          &copy; {footerConfig.year}. All rights
-          reserved.
+          &copy; {footerConfig.year}. All rights reserved.
         </p>
       </div>
     </footer>

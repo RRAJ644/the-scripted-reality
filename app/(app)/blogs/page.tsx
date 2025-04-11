@@ -11,7 +11,7 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch('/api/blogs')
+        const res = await fetch('/api/blogs?status=published')
         const data = await res.json()
         setBlogs(data)
       } catch (error) {
@@ -41,7 +41,7 @@ const Blogs = () => {
       ) : blogs.length === 0 ? (
         <p className='text-center text-gray-500'>No blogs published yet.</p>
       ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full h-full'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full h-full mt-10'>
           {blogs.map((blog: any) => (
             <BlogCard key={blog._id?.toString()} blog={blog} />
           ))}

@@ -22,8 +22,8 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const { data } = await axios.get('/api/blogs?status=Draft')
-        setBlogs(data.blogs)
+        const { data } = await axios.get('/api/blogs?status=draft')
+        setBlogs(data)
       } catch (err) {
         console.error('Failed to fetch blogs')
       }
@@ -32,6 +32,8 @@ const Blogs = () => {
     fetchBlogs()
   }, [])
 
+  console.log(blogs, '=====blogs')
+  
   const handleDelete = async (id: string) => {
     try {
       const response = await axios.delete(`/api/blogs?id=${id}`)
@@ -48,7 +50,6 @@ const Blogs = () => {
       const response = await axios.put(`/api/blogs?id=${id}`)
       setPublishedStatus(response.data.status)
     } catch (error) {
-      console.log(error, '=====rr')
       console.error('Failed to publish blog')
     }
   }
@@ -56,10 +57,10 @@ const Blogs = () => {
   return (
     <section className='h-full flex flex-col items-center p-6'>
       <div className='w-full max-w-2xl space-y-4'>
-        {blogs.length === 0 ? (
+        {blogs?.length === 0 ? (
           <p className='text-gray-500'>No blogs found.</p>
         ) : (
-          blogs.map((blog) => (
+          blogs?.map((blog) => (
             <Card key={blog._id} className='shadow-md'>
               <CardHeader>
                 <CardTitle>{blog.title}</CardTitle>
