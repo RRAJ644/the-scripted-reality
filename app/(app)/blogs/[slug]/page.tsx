@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 interface BlogData {
@@ -9,6 +8,21 @@ interface BlogData {
   date: string
   description: string
   createdAt: string
+}
+
+export const generateStaticParams = async () => {
+  // You can fetch all slugs here and return as params
+  // Example:
+  // const res = await fetch('...')
+  // const blogs = await res.json()
+  // return blogs.map((blog: BlogData) => ({ slug: blog.slug }))
+  return []
+}
+
+interface ReadPageProps {
+  params: {
+    slug: string
+  }
 }
 
 const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
@@ -28,7 +42,7 @@ const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
   }
 }
 
-const Read = async ({ params }: { params: { slug: string } }) => {
+const Read = async ({ params }: ReadPageProps) => {
   const blog = await fetchBlogBySlug(params.slug)
   if (!blog) return notFound()
 
