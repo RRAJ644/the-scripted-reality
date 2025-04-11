@@ -1,5 +1,6 @@
 import React from 'react'
-import '../globals.css'
+import '../../(app)/global.css'
+
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
