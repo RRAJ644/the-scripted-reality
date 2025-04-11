@@ -10,12 +10,6 @@ interface BlogData {
   createdAt: string
 }
 
-interface ReadPageProps {
-  params: {
-    slug: string
-  }
-}
-
 const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
   try {
     const res = await fetch(
@@ -33,8 +27,11 @@ const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
   }
 }
 
-const Read = async ({ params }: ReadPageProps) => {
-  const blog = await fetchBlogBySlug(params.slug)
+type paramsType = Promise<{ slug: string }>
+
+const Read = async ({ params }: { params: paramsType }) => {
+  const { slug } = await params
+  const blog = await fetchBlogBySlug(slug)
   if (!blog) return notFound()
 
   return (
@@ -46,7 +43,6 @@ const Read = async ({ params }: ReadPageProps) => {
         </p>
       </div>
 
-      {/* Featured Image */}
       <div className='w-full max-w-4xl'>
         <Image
           src={blog.imageUrl || '/fallback.jpg'}
