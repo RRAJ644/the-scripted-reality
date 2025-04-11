@@ -2,10 +2,14 @@ import { connectToDatabase } from '@/lib/db'
 import Blog from '@/models/Blog'
 import { NextRequest } from 'next/server'
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+// Define the type for params explicitly
+interface Params {
+  params: {
+    slug: string
+  }
+}
+
+export async function GET(request: NextRequest, { params }: Params) {
   try {
     await connectToDatabase()
 
