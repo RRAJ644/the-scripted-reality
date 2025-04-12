@@ -7,6 +7,7 @@ import {
   FaFacebook,
   FaEnvelope,
   FaInstagram,
+  FaDonate,
 } from 'react-icons/fa'
 
 const footerConfig = {
@@ -25,6 +26,11 @@ const footerConfig = {
       name: 'Email',
       url: 'mailto:thescriptedreality217@gmail.com',
       icon: FaEnvelope,
+    },
+    {
+      name: 'Support',
+      url: 'https://buymeacoffee.com/thescriptedreality',
+      icon: FaDonate,
     },
   ],
   links: [
