@@ -160,13 +160,7 @@ const BlogList = ({
                 variant='outline'
                 className='bg-neutral-900 text-white rounded-xl'
               >
-                <Link
-                  href={`/blog/${blog.title
-                    .toLowerCase()
-                    .replace(/\s+/g, '-')}`}
-                >
-                  Check
-                </Link>
+                <Link href={`/blogs/${blog?.slug}`}>Check</Link>
               </Button>
               <Button
                 variant='outline'
