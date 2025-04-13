@@ -5,15 +5,16 @@ import Link from 'next/link'
 
 const NEXT_PUBLIC_BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 
-const TrendingStories = async () => {
-  const fetchStories = async () => {
-    try {
-      const res = await axios.get(`${NEXT_PUBLIC_BACKEND_ENDPOINT}api/story`)
-      return res.data
-    } catch (error) {
-      console.error('Error fetching blogs:', error)
-    }
+const fetchStories = async () => {
+  try {
+    const res = await axios.get(`${NEXT_PUBLIC_BACKEND_ENDPOINT}/api/story`)
+    return res.data
+  } catch (error) {
+    console.error('Error fetching blogs:', error)
   }
+}
+
+const TrendingStories = async () => {
 
   const trendingStories: any = await fetchStories()
 
