@@ -5,8 +5,6 @@ import MediaPartners from '@/components/custom/MediaPartners'
 import TrendingStories from '@/components/custom/TrendingStories'
 
 export default function Home() {
-
-  
   return (
     <section className='flex flex-col items-center justify-center gap-y-10'>
       <Hero />
