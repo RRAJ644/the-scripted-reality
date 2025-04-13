@@ -48,6 +48,8 @@ const EditorContent = () => {
       if (slug) {
         try {
           const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
+          console.log(apiUrl, '-----test')
+          
           const response = await axios.get(`${apiUrl}/api/blogs/${slug}`)
           const data = response.data.data
 
