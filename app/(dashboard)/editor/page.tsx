@@ -27,7 +27,6 @@ interface FormData {
   image: string
 }
 
-// Main content component containing useSearchParams
 const EditorContent = () => {
   const searchParams = useSearchParams()
   const slug = searchParams?.get('slug') || null
@@ -37,7 +36,6 @@ const EditorContent = () => {
   const [isLoading, setIsLoading] = useState<boolean>(!!slug)
   const [blogId, setBlogId] = useState<string | null>(null)
 
-  // Initialize react-hook-form
   const form = useForm<FormData>({
     defaultValues: {
       title: '',
@@ -45,12 +43,11 @@ const EditorContent = () => {
     },
   })
 
-  // Load blog data when slug is present or restore from localStorage
   useEffect(() => {
     const loadData = async () => {
       if (slug) {
         try {
-          const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000'
+          const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
           const response = await axios.get(`${apiUrl}/api/blogs/${slug}`)
           const data = response.data.data
 
@@ -109,8 +106,7 @@ const EditorContent = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const apiUrl =
-        process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000'
+      const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
       const payload = {
         _id: blogId,
         title: data.title,
