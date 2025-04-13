@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import 'react-quill-new/dist/quill.snow.css'
 import axios from 'axios'
@@ -143,102 +143,104 @@ const Editor: React.FC = () => {
   }
 
   return (
-    <section className='w-full h-full flex flex-col items-center px-6 py-6'>
-      <Tabs
-        value={activeTab}
-        className='w-full bg-white border-gray-200 rounded-xl'
-        onValueChange={(value) => setActiveTab(value as 'write' | 'preview')}
-      >
-        <TabsList className='w-full max-w-3xl flex gap-x-4 items-center justify-center mx-auto bg-gray-100 overflow-hidden rounded-xl h-16 px-3'>
-          <TabsTrigger
-            value='write'
-            className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
-          >
-            Write
-          </TabsTrigger>
-          <TabsTrigger
-            value='preview'
-            className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
-          >
-            Preview
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value='write'>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className='w-full space-y-6'
+    <Suspense fallback={<div>Loading...</div>}>
+      <section className='w-full h-full flex flex-col items-center px-6 py-6'>
+        <Tabs
+          value={activeTab}
+          className='w-full bg-white border-gray-200 rounded-xl'
+          onValueChange={(value) => setActiveTab(value as 'write' | 'preview')}
+        >
+          <TabsList className='w-full max-w-3xl flex gap-x-4 items-center justify-center mx-auto bg-gray-100 overflow-hidden rounded-xl h-16 px-3'>
+            <TabsTrigger
+              value='write'
+              className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
             >
-              <FormField
-                control={form.control}
-                name='title'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Title</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder='Enter title...' />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              Write
+            </TabsTrigger>
+            <TabsTrigger
+              value='preview'
+              className='flex-1 text-gray-700 text-xl border border-gray-400 font-medium data-[state=active]:bg-neutral-800 data-[state=active]:text-white rounded-xl py-2'
+            >
+              Preview
+            </TabsTrigger>
+          </TabsList>
 
-              <FormField
-                control={form.control}
-                name='image'
-                render={() => (
-                  <FormItem>
-                    <FormLabel>Upload Image</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='file'
-                        accept='image/*'
-                        onChange={handleImageUpload}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {form.watch('image') && (
-                <div className='relative w-fit'>
-                  <img
-                    src={form.watch('image')}
-                    alt='Uploaded'
-                    className='max-w-3xl rounded-lg shadow'
-                  />
-                  <Button
-                    type='button'
-                    onClick={removeImage}
-                    className='absolute top-2 right-2 bg-red-600 text-white text-sm px-3 py-1 rounded-md hover:bg-red-700'
-                  >
-                    Remove
-                  </Button>
-                </div>
-              )}
-
-              <ReactQuill
-                value={content}
-                onChange={setContent}
-                placeholder='Write your blog post here...'
-              />
-              <Button
-                type='submit'
-                className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
+          <TabsContent value='write'>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className='w-full space-y-6'
               >
-                {slug ? 'Update' : 'Save'}
-              </Button>
-            </form>
-          </Form>
-        </TabsContent>
+                <FormField
+                  control={form.control}
+                  name='title'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder='Enter title...' />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-        <TabsContent value='preview'>
-          <div dangerouslySetInnerHTML={{ __html: content }}></div>
-        </TabsContent>
-      </Tabs>
-    </section>
+                <FormField
+                  control={form.control}
+                  name='image'
+                  render={() => (
+                    <FormItem>
+                      <FormLabel>Upload Image</FormLabel>
+                      <FormControl>
+                        <Input
+                          type='file'
+                          accept='image/*'
+                          onChange={handleImageUpload}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {form.watch('image') && (
+                  <div className='relative w-fit'>
+                    <img
+                      src={form.watch('image')}
+                      alt='Uploaded'
+                      className='max-w-3xl rounded-lg shadow'
+                    />
+                    <Button
+                      type='button'
+                      onClick={removeImage}
+                      className='absolute top-2 right-2 bg-red-600 text-white text-sm px-3 py-1 rounded-md hover:bg-red-700'
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                )}
+
+                <ReactQuill
+                  value={content}
+                  onChange={setContent}
+                  placeholder='Write your blog post here...'
+                />
+                <Button
+                  type='submit'
+                  className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
+                >
+                  {slug ? 'Update' : 'Save'}
+                </Button>
+              </form>
+            </Form>
+          </TabsContent>
+
+          <TabsContent value='preview'>
+            <div dangerouslySetInnerHTML={{ __html: content }}></div>
+          </TabsContent>
+        </Tabs>
+      </section>
+    </Suspense>
   )
 }
 
