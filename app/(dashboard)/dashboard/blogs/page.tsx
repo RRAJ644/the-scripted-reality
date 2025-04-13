@@ -24,7 +24,7 @@ const Loader = ({ size = 28 }: { size?: number }) => (
   />
 )
 
-const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000'
+const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([])
