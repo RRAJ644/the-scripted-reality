@@ -17,6 +17,7 @@ const TrendingStories = async () => {
     console.error('Error fetching blogs:', error)
   }
 
+  console.log(trendingStories, '=====treee')
   return (
     <section className='w-full flex flex-col items-center justify-center gap-y-6'>
       <div className='max-w-6xl mx-auto text-center space-y-4'>
@@ -38,13 +39,13 @@ const TrendingStories = async () => {
                   className='flex items-center gap-5 border border-zinc-300 dark:border-zinc-700 py-5 px-4 bg-white dark:bg-zinc-900 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-transform cursor-pointer'
                   aria-label={`Story: ${story.title}`}
                 >
-                  <div className='p-3 text-white rounded-full shadow-md'>
+                  <div className='text-white shadow-md'>
                     <Image
                       src={story?.imageUrl}
                       alt={story.title}
                       width={100}
                       height={100}
-                      className='object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90 rounded-t-2xl'
+                      className='w-20 h-20'
                     />
                   </div>
 

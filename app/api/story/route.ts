@@ -9,6 +9,7 @@ export async function GET(request: Request) {
       createdAt: -1,
     })
 
+    console.log(blogs, '=========')
     return NextResponse.json(blogs)
   } catch (error) {
     console.error('Error fetching blogs:', error)
