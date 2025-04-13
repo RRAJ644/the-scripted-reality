@@ -1,5 +1,4 @@
 import React from 'react'
-import { BookOpen } from 'lucide-react'
 import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
