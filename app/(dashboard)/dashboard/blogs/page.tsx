@@ -13,6 +13,7 @@ interface Blog {
   description: string
   imageUrl: string
   status: string
+  slug: string
   createdAt: string
 }
 
@@ -44,28 +45,31 @@ const Blogs = () => {
     fetchBlogs(status)
   }, [status])
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (slug: string) => {
     try {
-      const response = await axios.delete(`/api/blogs?id=${id}`)
+      const response = await axios.delete(`/api/blogs/${slug.trim()}`)
       if (response.status === 200) {
-        setBlogs((prev) => prev.filter((blog) => blog._id !== id))
+        setBlogs((prev) => prev.filter((blog: any) => blog.slug !== slug))
       }
     } catch (error) {
       console.error('Failed to delete blog')
     }
   }
 
-  const handlePublish = async (id: string) => {
+  const handlePublish = async (slug: string) => {
     try {
-      const response = await axios.put(`/api/blogs?id=${id}`)
+      const response = await axios.put(`/api/blogs/${slug.trim()}`)
       if (response.status === 200) {
         setBlogs((prev) =>
           prev.map((blog) =>
-            blog._id === id ? { ...blog, status: response.data.status } : blog
+            blog.slug === slug
+              ? { ...blog, status: response.data.status }
+              : blog
           )
         )
       }
     } catch (error) {
+      console.log(error, '======')
       console.error('Failed to publish blog')
     }
   }
@@ -138,7 +142,7 @@ const BlogList = ({
 
   return (
     <div className='space-y-4'>
-      {blogs.map((blog) => (
+      {blogs.map((blog: any) => (
         <Card key={blog._id} className='shadow-md'>
           <CardHeader>
             <CardTitle>{blog.title}</CardTitle>
@@ -173,7 +177,7 @@ const BlogList = ({
               <Button
                 variant='outline'
                 className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
-                onClick={() => handleDelete(blog._id)}
+                onClick={() => handleDelete(blog?.slug)}
               >
                 Delete
               </Button>
@@ -181,7 +185,7 @@ const BlogList = ({
                 <Button
                   variant='outline'
                   className='bg-neutral-900 text-white rounded-xl hover:bg-transparent'
-                  onClick={() => handlePublish(blog._id)}
+                  onClick={() => handlePublish(blog.slug)}
                 >
                   Publish
                 </Button>
