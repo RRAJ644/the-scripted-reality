@@ -24,6 +24,8 @@ const Loader = ({ size = 28 }: { size?: number }) => (
   />
 )
 
+const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000'
+
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([])
   const [status, setStatus] = useState<'draft' | 'published'>('draft')
@@ -32,7 +34,7 @@ const Blogs = () => {
   const fetchBlogs = async (status: 'draft' | 'published') => {
     try {
       setLoading(true)
-      const { data } = await axios.get(`/api/blogs?status=${status}`)
+      const { data } = await axios.get(`${apiUrl}api/blogs?status=${status}`)
       setBlogs(data)
     } catch (err) {
       console.error('Failed to fetch blogs')
@@ -47,7 +49,7 @@ const Blogs = () => {
 
   const handleDelete = async (slug: string) => {
     try {
-      const response = await axios.delete(`/api/blogs/${slug.trim()}`)
+      const response = await axios.delete(`${apiUrl}/api/blogs/${slug.trim()}`)
       if (response.status === 200) {
         await fetchBlogs('draft')
       }
@@ -58,7 +60,7 @@ const Blogs = () => {
 
   const handlePublish = async (slug: string) => {
     try {
-      const response = await axios.put(`/api/blogs/${slug.trim()}`)
+      const response = await axios.put(`${apiUrl}/api/blogs/${slug.trim()}`)
       if (response.status === 200) {
         await fetchBlogs('published')
       }

@@ -50,8 +50,7 @@ const EditorContent = () => {
     const loadData = async () => {
       if (slug) {
         try {
-          const apiUrl =
-            process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000'
+          const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000'
           const response = await axios.get(`${apiUrl}/api/blogs/${slug}`)
           const data = response.data.data
 
