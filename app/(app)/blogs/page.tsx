@@ -7,14 +7,19 @@ const NEXT_PUBLIC_BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 const Blogs = async () => {
   let blogs: IBlog[] = []
 
-  try {
-    const res = await axios.get(
-      `${NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs?status=published`
-    )
-    blogs = res.data
-  } catch (error) {
-    console.error('Error fetching blogs:', error)
+  const fetchBlogs = async () => {
+    try {
+      const res = await axios.get(
+        `${NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs?status=published`
+      )
+      return res.data
+    } catch (error) {
+      console.error('Error fetching blogs:', error)
+    }
   }
+
+  blogs = await fetchBlogs()
+  console.log(blogs, '==========')
 
   return (
     <section className='w-full max-w-7xl mx-auto px-4 py-12'>
