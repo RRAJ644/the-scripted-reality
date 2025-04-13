@@ -49,7 +49,7 @@ const Blogs = () => {
 
   const handleDelete = async (slug: string) => {
     try {
-      const response = await axios.delete(`${apiUrl}/api/blogs/${slug.trim()}`)
+      const response = await axios.delete(`${apiUrl}api/blogs/${slug.trim()}`)
       if (response.status === 200) {
         await fetchBlogs('draft')
       }
@@ -60,7 +60,7 @@ const Blogs = () => {
 
   const handlePublish = async (slug: string) => {
     try {
-      const response = await axios.put(`${apiUrl}/api/blogs/${slug.trim()}`)
+      const response = await axios.put(`${apiUrl}api/blogs/${slug.trim()}`)
       if (response.status === 200) {
         await fetchBlogs('published')
       }
