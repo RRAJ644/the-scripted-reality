@@ -7,7 +7,7 @@ const NEXT_FRONTEND_ENDPOINT = process.env.NEXT_FRONTEND_ENDPOINT || 'http://loc
 
 const fetchStories = async () => {
   try {
-    const res = await axios.get(`${NEXT_FRONTEND_ENDPOINT}api/story`)
+    const res = await axios.get(`/api/story`)
     return res.data
   } catch (error) {
     console.error('Error fetching blogs:', error)
