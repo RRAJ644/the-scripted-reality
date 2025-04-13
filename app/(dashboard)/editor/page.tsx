@@ -116,7 +116,7 @@ const EditorContent = () => {
       }
 
       if (slug) {
-        await axios.put(`${apiUrl}/api/blogs`, payload)
+        await axios.put(`${apiUrl}api/blogs`, payload)
         alert('Blog updated successfully!')
       } else {
         const response = await axios.post(`${apiUrl}/api/blogs`, payload)
