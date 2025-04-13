@@ -39,7 +39,9 @@ const Read = async ({ params }: { params: paramsType }) => {
     <section className='flex flex-col items-center px-4 mt-8 space-y-8'>
       <div className='text-center space-y-3'>
         <h1 className='text-3xl md:text-5xl font-semibold'>{blog.title}</h1>
-        <p className='text-gray-500 text-sm'>Written on {blog.createdAt}</p>
+        <p className='text-gray-500 text-sm'>
+          Written on {new Date(blog.createdAt).toLocaleDateString()}
+        </p>
       </div>
 
       <div className='w-full max-w-4xl'>
@@ -52,7 +54,7 @@ const Read = async ({ params }: { params: paramsType }) => {
         />
       </div>
 
-      <article className='w-full prose prose-lg dark:prose-invert md:text-xl max-lg:text-lg'>
+      <article className='w-full prose prose-lg dark:prose-invert md:text-xl max-lg:text-lg max-w-7xl'>
         <div dangerouslySetInnerHTML={{ __html: blog?.description }} />
       </article>
     </section>

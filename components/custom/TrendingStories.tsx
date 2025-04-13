@@ -53,10 +53,11 @@ const TrendingStories = async () => {
                     <h3 className='text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 truncate'>
                       {story.title}
                     </h3>
-                    <p
-                      className='text-zinc-700 dark:text-zinc-300 text-sm mb-2 line-clamp-3'
-                      dangerouslySetInnerHTML={{ __html: story.description }}
-                    ></p>
+                    <article className='w-full prose prose-lg dark:prose-invert md:text-xl max-lg:text-lg max-w-7xl'>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: story?.description }}
+                      />
+                    </article>
                   </div>
                 </div>
               </Link>
