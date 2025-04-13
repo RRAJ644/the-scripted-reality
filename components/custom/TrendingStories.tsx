@@ -7,17 +7,17 @@ const NEXT_PUBLIC_BACKEND_ENDPOINT =
   process.env.NEXT_PUBLIC_BACKEND_ENDPOINT || 'http://localhost:3000/'
 
 const TrendingStories = async () => {
-  let trendingStories: any = []
-
-  try {
-    const res = await axios.get(`${NEXT_PUBLIC_BACKEND_ENDPOINT}api/story`)
-
-    trendingStories = res.data
-  } catch (error) {
-    console.error('Error fetching blogs:', error)
+  const fetchStories = async () => {
+    try {
+      const res = await axios.get(`${NEXT_PUBLIC_BACKEND_ENDPOINT}api/story`)
+      return res.data
+    } catch (error) {
+      console.error('Error fetching blogs:', error)
+    }
   }
 
-  console.log(trendingStories, '=====treee')
+  const trendingStories: any = await fetchStories()
+
   return (
     <section className='w-full flex flex-col items-center justify-center gap-y-6'>
       <div className='max-w-6xl mx-auto text-center space-y-4'>

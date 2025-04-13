@@ -5,8 +5,6 @@ import BlogCard from '@/components/custom/BlogCard'
 const NEXT_PUBLIC_BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 
 const Blogs = async () => {
-  let blogs: IBlog[] = []
-
   const fetchBlogs = async () => {
     try {
       const res = await axios.get(
@@ -18,8 +16,7 @@ const Blogs = async () => {
     }
   }
 
-  blogs = await fetchBlogs()
-  console.log(blogs, '==========')
+  const blogs: IBlog[] = await fetchBlogs()
 
   return (
     <section className='w-full max-w-7xl mx-auto px-4 py-12'>
