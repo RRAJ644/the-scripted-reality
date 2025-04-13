@@ -1,4 +1,3 @@
-import { slugify } from '@/lib/constants'
 import { connectToDatabase } from '@/lib/db'
 import Blog from '@/models/Blog'
 import { NextResponse } from 'next/server'

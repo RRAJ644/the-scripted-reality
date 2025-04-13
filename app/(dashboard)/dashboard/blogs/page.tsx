@@ -49,7 +49,7 @@ const Blogs = () => {
     try {
       const response = await axios.delete(`/api/blogs/${slug.trim()}`)
       if (response.status === 200) {
-        setBlogs((prev) => prev.filter((blog: any) => blog.slug !== slug))
+        await fetchBlogs('draft')
       }
     } catch (error) {
       console.error('Failed to delete blog')
@@ -60,13 +60,7 @@ const Blogs = () => {
     try {
       const response = await axios.put(`/api/blogs/${slug.trim()}`)
       if (response.status === 200) {
-        setBlogs((prev) =>
-          prev.map((blog) =>
-            blog.slug === slug
-              ? { ...blog, status: response.data.status }
-              : blog
-          )
-        )
+        await fetchBlogs('published')
       }
     } catch (error) {
       console.error('Failed to publish blog')
