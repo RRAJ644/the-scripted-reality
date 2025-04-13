@@ -33,7 +33,12 @@ const Read = async ({ params }: { params: paramsType }) => {
   const { slug } = await params
   const blog = await fetchBlogBySlug(slug)
 
-  if (!blog) return <Loader />
+  if (!blog)
+    return (
+      <section className='flex flex-col items-center px-4 mt-8 space-y-8'>
+        <Loader />
+      </section>
+    )
 
   return (
     <section className='flex flex-col items-center px-4 mt-8 space-y-8'>
