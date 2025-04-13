@@ -14,7 +14,7 @@ const MediaPartners = () => {
           digital media to help your brand stand out and drive results.
         </p>
 
-        <Link href={process.env.NEXT_MEETING!} target='_blank'>
+        <Link href={process.env.NEXT_PUBLIC_MEETING!} target='_blank'>
           <Button
             variant='outline'
             className='px-6 py-5 text-lg border-2 border-neutral-600 text-neutral-200 shadow-md rounded-3xl bg-zinc-900 hover:bg-zinc-800 hover:text-white transition-colors duration-300'
