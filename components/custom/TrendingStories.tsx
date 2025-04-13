@@ -3,8 +3,7 @@ import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const NEXT_PUBLIC_BACKEND_ENDPOINT =
-  process.env.NEXT_PUBLIC_BACKEND_ENDPOINT || 'http://localhost:3000/'
+const NEXT_PUBLIC_BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 
 const TrendingStories = async () => {
   const fetchStories = async () => {
