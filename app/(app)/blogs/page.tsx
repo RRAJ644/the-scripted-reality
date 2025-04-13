@@ -2,15 +2,14 @@ import axios from 'axios'
 import { IBlog } from '@/models/Blog'
 import BlogCard from '@/components/custom/BlogCard'
 
-const NEXT_FRONTEND_ENDPOINT =
-  process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
+const NEXT_FRONTEND_ENDPOINT = process.env.NEXT_FRONTEND_ENDPOINT
 
 const Blogs = async () => {
   let blogs: IBlog[] = []
 
   try {
     const res = await axios.get(
-      `${NEXT_FRONTEND_ENDPOINT}api/blogs?status=published`
+      `${NEXT_FRONTEND_ENDPOINT}/api/blogs?status=published`
     )
     blogs = res.data
   } catch (error) {

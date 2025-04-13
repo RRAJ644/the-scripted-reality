@@ -48,7 +48,7 @@ const EditorContent = () => {
       if (slug) {
         try {
           const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
-          const response = await axios.get(`${apiUrl}api/blogs/${slug}`)
+          const response = await axios.get(`${apiUrl}/api/blogs/${slug}`)
           const data = response.data.data
 
           form.setValue('title', data.title)
@@ -116,10 +116,10 @@ const EditorContent = () => {
       }
 
       if (slug) {
-        await axios.put(`${apiUrl}api/blogs`, payload)
+        await axios.put(`${apiUrl}/api/blogs`, payload)
         alert('Blog updated successfully!')
       } else {
-        const response = await axios.post(`${apiUrl}api/blogs`, payload)
+        const response = await axios.post(`${apiUrl}/api/blogs`, payload)
         if (response.status === 201) {
           alert('Blog saved successfully!')
           if (typeof window !== 'undefined') {
