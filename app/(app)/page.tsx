@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
       <Featured />
       <Genres />
-      {/* <TrendingStories /> */}
+      <TrendingStories />
       <MediaPartners />
     </section>
   )
