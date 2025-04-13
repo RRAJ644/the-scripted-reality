@@ -3,11 +3,12 @@ import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const NEXT_FRONTEND_ENDPOINT = process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
+const NEXT_FRONTEND_ENDPOINT =
+  process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
 
 const fetchStories = async () => {
   try {
-    const res = await axios.get(`/api/story`)
+    const res = await axios.get(`${NEXT_FRONTEND_ENDPOINT}api/story`)
     return res.data
   } catch (error) {
     console.error('Error fetching blogs:', error)
