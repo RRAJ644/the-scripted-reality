@@ -1,5 +1,5 @@
+import { Loader } from '@/components/custom/Loader'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
 
 interface BlogData {
   title: string
@@ -33,7 +33,7 @@ const Read = async ({ params }: { params: paramsType }) => {
   const { slug } = await params
   const blog = await fetchBlogBySlug(slug)
 
-  if (!blog) return notFound()
+  if (!blog) return <Loader />
 
   return (
     <section className='flex flex-col items-center px-4 mt-8 space-y-8'>
@@ -52,7 +52,7 @@ const Read = async ({ params }: { params: paramsType }) => {
         />
       </div>
 
-      <article className='prose prose-lg dark:prose-invert max-w-4xl'>
+      <article className='w-full prose prose-lg dark:prose-invert md:text-xl max-lg:text-lg'>
         <div dangerouslySetInnerHTML={{ __html: blog?.description }} />
       </article>
     </section>

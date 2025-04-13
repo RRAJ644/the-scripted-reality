@@ -1,14 +1,18 @@
 import axios from 'axios'
 import { IBlog } from '@/models/Blog'
 import BlogCard from '@/components/custom/BlogCard'
+import { Loader } from '@/components/custom/Loader'
 
-const NEXT_FRONTEND_ENDPOINT = process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
+const NEXT_FRONTEND_ENDPOINT =
+  process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
 
 const Blogs = async () => {
   let blogs: IBlog[] = []
 
   try {
-    const res = await axios.get(`${NEXT_FRONTEND_ENDPOINT}api/blogs?status=published`)
+    const res = await axios.get(
+      `${NEXT_FRONTEND_ENDPOINT}api/blogs?status=published`
+    )
     blogs = res.data
   } catch (error) {
     console.error('Error fetching blogs:', error)
@@ -27,9 +31,7 @@ const Blogs = async () => {
       </div>
 
       {blogs.length === 0 ? (
-        <p className='text-center text-gray-500 mt-10'>
-          No blogs published yet.
-        </p>
+        <Loader />
       ) : (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full h-full mt-10'>
           {blogs?.map((blog: any) => (
