@@ -47,9 +47,9 @@ const EditorContent = () => {
     const loadData = async () => {
       if (slug) {
         try {
-          const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
+          const apiUrl = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
           console.log(apiUrl, '-----test')
-          
+
           const response = await axios.get(`${apiUrl}/api/blogs/${slug}`)
           const data = response.data.data
 
@@ -108,7 +108,7 @@ const EditorContent = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
+      const apiUrl = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
       const payload = {
         _id: blogId,
         title: data.title,

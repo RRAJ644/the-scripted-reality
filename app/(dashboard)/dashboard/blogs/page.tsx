@@ -24,7 +24,7 @@ const Loader = ({ size = 28 }: { size?: number }) => (
   />
 )
 
-const apiUrl = process.env.NEXT_FRONTEND_ENDPOINT
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([])

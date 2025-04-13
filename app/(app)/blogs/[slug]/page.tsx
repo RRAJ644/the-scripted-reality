@@ -13,7 +13,7 @@ interface BlogData {
 const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_FRONTEND_ENDPOINT}/api/blogs/${slug}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs/${slug}`,
       {
         next: { revalidate: 60 },
       }

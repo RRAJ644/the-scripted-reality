@@ -3,14 +3,14 @@ import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const NEXT_FRONTEND_ENDPOINT =
-  process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
+const NEXT_PUBLIC_BACKEND_ENDPOINT =
+  process.env.NEXT_PUBLIC_BACKEND_ENDPOINT || 'http://localhost:3000/'
 
 const TrendingStories = async () => {
   let trendingStories: any = []
 
   try {
-    const res = await axios.get(`${NEXT_FRONTEND_ENDPOINT}api/story`)
+    const res = await axios.get(`${NEXT_PUBLIC_BACKEND_ENDPOINT}api/story`)
 
     trendingStories = res.data
   } catch (error) {
