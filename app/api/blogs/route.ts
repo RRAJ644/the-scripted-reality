@@ -49,4 +49,44 @@ export async function POST(request: Request) {
   }
 }
 
+export async function PUT(request: Request) {
+  try {
+    await connectToDatabase()
 
+    const body = await request.json()
+    const { _id, ...updateData } = body
+
+    if (!_id) {
+      return Response.json(
+        { success: false, message: 'Blog ID is required' },
+        { status: 400 }
+      )
+    }
+
+    const updatedBlog = await Blog.findByIdAndUpdate(_id, updateData, {
+      new: true,
+    })
+
+    if (!updatedBlog) {
+      return Response.json(
+        { success: false, message: 'Blog not found' },
+        { status: 404 }
+      )
+    }
+
+    return Response.json(
+      {
+        success: true,
+        message: 'Blog updated successfully',
+        data: updatedBlog,
+      },
+      { status: 200 }
+    )
+  } catch (error) {
+    console.error('Error updating blog:', error)
+    return Response.json(
+      { success: false, message: 'Error updating blog' },
+      { status: 500 }
+    )
+  }
+}

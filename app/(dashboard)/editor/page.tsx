@@ -16,12 +16,18 @@ import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import 'react-quill-new/dist/quill.snow.css'
 import axios from 'axios'
+import { useSearchParams } from 'next/navigation'
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 
 const Editor: React.FC = () => {
+  const searchParams = useSearchParams()
+  const slug = searchParams.get('slug')
+
   const [content, setContent] = useState<string>('')
   const [activeTab, setActiveTab] = useState<'write' | 'preview'>('write')
+  const [isLoading, setIsLoading] = useState<boolean>(!!slug)
+  const [blogId, setBlogId] = useState<string | null>(null)
 
   const form = useForm({
     defaultValues: {
@@ -31,29 +37,50 @@ const Editor: React.FC = () => {
   })
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedContent = localStorage.getItem('content') || ''
-      const storedTitle = localStorage.getItem('title') || ''
-      const storedImage = localStorage.getItem('image') || ''
+    const loadData = async () => {
+      if (slug) {
+        try {
+          const {
+            data: { data },
+          } = await axios.get(`/api/blogs/${slug}`)
 
-      setContent(storedContent)
-      form.setValue('title', storedTitle)
-      form.setValue('image', storedImage)
+          form.setValue('title', data.title)
+          form.setValue('image', data.imageUrl)
+          setBlogId(data._id)
+          setContent(data.description)
+        } catch (err) {
+          console.error('Error fetching blog:', err)
+        } finally {
+          setIsLoading(false)
+        }
+      } else {
+        if (typeof window !== 'undefined') {
+          const storedContent = localStorage.getItem('content') || ''
+          const storedTitle = localStorage.getItem('title') || ''
+          const storedImage = localStorage.getItem('image') || ''
+
+          setContent(storedContent)
+          form.setValue('title', storedTitle)
+          form.setValue('image', storedImage)
+        }
+      }
     }
-  }, [])
+
+    loadData()
+  }, [slug])
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (!slug && typeof window !== 'undefined') {
       localStorage.setItem('content', content)
     }
-  }, [content])
+  }, [content, slug])
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      const maxSize = 3 * 1024 * 1024 // 2MB limit
+      const maxSize = 3 * 1024 * 1024
       if (file.size > maxSize) {
-        alert('File size exceeds 2MB. Please upload a smaller image.')
+        alert('File size exceeds 3MB. Please upload a smaller image.')
         return
       }
 
@@ -61,7 +88,7 @@ const Editor: React.FC = () => {
       reader.onload = (e) => {
         const imageData = e.target?.result as string
         form.setValue('image', imageData)
-        if (typeof window !== 'undefined') {
+        if (!slug && typeof window !== 'undefined') {
           localStorage.setItem('image', imageData)
         }
       }
@@ -72,35 +99,47 @@ const Editor: React.FC = () => {
   const onSubmit = async (data: any) => {
     try {
       const payload = {
+        _id: blogId,
         title: data.title,
         imageUrl: data.image,
         description: content,
         status: 'draft',
       }
 
-      const response = await axios.post('/api/blogs', payload)
-
-      if (response.status === 201) {
-        alert('Blog saved successfully!')
-        localStorage.removeItem('title')
-        localStorage.removeItem('image')
-        localStorage.removeItem('content')
-        form.reset()
-        setContent('')
+      if (slug) {
+        await axios.put(`/api/blogs`, payload)
+        alert('Blog updated successfully!')
       } else {
-        alert('Failed to save blog.')
+        const response = await axios.post('/api/blogs', payload)
+        if (response.status === 201) {
+          alert('Blog saved successfully!')
+          localStorage.removeItem('title')
+          localStorage.removeItem('image')
+          localStorage.removeItem('content')
+        }
       }
+
+      form.reset()
+      setContent('')
     } catch (error) {
-      console.error('Error saving blog:', error)
+      console.error('Error submitting blog:', error)
       alert('Something went wrong. Please try again.')
     }
   }
 
   const removeImage = () => {
     form.setValue('image', '')
-    if (typeof window !== 'undefined') {
+    if (!slug && typeof window !== 'undefined') {
       localStorage.removeItem('image')
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className='h-screen flex justify-center items-center'>
+        <div className='animate-spin h-10 w-10 border-4 border-t-transparent border-black rounded-full' />
+      </div>
+    )
   }
 
   return (
@@ -189,7 +228,7 @@ const Editor: React.FC = () => {
                 type='submit'
                 className='w-fit bg-neutral-800 text-white rounded-xl py-2 hover:text-white hover:bg-neutral-800'
               >
-                Save
+                {slug ? 'Update' : 'Save'}
               </Button>
             </form>
           </Form>

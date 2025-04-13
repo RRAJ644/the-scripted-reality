@@ -69,7 +69,6 @@ const Blogs = () => {
         )
       }
     } catch (error) {
-      console.log(error, '======')
       console.error('Failed to publish blog')
     }
   }
@@ -142,7 +141,7 @@ const BlogList = ({
 
   return (
     <div className='space-y-4'>
-      {blogs.map((blog: any) => (
+      {blogs?.map((blog: any) => (
         <Card key={blog._id} className='shadow-md'>
           <CardHeader>
             <CardTitle>{blog.title}</CardTitle>
@@ -166,7 +165,7 @@ const BlogList = ({
                 variant='outline'
                 className='bg-neutral-900 text-white rounded-xl'
               >
-                <Link href={`/edit/${blog._id}`}>Edit</Link>
+                <Link href={`/editor?slug=${blog.slug}`}>Edit</Link>
               </Button>
               <Button
                 variant='outline'
