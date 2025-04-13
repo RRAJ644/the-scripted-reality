@@ -16,7 +16,7 @@ type Blog = {
 
 const BlogCard: FC<{ blog: Blog }> = ({ blog }) => {
   return (
-    <Link href={`/blogs/${blog?.slug}`}>
+    <Link href={`/blogs/${blog?.slug}`} target='_blank'>
       <Card className='group flex flex-col h-full overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-neutral-900'>
         <div className='relative w-full aspect-[16/9] overflow-hidden'>
           <Image

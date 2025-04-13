@@ -15,7 +15,6 @@ const fetchStories = async () => {
 }
 
 const TrendingStories = async () => {
-
   const trendingStories: any = await fetchStories()
 
   return (
@@ -33,7 +32,11 @@ const TrendingStories = async () => {
         <div className='flex flex-col gap-6'>
           {trendingStories.length > 0 &&
             trendingStories?.map((story: any, index: any) => (
-              <Link href={`/blogs/${story.slug}`} key={story.slug}>
+              <Link
+                href={`/blogs/${story.slug}`}
+                key={story.slug}
+                target='_blank'
+              >
                 <div
                   key={index}
                   className='flex items-center gap-5 border border-zinc-300 dark:border-zinc-700 py-5 px-4 bg-white dark:bg-zinc-900 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-transform cursor-pointer'
