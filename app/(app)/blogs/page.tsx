@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { IBlog } from '@/models/Blog'
 import BlogCard from '@/components/custom/BlogCard'
-import { Loader } from '@/components/custom/Loader'
 
 const NEXT_FRONTEND_ENDPOINT =
   process.env.NEXT_FRONTEND_ENDPOINT || 'http://localhost:3000/'
@@ -30,9 +29,7 @@ const Blogs = async () => {
         </p>
       </div>
 
-      {blogs.length === 0 ? (
-        <Loader />
-      ) : (
+      {blogs.length > 0 && (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full h-full mt-10'>
           {blogs?.map((blog: any) => (
             <BlogCard key={blog._id?.toString()} blog={blog} />
