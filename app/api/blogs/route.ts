@@ -5,11 +5,13 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url)
-    const status = searchParams.get('status')
+    // const { searchParams } = new URL(request.url)
+    // const status = searchParams.get('status')
 
     await connectToDatabase()
-    const blogs = await Blog.find({ status }).sort({ createdAt: -1 })
+    const blogs = await Blog.find({ status: 'published' }).sort({
+      createdAt: -1,
+    })
 
     return NextResponse.json(blogs)
   } catch (error) {

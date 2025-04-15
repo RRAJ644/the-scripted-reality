@@ -1,13 +1,12 @@
 import React from 'react'
-import '../../globals.css';
+import '../../globals.css'
+
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html>
-      <body>
-        <section>{children}</section>
-      </body>
-    </html>
+    <section className='min-h-screen flex items-center justify-center'>
+      {children}
+    </section>
   )
 }
 
