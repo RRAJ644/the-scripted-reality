@@ -14,10 +14,7 @@ export async function GET(request: Request) {
       createdAt: -1,
     })
 
-    const res = NextResponse.json(blogs)
-    res.headers.set('Cache-Control', 'no-store')
-
-    return res
+    return NextResponse.json(blogs)
   } catch (error) {
     console.error('Error fetching blogs:', error)
     return NextResponse.json({ error: 'Failed to load blogs' }, { status: 500 })

@@ -1,22 +1,30 @@
-import axios from 'axios'
 import { IBlog } from '@/models/Blog'
 import BlogCard from '@/components/custom/BlogCard'
 
 const NEXT_PUBLIC_BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 
-const fetchBlogs = async () => {
+const fetchBlogs = async (): Promise<IBlog[]> => {
   try {
-    const res = await axios.get(
-      `${NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs?status=published`
+    const res = await fetch(
+      `${NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs?status=published`,
+      {
+        cache: 'no-store', // 🔥 Ensures no SSR caching
+      }
     )
-    return res.data
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch blogs')
+    }
+
+    return await res.json()
   } catch (error) {
     console.error('Error fetching blogs:', error)
+    return []
   }
 }
 
 const Blogs = async () => {
-  const blogs: IBlog[] = await fetchBlogs()
+  const blogs = await fetchBlogs()
 
   return (
     <section className='w-full max-w-7xl mx-auto px-4 py-12'>
@@ -32,7 +40,7 @@ const Blogs = async () => {
 
       {blogs?.length > 0 && (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full h-full mt-10'>
-          {blogs?.map((blog: any) => (
+          {blogs.map((blog: any) => (
             <BlogCard key={blog._id?.toString()} blog={blog} />
           ))}
         </div>
