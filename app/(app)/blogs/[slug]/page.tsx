@@ -16,7 +16,9 @@ const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
       `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs/${slug}`,
       {
         next: { revalidate: 60 },
+
       }
+
     )
     if (!res.ok) return null
     const data = await res.json()

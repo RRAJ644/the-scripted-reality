@@ -8,10 +8,9 @@ const fetchBlogs = async (): Promise<IBlog[]> => {
     const res = await fetch(
       `${NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs?status=published`,
       {
-        cache: 'no-store', // 🔥 Ensures no SSR caching
+        next: { revalidate: 60 },
       }
     )
-
     if (!res.ok) {
       throw new Error('Failed to fetch blogs')
     }
