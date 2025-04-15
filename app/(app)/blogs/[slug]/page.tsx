@@ -1,5 +1,6 @@
 import { Loader } from '@/components/custom/Loader'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 interface BlogData {
   title: string
@@ -16,9 +17,7 @@ const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
       `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/api/blogs/${slug}`,
       {
         next: { revalidate: 60 },
-
       }
-
     )
     if (!res.ok) return null
     const data = await res.json()
@@ -30,6 +29,51 @@ const fetchBlogBySlug = async (slug: string): Promise<BlogData | null> => {
 }
 
 type paramsType = Promise<{ slug: string }>
+
+export async function generateMetadata({
+  params,
+}: {
+  params: paramsType
+}): Promise<Metadata> {
+  const { slug } = await params
+  const blog = await fetchBlogBySlug(slug)
+
+  if (!blog) {
+    return {
+      title: 'Blog Not Found',
+      description: 'The requested blog post could not be found.',
+    }
+  }
+
+  return {
+    title: blog.title,
+    description: blog.description.slice(0, 160), // Limit to 160 chars for SEO
+    openGraph: {
+      title: blog.title,
+      description: blog.description.slice(0, 160),
+      images: [
+        {
+          url: blog.imageUrl || '/fallback.jpg',
+          width: 900,
+          height: 500,
+          alt: blog.title,
+        },
+      ],
+      type: 'article',
+      publishedTime: blog.createdAt,
+      authors: [blog.author],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.description.slice(0, 160),
+      images: [blog.imageUrl || '/fallback.jpg'],
+    },
+    alternates: {
+      canonical: `https://www.thescriptedreality.com//blogs/${slug}`,
+    },
+  }
+}
 
 const Read = async ({ params }: { params: paramsType }) => {
   const { slug } = await params
@@ -62,7 +106,7 @@ const Read = async ({ params }: { params: paramsType }) => {
       </div>
 
       <article className='w-full prose prose-lg dark:prose-invert md:text-xl max-lg:text-lg max-w-7xl'>
-        <div dangerouslySetInnerHTML={{ __html: blog?.description }} />
+        <div dangerouslySetInnerHTML={{ __html: blog.description }} />
       </article>
     </section>
   )
